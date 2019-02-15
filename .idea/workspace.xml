@@ -1,45 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9f198f29-acf0-4c80-ba33-87463998389b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/script_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ExtentHTMLTestRunner.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/ExtentHTMLTestRunner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/job.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/job.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/log.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/make_testcase.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/make_testcase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/request.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/request.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sqldb.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/sqldb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requestnew/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/requestnew/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requestnew/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/requestnew/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requestnew/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/requestnew/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jsonparse2.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/jsonparse2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/template" beforeDir="false" afterPath="$PROJECT_DIR$/task/template" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/first_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/first_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/first_page1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/Nosql.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/Nosql.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/NosqlDb.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/NosqlDb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/case.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/case.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/companydatabase.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/database.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/database.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/email.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/env.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/env.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/formatJson.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/formatJson.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/functionhelp.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/functionhelp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/modules.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/modules.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/project.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/project.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/sql.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/sql.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/step.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/step.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/task.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/task.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/version" beforeDir="false" afterPath="$PROJECT_DIR$/version" afterDir="false" />
-    </list>
+    <list default="true" id="9f198f29-acf0-4c80-ba33-87463998389b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +196,11 @@
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/expandfunction.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="17" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="17" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -677,7 +643,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34168443" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -1105,7 +1070,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/expandfunction.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
