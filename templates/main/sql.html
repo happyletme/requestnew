@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    <title>Env</title>
+    <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js">
+    </script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/bootstrap-select.js"></script>
+    <link rel="stylesheet" href="../static/frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/frame/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">
+    <script>
+        function display(){
+            var elements=$("#table").find("td");
+            for (var i=0;i<elements.length;i++){
+                $(elements[i]).attr("title",$(elements[i]).text());
+                if ($(elements[i]).text().length>=80){
+                    var str=$(elements[i]).text().substring(0,60)+"...";
+                    $(elements[i]).html(str);
+                }
+                //当鼠标在列表上悬停时，出现内容
+                $(elements[i]).mouseover(function(){
+                    $(this).tooltip;
+                 });
+            }
+        }
+        //点击全选按钮勾选子节点操作
+        function demo(){
+            var allcheck=document.getElementById("allcheck");
+            var choice=document.getElementsByName("choice");
+            for(var i=0;i<choice.length;i++){
+                choice[i].checked=allcheck.checked;
+            }
+        }
+        //点击子复选框,全选框 选中、取消
+        function setAll(){
+            if(!$(".checknum").checked){
+                $("#allcheck").prop("checked",false); // 子复选框某个不选择，全选也被取消
+            }
+            var choicelength=$("input[type='checkbox'][class='checknum']").length;
+            var choiceselect=$("input[type='checkbox'][class='checknum']:checked").length;
+
+            if(choicelength==choiceselect){
+                $("#allcheck").prop("checked",true);   // 子复选框全部部被选择，全选也被选择；1.对于HTML元素我们自己自定义的DOM属性，在处理时，使用attr方法；2.对于HTML元素本身就带有的固有属性，在处理时，使用prop方法。
+            }
+        }
+        //把sql输入框换行替换
+        function Nolinebreaks(id){
+            var doc=$(id).val();
+            if (doc){
+                doc= doc.replace(/[\r\n]/g," ");
+                $(id).val(doc);
+            }
+        }
+        //修改select框
+        function changeSelect(){
+            $('.selectpicker').selectpicker({
+                'selectedText': 'cat'
+            });
+        }
+        //搜索或者搜索分页后去根据select返回的value去确定第几个option被选中
+        $(function(){
+            tip();
+            changeSelect();//修改select框
+            display();
+            edit();
+            add();
+            del();
+            editAppname();//批量修改appname
+            paging();
+            search();
+            check()
+        });
+        //icon提示
+        function tip(){
+            $("#table").find(".icon").each(function(){
+                $(this).mouseover(function(){
+                    $(this).tooltip;
+                 });
+            });
+        }
+        //搜索或者搜索分页后去根据select返回的value去确定第几个option被选中
+        function get_option(elements,value){
+           $(elements).each(function(index,element){
+                if($(element).val()==value){
+                    $(element).attr("selected",true);
+                    //console.log($(element).val());
+                    return;
+                }
+            });
+        }
+        //根据返回值确认带模糊查询的搜索框
+        function get_option_new_select(elements,selectstep,startValue){
+            //带input的select
+            if (selectstep==0){
+                $(elements+" :button").attr("title",startValue);
+                $(elements+" :button >span:nth-child(1)").text(startValue);
+            }
+            else{
+                $(elements+" :button").attr("title",selectstep);
+                $(elements+" :button >span:nth-child(1)").text(selectstep);
+            }
+        }
+        //根据返回值确认带模糊查询的搜索框下拉框选择的位置
+        function choose_new_select(elements,selectstep){
+            $(elements).find("ul").find("a").children("span:nth-child(1)").each(function(){
+                if (selectstep==$(this).text()){
+                    //去除所有高亮
+                    $(elements).find("li").each(function(){
+                        $(this).attr("class","");
+                    });
+                    /*
+                    for (var i=0;i<lielsements.length;i++){
+                        lielsements[i].attr("class","");
+                    }*/
+                    //把匹配的高亮
+                    $(this).parent().parent().attr("class","selected");
+                    return false;
+                }
+            })
+        }
+
+        function search(){
+            var elementsStatus="#select1 option";
+            var valueStatus="{{ select }}";
+            get_option(elementsStatus,valueStatus);
+            var elementsstep="#selectstep option";
+            var selectstep="{{ selectstep }}";
+            //console.log(selectstep);
+            get_option(elementsstep,selectstep);
+
+            //带input的select
+            startValue="用例";
+            elements="#searchdiv"
+            get_option_new_select(elements,selectstep,startValue);
+            choose_new_select(elements,selectstep);
+
+
+            var elementsisselect="#selectisselect option";
+            var selectisselect="{{ selectisselect }}";
+            get_option(elementsisselect,selectisselect);
+        }
+        //编辑
+        function edit(){
+            $("#btn2").click(function(){
+                $("#myAlert").css("display","none");
+                $("#myAlert1").css("display","none");
+                var count=0;
+                var env_value;
+                var env=new Array();
+                var elements=$(".ipt");
+                $("#table").find(":checkbox:checked.checknum").each(function(){
+                    env_value=$(this).parent()
+                    for (var i=0;i<elements.length;i++){
+                        env_value=env_value.next()
+                        //alert(email_value.text());
+                        env[i]=env_value.attr("titlevalue");
+                    }
+                    console.log(env)
+                    //alert(env)
+                    count++;
+                });
+                if (count==1)
+                {
+                    //alert(env);
+                    for (var i=0;i<env.length-1;i++){
+                        if (i!=1){
+                            $(elements[i]).val(env[i]);
+                        }
+                        //带有select的input特殊处理
+                        else{
+                            selectstep=env[i];
+                        }
+                    }
+                    //带input的select
+                    startValue="用例";
+                    selectelements="#editdiv"
+                    //get_option_new_select(selectelements,selectstep,startValue);
+                    $('#editselectstep').val(selectstep).trigger("change");
+                    choose_new_select(selectelements,selectstep);//根据返回值选中高亮
+                    if (env[env.length-1]=="True"){
+                        $(elements[env.length-1]).prop('checked',true);
+                    }
+                    else{
+                        $(elements[env.length-1]).removeAttr('checked');
+                    }
+                    //初始化是否是查询和变量输入框
+                    if ($("#editvariable input").val()==""){
+                        $("#editisselect").removeAttr('checked');
+                        $("#editvariable").attr("style","display:None");
+                    }
+                    else{
+                        $("#editisselect").prop('checked',true);
+                        $("#editvariable").attr("style","display:Block");
+                    }
+                    //执行位置初始化
+                    if ($("#editsql_condition1").val()==1){
+                        $("#editsql_condition2").prop('checked',true);
+                        $("#editsql_condition1").removeAttr('checked');
+                        $("#editsql_condition3").removeAttr('checked');
+                        $("#editsql_condition1").val(0);
+                    }
+                    else if($("#editsql_condition1").val()==0){
+                        $("#editsql_condition1").prop('checked',true);
+                        $("#editsql_condition2").removeAttr('checked');
+                        $("#editsql_condition3").removeAttr('checked');
+                        $("#editsql_condition1").val(0);
+                    }
+                    else{
+                        $("#editsql_condition3").prop('checked',true);
+                        $("#editsql_condition1").removeAttr('checked');
+                        $("#editsql_condition2").removeAttr('checked');
+                        $("#editsql_condition1").val(0);
+                    }
+                    $('#editMyModal').modal("show");
+                }
+                else{
+                    $("#myAlert").css("display","inherit");
+                }
+            });
+            isvariable("#editisselect","#editvariable");
+            $("#editsubmit").click(function() {
+                Nolinebreaks("#editSql");//把sql框里的内容去换行
+            });
+        }
+        //新增和编辑的时候根据该sql是否是查询判断变量输入框是否显示
+        function isvariable(checkbox,ipt){
+            $(checkbox).click(function() {
+                if($(checkbox).is(':checked')){
+                    $(ipt).attr("style","display:Block");
+                }
+                else{
+                    $(ipt).attr("style","display:None");
+                }
+            });
+        }
+        //新增
+        function add(){
+            $("#btn1").click(function(){
+                $("#myAlert").css("display","none");
+                $("#myAlert1").css("display","none");
+            });
+            isvariable("#isselect","#addvariable");
+            $("#addsubmit").click(function() {
+                Nolinebreaks("#addSql");//把sql框里的内容去换行
+            });
+        }
+        //删除
+        function del(){
+            $("#btn3").click(function(){
+                //调整被勾选的值
+                change_checkedenv_ids();
+                $("#myAlert").css("display","none");
+                $("#myAlert1").css("display","none");
+                $("#myAlert2").css("display","none");
+                if (checkedenv_ids.length<=1){
+                    $("#myAlert1").css("display","inherit");
+                    return false;
+                }
+                else{
+                    $("#ipt1").val(checkedenv_ids);
+                }
+            });
+        }
+        //批量修改appname
+        function editAppname(){
+            $("#btn5").click(function(){
+                //调整被勾选的值
+                change_checkedenv_ids();
+                $("#myAlert").css("display","none");
+                $("#myAlert1").css("display","none");
+                $("#myAlert2").css("display","none");
+                if (checkedenv_ids.length<=1){
+                    $("#myAlert2").css("display","inherit");
+                    return false;
+                }
+                else{
+                    $("#iptappname").val(checkedenv_ids);
+                }
+            });
+        }
+        //定义一个被选中的全局变量
+        var checkedenv_ids="{{ checkedenv_ids }}";
+        checkedenv_ids=checkedenv_ids.split(",");
+        // 根据返回值去勾选对应列
+        function check(){
+            //alert (checkedenv_ids);
+            //当前页的列id
+            $("#table").find(":checkbox.checknum").each(function(){
+                env_id=$(this).parent().next().text();
+                if (env_id != "") {
+                    //env_ids.push(env_id);
+                    //alert(env_id);
+                    if (checkedenv_ids.includes(String(env_id))){
+                        $(this).attr("checked", true);
+                    }
+                }
+            });
+            //全选
+            setAll();
+        }
+        //根据当前页的勾选变化改变checkedenv_ids值
+        function change_checkedenv_ids(){
+            //当前页的列id
+            $("#table").find(":checkbox.checknum").each(function(){
+                env_id=$(this).parent().next().text();
+                if (env_id != "") {
+                    //env_ids.push(env_id);
+                    //alert($(this).attr("checked"));
+                    //选中则判断数组是否存在，不存在则入栈
+                    if ($(this).is(":checked")){
+                        //alert(1);
+                        //$(this).attr("checked", true);
+                        if (!checkedenv_ids.includes(String(env_id))){
+                            checkedenv_ids.push(String(env_id));
+                        }
+                    }
+                    //未选中则判断数组是否存在，存在则出栈
+                    else{
+                        if (checkedenv_ids.includes(String(env_id))){
+                            checkedenv_ids = $.grep(checkedenv_ids, function(value) {
+                                return value != String(env_id);
+                            });
+                        }
+                    }
+                }
+            });
+            //alert(checkedenv_ids);
+        }
+        //分页
+        function paging(){
+            var elementselectstep,elementselectisselect,elementselect;
+            function merge(btn){
+                //调整被勾选的值
+                change_checkedenv_ids();
+
+                elementselectstep=$("#selectstep").val();
+                elementselectisselect=$("#selectisselect").val();
+                elementselect=$("#select1").val();
+                oldHref=$(btn).attr("href");
+                href=oldHref+"&step_name="+elementselectstep+"&selectisselect="+elementselectisselect+"&select="+elementselect+"&checkedenv_ids="+checkedenv_ids;
+                $(btn).attr("href",href)
+            }
+            $("#first").click(function(){
+                merge(this);
+            });
+            $("#previous").click(function(){
+                merge(this);
+            });
+            $("#next").click(function(){
+                merge(this);
+            });
+            $("#last").click(function(){
+                merge(this);
+            });
+        }
+    </script>
+</head>
+<body role="document">
+    <!--环境搜索栏-->
+    <div class="page-header" >
+        <form class="navbar-form" method="GET" action="/sql_search_name/">
+            <div class="form-group" id="searchdiv" >
+                <select id="selectstep" name="step_name" class="form-control selectpicker" data-live-search="true">
+                    <option value="0" class="select">用例</option>
+                    {% for step_name in step_names %}
+                        <option>{{ step_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group" >
+                <select id="selectisselect" name='selectisselect' class="form-control" >
+                    <option  value="2"  class="select">是否是查询</option>
+                    <option value="1" class="select">查询</option>
+                    <option value="0" class="select">非查询</option>
+                </select>
+                <select id="select1" name='select' class="form-control" >
+                    <option  value="2"  class="select">状态</option>
+                    <option value="1" class="select">启用</option>
+                    <option value="0" class="select">禁用</option>
+                </select>
+            </div>
+            <button id="btn4" type="submit" class="btn layui-btn" >搜索</button>
+            {% csrf_token %}
+        </form>
+    </div>
+    <!--警告框-->
+    <div id="myAlert" class="alert alert-warning" style="display: none">
+	    <strong>警告！</strong>编辑时只能勾选一条。
+    </div>
+    <div id="myAlert1" class="alert alert-warning" style="display: none">
+	    <strong>警告！</strong>删除时一定要勾选一条。
+    </div>
+    <div id="myAlert2" class="alert alert-warning" style="display: none">
+	    <strong>警告！</strong>批量修改时一定要勾选一条。
+    </div>
+    <!--按钮-->
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group">
+            <button id="btn1" class="btn layui-btn"  data-toggle="modal" data-target="#addMyModal" >
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+            </button>
+            <button id="btn2" class="btn layui-btn"  data-toggle="modal" data-target="#">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
+            </button>
+            <button id="btn3" type="onclick" class="btn layui-btn" data-toggle="modal" data-target="#delmyModal">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>删除
+            </button>
+            <button id="btn5" type="onclick" class="btn layui-btn" data-toggle="modal" data-target="#EditAppnamemyModal">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>批量修改数据库
+            </button>
+        </div>
+    </div>
+    <!--环境列表-->
+    <div>
+        <div>
+            <table id="table" class="table table-striped">
+                <tr>
+                    <th><input type="checkbox" id="allcheck"  onclick="demo()" /></th><th>id</th><th>用例名</th><th>数据库</th><th>是否是查询</th><th>变量</th><th>sql</th><th>执行位置</th><th>备注</th><th>状态</th>
+                </tr>
+                <tbody>
+                {% for sql in sqls %}
+                    <tr>
+                        <td id="che1"><input type="checkbox" name="choice" class="checknum"  onclick="setAll()"/></td>
+                        <td titlevalue={{ sql.id }}>{{ sql.id }}</td>
+                        <td titlevalue={{ sql.step }}>{{ sql.step }}</td>
+                        <td titlevalue={{ sql.db_remark }}>{{ sql.db_remark }}</td>
+                        {% if sql.is_select %}
+                            <td titlevalue={{ sql.is_select }}>查询</td>
+                        {% else %}
+                            <td titlevalue={{ sql.is_select }}>非查询</td>
+                        {% endif %}
+                        <td titlevalue={{ sql.variable }}>{{ sql.variable }}</td>
+                        <td titlevalue="{{ sql.sql }}">{{ sql.sql }}</td>
+                        {% if sql.sql_condition is 0 %}
+                            <td titlevalue={{ sql.sql_condition }}>前置</td>
+                        {% elif sql.sql_condition is 1 %}
+                            <td titlevalue={{ sql.sql_condition }}>中间态</td>
+                        {% else %}
+                            <td titlevalue={{ sql.sql_condition }}>后置</td>
+                        {% endif %}
+                        <td titlevalue={{ sql.remake }}>{{ sql.remake }}</td>
+                        {% if sql.status %}
+                            <td titlevalue={{ sql.status }}>启用</td>
+                        {% else %}
+                            <td titlevalue={{ sql.status }}><font color="#AAAAAA">禁用</font></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 模态框示例（Modal） -->
+    <!--新增-->
+    <div class="modal fade" id="addMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					新增sql
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form id="add" role="form" method='POST' action="/sql_add_data/">
+                    <div class="form-group">
+                        <label  for="step_name" >用例名</label>
+                        <select name="step_name" class="form-control selectpicker" data-live-search="true" required>
+                            {% for step_name in step_names %}
+                            <option>{{ step_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label  for="database_desc" >数据库&nbsp;<span class="glyphicon glyphicon-question-sign icon" title="数据库的连接名称，可去配置数据库页面维护相关信息"></span></label>
+                        <select name="database_desc" class="form-control" >
+                            {% for db_remark in db_remarks %}
+                            <option>{{ db_remark }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group" >
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="isselect" id="isselect" checked> 是否是查询
+                        </label>
+                    </div>
+                    <div class="form-group" id="addvariable">
+                        <label  for="variable">变量&nbsp;<span class="glyphicon glyphicon-question-sign icon" title="取查询sql第一行的字段值，赋值给该行变量，变量之间用','隔开"></span></label>
+                        <input  type="text" class="form-control"  name="variable" placeholder="请输入变量">
+                    </div>
+                    <div class="form-group">
+                        <label  for="sql">sql</label>
+                        <textarea  id="addSql" class="form-control" name="sql" placeholder="请输入sql" required style="height:250px" ></textarea>
+                    </div>
+                    <div class="form-group" >
+                        <label class="radio-inline">
+                            <input type="radio" name="sql_condition" id="sql_condition1" value="0" checked> 前置
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sql_condition" id="sql_condition2" value="1"> 中间态
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sql_condition" id="sql_condition3" value="2"> 后置
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="remake">备注</label>
+                        <input  type="text" class="form-control" name="remake" placeholder="请输入备注">
+                    </div>
+                    <div class="form-group" >
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="status" id="optionsRadios1" checked> 状态
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn" data-dismiss="modal">关闭
+				        </button>
+                        <button id="addsubmit" type="submit" class="btn layui-btn">
+					    提交
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!-- 编辑 -->
+    <div class="modal fade" id="editMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					编辑sql
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form id="edit" role="form" method='POST' action="/sql_edit_data/">
+                    <div class="form-group" style="display: none">
+                        <label  for="id">id</label>
+                        <input  type="text" class="ipt form-control" name="id" placeholder="请输入id" >
+                    </div>
+                    <!--给label的class加个ipt的属性，保证新的select成功-->
+                    <div class="form-group ipt" id="editdiv">
+                        <label  for="step_name " >用例名</label>
+                        <select id="editselectstep" name="step_name" class=" form-control selectpicker" data-live-search="true" required>
+                            {% for step_name in step_names %}
+                            <option>{{ step_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label  for="database_desc" >数据库&nbsp;<span class="glyphicon glyphicon-question-sign icon" title="数据库的连接名称，可去配置数据库页面维护相关信息"></span></label>
+                        <select name="database_desc" class="ipt form-control" >
+                            {% for db_remark in db_remarks %}
+                            <option>{{ db_remark }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group" >
+                        <label class="checkbox-inline">
+                            <input type="checkbox" class="ipt" name="isselect" id="editisselect" checked> 是否是查询
+                        </label>
+                    </div>
+                    <div class="form-group" id="editvariable">
+                        <label  for="variable">变量&nbsp;<span class="glyphicon glyphicon-question-sign icon" title="取查询sql第一行的字段值，赋值给该行变量，变量之间用','隔开"></span></label>
+                        <input  type="text" class="ipt form-control"  name="variable" placeholder="请输入变量">
+                    </div>
+                    <div class="form-group">
+                        <label  for="sql">sql</label>
+                        <textarea  id="editSql" class="ipt form-control" name="sql" placeholder="请输入sql" style="height:250px" required></textarea>
+                    </div>
+                    <div class="form-group" >
+                        <label class="radio-inline">
+                            <input type="radio" class="ipt" name="sql_condition"  id="editsql_condition1" value="0" checked> 前置
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sql_condition" id="editsql_condition2" value="1"> 中间态
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sql_condition" id="editsql_condition3" value="2"> 后置
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="remake">备注</label>
+                        <input  type="text" class="ipt form-control" name="remake" placeholder="请输入备注">
+                    </div>
+                    <div class="form-group" >
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="status" class="ipt" id="optionsRadios1" checked> 状态
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn" data-dismiss="modal">关闭
+				        </button>
+                         <button id="editsubmit" type="submit" class="btn layui-btn">
+					    提交
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!--批量修改数据库-->
+    <div class="modal fade" id="EditAppnamemyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					批量修改数据库
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form role="form" method='POST' action="/sql_editDb/">
+                    <input id="iptappname" type="text" name="id" style="display:none"/>
+                    <div class="form-group">
+                        <label  for="database_desc" >数据库&nbsp;<span class="glyphicon glyphicon-question-sign icon" title="数据库的连接名称，可去配置数据库页面维护相关信息"></span></label>
+                        <select name="database_desc" class="form-control" >
+                            {% for db_remark in db_remarks %}
+                            <option>{{ db_remark }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn" data-dismiss="modal">关闭
+				        </button>
+				        <button type="submit" class="btn layui-btn">
+					    确认
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!--删除二次确认框-->
+    <div class="modal fade" id="delmyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					确认要删除吗？
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form role="form" method='POST' action="/sql_delete_data/">
+                    <input id="ipt1" type="text" name="id" style="display:none"/>
+                    <div class="modal-body" align="center">
+                        <img src="../static/img/caveat.jpg"  width="50%" >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn" data-dismiss="modal">关闭
+				        </button>
+				        <button type="submit" class="btn layui-btn">
+					    确认
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!--分页器-->
+    <div style="text-align: right;">
+        <ul class="pagination pagination-sm">
+            <li>
+                <span class="current">
+                    Page {{ sqls.number }} of {{ sqls.paginator.num_pages }}
+                </span>
+            </li>
+            <li>
+                <a id="first" href="/sql/?page=1">
+                    <span class="glyphicon glyphicon-fast-backward"></span>
+                </a>
+            </li>
+            <li>
+                {% if sqls.has_previous %}
+                <a id="previous" href="/sql/?page={{ sqls.previous_page_number }}">
+                    <span class="glyphicon glyphicon-backward"></span>
+                </a>
+                {% endif %}
+            </li>
+            <li>
+                {% if sqls.has_next %}
+                <a id="next" href="/sql/?page={{ sqls.next_page_number }}">
+                    <span class="glyphicon glyphicon-forward"></span>
+                </a>
+                {% endif %}
+            </li>
+            <li>
+                <a id="last" href="/sql/?page={{ sqls.paginator.num_pages }}">
+                    <span class="glyphicon glyphicon-fast-forward"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

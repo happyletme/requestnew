@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Login - Resource Monitoring Platform</title>
+    <script>
+        if (window != window.top) top.location.href = self.location.href;
+    </script>
+    <link href="../static/plugins/layui/css/layui.css" rel="stylesheet" />
+    <link href="../static/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../static/css/login.css" rel="stylesheet" />
+    <link href="../static/plugins/sideshow/css/normalize.css" rel="stylesheet" />
+    <link href="../static/plugins/sideshow/css/demo.css" rel="stylesheet" />
+    <link href="../static/plugins/sideshow/css/component.css" rel="stylesheet" />
+    <!--[if IE]>
+    <script src="./plugins/sideshow/js/html5.js"></script>
+    <![endif]-->
+    <style>
+        input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px #303030 inset;}
+        canvas {
+            position: absolute;
+            z-index: -1;
+        }
+
+        .kit-login-box header h1 {
+            line-height: normal;
+        }
+
+        .kit-login-box header {
+            height: auto;
+        }
+
+        .content {
+            position: relative;
+        }
+
+        .codrops-demos {
+            position: absolute;
+            bottom: 0;
+            left: 40%;
+            z-index: 10;
+        }
+
+        .codrops-demos a {
+            border: 2px solid rgba(242, 242, 242, 0.41);
+            color: rgba(255, 255, 255, 0.51);
+        }
+
+        .kit-pull-right button,
+        .kit-login-main .layui-form-item input {
+            background-color: transparent;
+            color: white;
+        }
+
+        .kit-login-main .layui-form-item input::-webkit-input-placeholder {
+            color: white;
+        }
+
+        .kit-login-main .layui-form-item input:-moz-placeholder {
+            color: white;
+        }
+
+        .kit-login-main .layui-form-item input::-moz-placeholder {
+            color: white;
+        }
+
+        .kit-login-main .layui-form-item input:-ms-input-placeholder {
+            color: white;
+        }
+
+        .kit-pull-right button:hover {
+            border-color: #009688;
+            color: #009688
+        }
+    </style>
+</head>
+
+
+<body class="kit-login-bg">
+<div class="container demo-1">
+    <div class="content">
+        <div id="large-header" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+            <div class="kit-login-box">
+                <header>
+                    <h1>登录控制台</h1>
+                </header>
+                <div class="kit-login-main">
+                    <form action="/login_action/" class="layui-form" method="post">
+                        <div class="layui-form-item">
+                            <label class="kit-login-icon">
+                                <i class="layui-icon">&#xe612;</i>
+                            </label>
+                            <input type="text" name="form-username" placeholder="Username..." autocomplete="off" id="form-username" class="layui-input">
+                            <input type="password" name="form-password" placeholder="Password..." class="layui-input" id="form-password">
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="kit-pull-right">
+                                <button class="layui-btn layui-btn-primary" lay-submit lay-filter="login">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i> 登入
+                                </button>
+                            </div>
+                            <div class="kit-clear"></div>
+                        </div>
+                        {{error}}
+                        {% csrf_token %}
+                    </form>
+                </div>
+                <footer>
+                    <p>Api Testing Monitoring Platform © <a href="https://www.cnblogs.com/letmeiscool/" style="color:white; font-size:18px;" target="_blank">letme</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /container -->
+<script src="../static/plugins/jquery.js"></script>
+<script src="../static/plugins/layui/layui.js"></script>
+<script src="../static/plugins/sideshow/js/TweenLite.min.js"></script>
+<script src="../static/plugins/sideshow/js/EasePack.min.js"></script>
+<script src="../static/plugins/sideshow/js/rAF.js"></script>
+<script src="../static/plugins/sideshow/js/demo-1.js"></script>
+<script>
+    var userKey;
+    layui.config({
+        base: './js/ext/'
+    }).use(['layer', 'form', 'rmputils'], function() {
+        var layer = layui.layer,
+            form = layui.form,
+            rmputil = layui.rmputils;
+
+        var index = layer.load(2, {
+            shade: [0.3, '#333']
+        });
+        $(window).on('load', function() {
+            layer.close(index);
+            form.on('submit(login)', function(data) {
+                if (rmputil.stringUtils.isEmpty(data.field.userKey)) {
+                    layer.msg('不能为空', {icon:5, time:1500});
+                    return false;
+                }
+                $.post(VALIDATE_USER_KEY_URL, {userKey:data.field.userKey}, function(json){
+                    validatReturnJson(json, function(){
+                        window.location.href = './index.html';
+                        layui.data('rmp', {
+                            key:'userKey',
+                            value:json.data.userKey
+                        });
+                    })
+                });
+                return false;
+            });
+
+            //获取本地是否已存在userKey
+            var rmpTable = layui.data('rmp');
+            rmpTable != null && (userKey = rmpTable.userKey);
+            if (userKey != null) {
+                $.post(VALIDATE_USER_KEY_URL, {userKey:userKey}, function(json){
+                    validatReturnJson(json, function(){
+                        window.location.href = './index.html';
+                        layui.data('rmp', {
+                            key:'userKey',
+                            value:json.data.userKey
+                        });
+                    })
+                });
+            }
+        }());
+
+    });
+</script>
+</body>
+
+</html>

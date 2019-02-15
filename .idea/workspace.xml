@@ -1,0 +1,1111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9f198f29-acf0-4c80-ba33-87463998389b" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/public/script_function.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/ExtentHTMLTestRunner.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/ExtentHTMLTestRunner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/job.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/job.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/log.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/log.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/make_testcase.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/make_testcase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/request.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/request.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sqldb.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/sqldb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/request/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/request/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/request/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requestnew/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/requestnew/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requestnew/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/requestnew/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requestnew/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/requestnew/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jsonparse2.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/jsonparse2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task/template" beforeDir="false" afterPath="$PROJECT_DIR$/task/template" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/first_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/first_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/first_page1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/Nosql.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/Nosql.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/NosqlDb.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/NosqlDb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/case.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/case.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/companydatabase.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/database.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/database.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/email.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/env.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/env.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/formatJson.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/formatJson.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/functionhelp.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/functionhelp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/modules.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/modules.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/project.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/project.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/sql.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/sql.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/step.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/step.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/task.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/task.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/version" beforeDir="false" afterPath="$PROJECT_DIR$/version" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/requestnew$loader.coverage" NAME="loader Coverage Results" MODIFIED="1534055995829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="E:/python36/Lib/unittest" />
+    <SUITE FILE_PATH="coverage/requestnew$email.coverage" NAME="email Coverage Results" MODIFIED="1539257267810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/public" />
+    <SUITE FILE_PATH="coverage/requestnew$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1546946694779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/requestnew$Unittests_for_PostStoreAreaOwner_PostStoreAreaOwner.coverage" NAME="Unittests for PostStoreAreaOwner.PostStoreAreaOwner Coverage Results" MODIFIED="1547014346504" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task/first_task---71dfddde-13c2-11e9-8dcf-4cedfb3d07c3/testcase" />
+    <SUITE FILE_PATH="coverage/requestnew$test3.coverage" NAME="test3 Coverage Results" MODIFIED="1543310981371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/requestnew$logtimeAssert.coverage" NAME="logtimeAssert Coverage Results" MODIFIED="1547000982459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/requestnew$Assert.coverage" NAME="Assert Coverage Results" MODIFIED="1546076871798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/requestnew$run.coverage" NAME="run Coverage Results" MODIFIED="1528718046996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/public" />
+    <SUITE FILE_PATH="coverage/requestnew$script_function.coverage" NAME="script_function Coverage Results" MODIFIED="1547020397539" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/public" />
+    <SUITE FILE_PATH="coverage/requestnew$mongodb.coverage" NAME="mongodb Coverage Results" MODIFIED="1534214033383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/public" />
+    <SUITE FILE_PATH="coverage/requestnew$views.coverage" NAME="views Coverage Results" MODIFIED="1544444004309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/request" />
+    <SUITE FILE_PATH="coverage/requestnew$Unittests_in_test_py.coverage" NAME="Unittests in test.py Coverage Results" MODIFIED="1533621606086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task/first_task/testcase" />
+    <SUITE FILE_PATH="coverage/requestnew$Unittests_for_PostStoreAreaOwner_PostStoreAreaOwner_test_StoreAreaOwner.coverage" NAME="Unittests for PostStoreAreaOwner.PostStoreAreaOwner.test_StoreAreaOwner Coverage Results" MODIFIED="1547014327739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task/first_task---71dfddde-13c2-11e9-8dcf-4cedfb3d07c3/testcase" />
+    <SUITE FILE_PATH="coverage/requestnew$request.coverage" NAME="request Coverage Results" MODIFIED="1541321022508" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/public" />
+    <SUITE FILE_PATH="coverage/requestnew$test.coverage" NAME="test Coverage Results" MODIFIED="1546074510518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/requestnew$redis.coverage" NAME="redis Coverage Results" MODIFIED="1542163789715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/public" />
+    <SUITE FILE_PATH="coverage/requestnew$Unittests_in_UserLoginInfoAdd_py.coverage" NAME="Unittests in UserLoginInfoAdd.py Coverage Results" MODIFIED="1524886095975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task/task1/testcase" />
+    <SUITE FILE_PATH="coverage/requestnew$Unittests_in_MetadataCityIncrement_py.coverage" NAME="Unittests in MetadataCityIncrement.py Coverage Results" MODIFIED="1524882278079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task/task1/testcase" />
+    <SUITE FILE_PATH="coverage/requestnew$sqldb.coverage" NAME="sqldb Coverage Results" MODIFIED="1525316331171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/public" />
+    <SUITE FILE_PATH="coverage/requestnew$Unittests_in_postCouponDisplaymentNormalTest_py.coverage" NAME="Unittests in postCouponDisplaymentNormalTest.py Coverage Results" MODIFIED="1539239073998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/task/first_task/testcase" />
+    <SUITE FILE_PATH="coverage/requestnew$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1542784397953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-664305037">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.3" value="3" />
+          <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="html" value="10796" />
+          <entry key="js" value="592" />
+          <entry key="py" value="22671" />
+          <entry key="template" value="53" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="10796" />
+          <entry key="JavaScript" value="592" />
+          <entry key="Python" value="22724" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="css" value="2" />
+          <entry key="html" value="206" />
+          <entry key="js" value="17" />
+          <entry key="pstat" value="1" />
+          <entry key="py" value="483" />
+          <entry key="pyi" value="3" />
+          <entry key="template" value="8" />
+          <entry key="ts" value="5" />
+          <entry key="version" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="2" />
+          <entry key="HTML" value="206" />
+          <entry key="JavaScript" value="17" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Profiler Session" value="1" />
+          <entry key="Python" value="491" />
+          <entry key="PythonStub" value="3" />
+          <entry key="TypeScript" value="5" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="1049481417">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.3" value="2" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="html" value="15" />
+          <entry key="js" value="1" />
+          <entry key="py" value="59" />
+          <entry key="template" value="2" />
+          <entry key="version" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="15" />
+          <entry key="JavaScript" value="1" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="61" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="html" value="697" />
+          <entry key="py" value="1458" />
+          <entry key="version" value="13" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="697" />
+          <entry key="PLAIN_TEXT" value="13" />
+          <entry key="Python" value="1458" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/system.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/redis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" column="12" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/request.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+              <folding>
+                <element signature="e#20#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task/template">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/run.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task/third_task---8f955d24-26f3-11e9-b9a4-4cedfb3d07c3/testcase/UserLogin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="12" column="32" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="32" />
+              <folding>
+                <element signature="e#43#71#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/expandfunction.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/script_function.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/spider.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+              <folding>
+                <element signature="e#20#49#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/sqldb.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1501">
+              <caret line="79" column="10" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
+              <folding>
+                <element signature="e#40#76#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>myModalLabel</find>
+      <find>btn5</find>
+      <find>EditAppnamemyModal</find>
+      <find>端口</find>
+      <find>db_remark</find>
+      <find>sqlDatalist</find>
+      <find>db</find>
+      <find>response</find>
+      <find>db_type</find>
+      <find>断言</find>
+      <find>get_dbvs</find>
+      <find>Database</find>
+      <find>DatabaseModel</find>
+      <find>db_remarks</find>
+      <find>Db</find>
+      <find>sqldbDatabase</find>
+      <find>port</find>
+      <find>disable</find>
+      <find>buttonsure</find>
+      <find>make</find>
+      <find>db_</find>
+      <find>进度</find>
+      <find>task_name</find>
+      <find>form.save_m2m()</find>
+      <find>construct_change_message</find>
+      <find>self.message_user(request, msg, messages.SUCCESS)</find>
+      <find>disabled</find>
+      <find>title</find>
+      <find>支付</find>
+      <find>shutil</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>email</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/templates/main/companydatabase.html" />
+        <option value="$PROJECT_DIR$/templates/main/functionhelp.html" />
+        <option value="D:/python/Lib/site-packages/django/contrib/admin/options.py" />
+        <option value="$PROJECT_DIR$/request/admin.py" />
+        <option value="$PROJECT_DIR$/task/market_center---214e8f0c-040a-11e9-a3bb-4cedfb3d07c3/testcase/RouletteRecords.py" />
+        <option value="$PROJECT_DIR$/templates/main/report.html" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/Assert.py" />
+        <option value="$PROJECT_DIR$/test2.py" />
+        <option value="$PROJECT_DIR$/logtimeAssert.py" />
+        <option value="$PROJECT_DIR$/task/first_task---71dfddde-13c2-11e9-8dcf-4cedfb3d07c3/testcase/PostStoreAreaOwner.py" />
+        <option value="$PROJECT_DIR$/task/market_center---b5a864d0-1243-11e9-ba9f-4cedfb3d07c3/testcase/PromotionActivityBusinessItem.py" />
+        <option value="$PROJECT_DIR$/task/first_task---8a635f28-13e8-11e9-9d13-4cedfb3d07c3/testcase/PostStoreAreaOwner.py" />
+        <option value="$PROJECT_DIR$/task/first_task---3052b998-13ec-11e9-9b28-4cedfb3d07c3/testcase/PostStoreAreaOwner.py" />
+        <option value="$PROJECT_DIR$/public/request.py" />
+        <option value="$PROJECT_DIR$/task/first_task---5f1ba212-1af0-11e9-ab89-4cedfb3d07c3/testcase/PostStoreTemplateSync.py" />
+        <option value="$PROJECT_DIR$/task/first_task---d744cbe6-1afb-11e9-9116-4cedfb3d07c3/testcase/PostStoreTemplateItemSync.py" />
+        <option value="$PROJECT_DIR$/templates/main/modules.html" />
+        <option value="$PROJECT_DIR$/templates/main/project.html" />
+        <option value="$PROJECT_DIR$/templates/main/Nosql.html" />
+        <option value="$PROJECT_DIR$/task/store---75f6f44c-1b10-11e9-9da3-4cedfb3d07c3/testcase/GetDdgStoreAppoint.py" />
+        <option value="D:/python/Lib/unittest/case.py" />
+        <option value="$PROJECT_DIR$/public/ExtentHTMLTestRunner.py" />
+        <option value="$PROJECT_DIR$/task/first_task---48ea0682-2058-11e9-956c-4cedfb3d07c3/testcase/PostStoreTemplateItemSync.py" />
+        <option value="$PROJECT_DIR$/task/template" />
+        <option value="$PROJECT_DIR$/public/make_testcase.py" />
+        <option value="$PROJECT_DIR$/templates/main/test.html" />
+        <option value="$PROJECT_DIR$/templates/main/case.html" />
+        <option value="$PROJECT_DIR$/templates/first_page1.html" />
+        <option value="$PROJECT_DIR$/templates/main/NosqlDb.html" />
+        <option value="$PROJECT_DIR$/templates/main/env.html" />
+        <option value="$PROJECT_DIR$/templates/main/email.html" />
+        <option value="$PROJECT_DIR$/request/models.py" />
+        <option value="$PROJECT_DIR$/requestnew/settings.py" />
+        <option value="$PROJECT_DIR$/templates/main/formatJson.html" />
+        <option value="$PROJECT_DIR$/templates/first_page.html" />
+        <option value="$PROJECT_DIR$/templates/main/database.html" />
+        <option value="$PROJECT_DIR$/templates/main/sql.html" />
+        <option value="$PROJECT_DIR$/requestnew/urls.py" />
+        <option value="$PROJECT_DIR$/requestnew/__init__.py" />
+        <option value="$PROJECT_DIR$/public/log.py" />
+        <option value="$PROJECT_DIR$/public/script_function.py" />
+        <option value="$PROJECT_DIR$/public/sqldb.py" />
+        <option value="$PROJECT_DIR$/public/job.py" />
+        <option value="$PROJECT_DIR$/templates/main/task.html" />
+        <option value="$PROJECT_DIR$/request/views.py" />
+        <option value="$PROJECT_DIR$/public/run.py" />
+        <option value="$PROJECT_DIR$/templates/main/step.html" />
+        <option value="$PROJECT_DIR$/version" />
+        <option value="$PROJECT_DIR$/public/system.py" />
+        <option value="$PROJECT_DIR$/task/third_task---8f955d24-26f3-11e9-b9a4-4cedfb3d07c3/testcase/UserLogin.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/static/echarts-2.2.7/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="622" />
+    <option name="y" value="586" />
+    <option name="width" value="1036" />
+    <option name="height" value="725" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="request" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+              <item name="third_task---8f955d24-26f3-11e9-b9a4-4cedfb3d07c3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+              <item name="third_task---8f955d24-26f3-11e9-b9a4-4cedfb3d07c3" type="462c0819:PsiDirectoryNode" />
+              <item name="testcase" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="px&#9;null&#9;null" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\pj\requestnew\templates\main" />
+      <recent name="E:\pj\requestnew\templates" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Django server.requestnew">
+    <configuration name="logtimeAssert" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="requestnew" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/logtimeAssert.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="script_function" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="requestnew" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/public" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/public/script_function.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="requestnew" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="requestnew" type="Python.DjangoServer" factoryName="Django server">
+      <module name="requestnew" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="requestnew.settings" />
+      </envs>
+      <option name="SDK_HOME" value="D:\python\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="0.0.0.0" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for PostStoreAreaOwner.PostStoreAreaOwner" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="requestnew" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/task/first_task---71dfddde-13c2-11e9-8dcf-4cedfb3d07c3/testcase" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;PostStoreAreaOwner.PostStoreAreaOwner&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for PostStoreAreaOwner.PostStoreAreaOwner.test_StoreAreaOwner" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="requestnew" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/task/first_task---71dfddde-13c2-11e9-8dcf-4cedfb3d07c3/testcase" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;PostStoreAreaOwner.PostStoreAreaOwner.test_StoreAreaOwner&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Django server.requestnew" />
+      <item itemvalue="Python.test2" />
+      <item itemvalue="Python.logtimeAssert" />
+      <item itemvalue="Python.script_function" />
+      <item itemvalue="Python tests.Unittests for PostStoreAreaOwner.PostStoreAreaOwner.test_StoreAreaOwner" />
+      <item itemvalue="Python tests.Unittests for PostStoreAreaOwner.PostStoreAreaOwner" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.script_function" />
+        <item itemvalue="Python tests.Unittests for PostStoreAreaOwner.PostStoreAreaOwner" />
+        <item itemvalue="Python tests.Unittests for PostStoreAreaOwner.PostStoreAreaOwner.test_StoreAreaOwner" />
+        <item itemvalue="Python.logtimeAssert" />
+        <item itemvalue="Python.test2" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9f198f29-acf0-4c80-ba33-87463998389b" name="Default" comment="" />
+      <created>1521446802794</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1521446802794</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_in_UserLoginInfoAdd_py - 2018.04.28 at 11h 22m 07s.xml">
+      <configuration name="Unittests in UserLoginInfoAdd.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_UserLoginInfoAdd_py - 2018.04.28 at 11h 25m 25s.xml">
+      <configuration name="Unittests in UserLoginInfoAdd.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_UserLoginInfoAdd_py - 2018.04.28 at 11h 27m 01s.xml">
+      <configuration name="Unittests in UserLoginInfoAdd.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_UserLoginInfoAdd_py - 2018.04.28 at 11h 28m 00s.xml">
+      <configuration name="Unittests in UserLoginInfoAdd.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_UserLoginInfoAdd_py - 2018.04.28 at 11h 28m 16s.xml">
+      <configuration name="Unittests in UserLoginInfoAdd.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_py - 2018.08.07 at 14h 00m 06s.xml">
+      <configuration name="Unittests in test.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_postCouponDisplaymentNormalTest_py - 2018.10.11 at 14h 24m 34s.xml">
+      <configuration name="Unittests in postCouponDisplaymentNormalTest.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_PostCouponDisplaymentItem_py - 2018.11.26 at 13h 59m 59s.xml">
+      <configuration name="Unittests in PostCouponDisplaymentItem.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_PostStoreAreaOwner_PostStoreAreaOwner_test_StoreAreaOwner - 2019.01.09 at 14h 12m 08s.xml">
+      <configuration name="Unittests for PostStoreAreaOwner.PostStoreAreaOwner.test_StoreAreaOwner" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_PostStoreAreaOwner_PostStoreAreaOwner - 2019.01.09 at 14h 12m 27s.xml">
+      <configuration name="Unittests for PostStoreAreaOwner.PostStoreAreaOwner" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34168443" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32899022" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.9051173" visible="true" weight="0.36047775" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.3984799" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49946696" weight="0.32899022" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.09488273" side_tool="true" weight="0.330076" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.49946696" weight="0.32899022" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="12" weight="0.32899022" />
+      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Coverage" order="5" side_tool="true" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24786781" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.9051173" visible="true" weight="0.330076" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.3984799" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49946696" weight="0.32899022" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.09488273" side_tool="true" visible="true" weight="0.330076" />
+      <window_info anchor="bottom" id="Python Console" order="11" sideWeight="0.49946696" weight="0.32899022" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="12" weight="0.32899022" />
+      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Coverage" order="5" side_tool="true" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/templates/main/modules.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="331" column="44" selection-start-line="331" selection-start-column="38" selection-end-line="331" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/case.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="415" column="64" selection-start-line="415" selection-start-column="51" selection-end-line="415" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.webworker.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="2579" column="17" selection-start-line="2579" selection-start-column="17" selection-end-line="2579" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/test.html" />
+    <entry file="file://D:/python/Lib/site-packages/django/db/models/manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="166" selection-start-line="166" selection-end-line="166" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/python/Lib/site-packages/django/db/models/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-969" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/assets/js/bui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="37292" column="4" selection-start-line="37292" selection-start-column="4" selection-end-line="37292" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.2/system/python_stubs/-287100998/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="237" column="4" selection-start-line="237" selection-start-column="4" selection-end-line="237" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/NosqlDb.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="310" column="197" selection-start-line="310" selection-start-column="197" selection-end-line="310" selection-end-column="197" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/env.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1078">
+          <caret line="316" column="197" selection-start-line="316" selection-start-column="197" selection-end-line="316" selection-end-column="197" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/functionhelp.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/formatJson.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="635" column="27" selection-start-line="635" selection-start-column="19" selection-end-line="635" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/Nosql.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="451" column="90" selection-start-line="451" selection-start-column="82" selection-end-line="451" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/database.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="929">
+          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/sql.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="626" column="67" selection-start-line="626" selection-start-column="57" selection-end-line="626" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/email.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="280" column="162" selection-start-line="280" selection-start-column="162" selection-end-line="280" selection-end-column="162" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requestnew/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/first_task---2acb8fee-26db-11e9-915f-4cedfb3d07c3/testcase/UserLogin.py" />
+    <entry file="file://D:/python/Lib/site-packages/django/contrib/auth/decorators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/request/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/first_task---2ee733f4-26e0-11e9-b807-4cedfb3d07c3/testcase/UserLogin.py" />
+    <entry file="file://$PROJECT_DIR$/task/first_task---d1a6a6c6-26ee-11e9-84c6-4cedfb3d07c3/testcase/UserLogin.py" />
+    <entry file="file://$PROJECT_DIR$/public/suit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/task.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13813">
+          <caret line="727" column="124" selection-start-line="727" selection-start-column="116" selection-end-line="727" selection-end-column="135" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/request/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50977">
+          <caret line="2708" column="26" selection-start-line="2708" selection-start-column="26" selection-end-line="2708" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <marker date="1549118468566" expanded="true" signature="26274:26275" ph="..." />
+            <marker date="1549118468566" expanded="true" signature="50220:50290" ph="..." />
+            <marker date="1549118468566" expanded="true" signature="57977:57979" ph="..." />
+            <marker date="1549118468566" expanded="true" signature="72580:72582" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requestnew/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2109">
+          <caret line="116" column="41" lean-forward="true" selection-start-line="116" selection-start-column="41" selection-end-line="116" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/request/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="30" selection-start-column="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/python/Lib/site-packages/django/contrib/admin/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#117#169#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/python/Lib/site-packages/django/contrib/admin/options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requestnew/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="27" column="30" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/step.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="970" column="91" selection-start-line="970" selection-start-column="91" selection-end-line="970" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/first_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="122" column="64" selection-start-line="122" selection-start-column="62" selection-end-line="122" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/version">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="16" lean-forward="true" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/carryfunction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#45#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/email.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/ExtentHTMLTestRunner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+          <folding>
+            <element signature="e#1674#1689#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/HTMLTestRunner.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/job.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1083">
+          <caret line="57" column="25" lean-forward="true" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/log.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/make_testcase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1121">
+          <caret line="59" column="111" selection-start-line="59" selection-start-column="111" selection-end-line="59" selection-end-column="111" />
+          <folding>
+            <element signature="e#20#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/mongodb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/redis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/script_function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/spider.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="e#20#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/sqldb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1501">
+          <caret line="79" column="10" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
+          <folding>
+            <element signature="e#40#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/system.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="e#20#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/template">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/third_task---8f955d24-26f3-11e9-b9a4-4cedfb3d07c3/testcase/UserLogin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="32" />
+          <folding>
+            <element signature="e#43#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/expandfunction.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>

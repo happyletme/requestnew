@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    <title>Env</title>
+    <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js">
+    </script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/frame/static/css/style.css">
+    <script>
+        //点击全选按钮勾选子节点操作
+        function demo(){
+            var allcheck=document.getElementById("allcheck");
+            var choice=document.getElementsByName("choice");
+            for(var i=0;i<choice.length;i++){
+                choice[i].checked=allcheck.checked;
+            }
+        }
+        //点击子复选框,全选框 选中、取消
+        function setAll(){
+            if(!$(".checknum").checked){
+                $("#allcheck").prop("checked",false); // 子复选框某个不选择，全选也被取消
+            }
+            var choicelength=$("input[type='checkbox'][class='checknum']").length;
+            var choiceselect=$("input[type='checkbox'][class='checknum']:checked").length;
+
+            if(choicelength==choiceselect){
+                $("#allcheck").prop("checked",true);   // 子复选框全部部被选择，全选也被选择；1.对于HTML元素我们自己自定义的DOM属性，在处理时，使用attr方法；2.对于HTML元素本身就带有的固有属性，在处理时，使用prop方法。
+            }
+        }
+        //搜索或者搜索分页后去根据select返回的value去确定第几个option被选中
+        $(function(){
+            edit();
+            add();
+            del();
+            paging();
+            search();
+            check()
+            makepy();
+            funisRepeat();
+        });
+        //搜索或者搜索分页后去根据select返回的value去确定第几个option被选中
+        function get_option(elements,value){
+           $(elements).each(function(index,element){
+               //console.log($(element).val());
+                if($(element).val()==value){
+                    $(element).attr("selected",true);
+                    //console.log($(element).val());
+                    return;
+                }
+            });
+        }
+        //搜索
+        function search(){
+            var elementsStatus="#select1 option";
+            var valueStatus="{{ select }}";
+            get_option(elementsStatus,valueStatus);
+            var elementsProject="#selectproject option";
+            var selectproject="{{ selectproject }}";
+            get_option(elementsProject,selectproject);
+            var elementsmodules="#selectmodules option";
+            var selectmodules="{{ selectmodules }}";
+            get_option(elementsmodules,selectmodules);
+
+            $("#btn4").click(function(){
+                $("#seach").submit();
+            });
+            //根据项目名去获取模块名
+            $("#selectproject").change(function(){
+                if($(this).val()==0){
+                    $("#selectmodules").empty();
+                    $("#selectmodules").append('<option value="0">' + "请先选择项目" + '</option>');
+                }
+                else{
+                    $.get('/get_modules_name/?&project_name='+$(this).val(),function(dict){
+                    //console.log(dict);
+                    $("#selectmodules").empty();
+                    $("#selectmodules").append('<option value="0">' + "模块名" + '</option>');
+                    for (var i=0;i<dict.modules_names.length;i++)
+                    {
+                        $("#selectmodules").append('<option >' + dict.modules_names[i] + '</option>');
+                    }
+                });
+                }
+            });
+        }
+        //编辑
+        function edit(){
+            //根据项目名去获取模块名
+            $("#editproject").change(function(){
+                $.get('/get_modules_name/?&project_name='+$(this).val(),function(dict){
+                    //console.log(dict.modules_names);
+                    $("#editmodules").empty();
+                    for (var i=0;i<dict.modules_names.length;i++)
+                    {
+                        $("#editmodules").append('<option >' + dict.modules_names[i] + '</option>');
+                    }
+                });
+            });
+            $("#btn2").click(function(){
+                $("#myAlert").css("display","none");
+                $("#myAlert1").css("display","none");
+                $("#myAlert2").css("display","none");
+                var count=0;
+                var env_value;
+                var env=new Array();
+                var elements=$(".ipt");
+                $("#table").find(":checkbox:checked.checknum").each(function(){
+                    env_value=$(this).parent()
+                    for (var i=0;i<elements.length;i++){
+                        if (i==3){
+                            $.get('/get_modules_name/?&project_name='+env_value.text(),function(dict){
+                                //console.log(dict.modules_names);
+                                $("#editmodules").empty();
+                                for (var i=0;i<dict.modules_names.length;i++)
+                                {
+                                    $("#editmodules").append('<option >' + dict.modules_names[i] + '</option>');
+                                }
+                                var elementsmodules="#editmodules option";
+                                var selectmodules=env[3];
+                                //alert(env[3]);
+                                get_option(elementsmodules,selectmodules);
+                            });
+                        }
+                        env_value=env_value.next();
+                        //alert(env_value.text());
+                        //console.log(env_value.attr('titlevalue'))
+                        env[i]=env_value.attr('titlevalue');
+                    }
+                    //alert(env)
+                    count++;
+                });
+                if (count==1)
+                {
+                    //alert(env);
+                    for (var i=0;i<env.length-1;i++){
+                        if (i!=3){
+                            $(elements[i]).val(env[i]);
+                        }
+                    }
+                    if (env[env.length-1]=="True"){
+                        $(elements[env.length-1]).prop('checked',true);
+                    }
+                    else{
+                        $(elements[env.length-1]).removeAttr('checked');
+                    }
+                    $('#editMyModal').modal("show");
+                }
+                else{
+                    $("#myAlert").css("display","inherit");
+                }
+            });}
+        //新增
+        function add(){
+            $("#btn1").click(function(){
+                $("#myAlert").css("display","none");
+                $("#myAlert1").css("display","none");
+                $("#myAlert2").css("display","none");
+            });
+            //根据项目名去获取模块名
+            $("#addproject").change(function(){
+                $.get('/get_modules_name/?&project_name='+$(this).val(),function(dict){
+                    //console.log(dict.modules_names);
+                    $("#addmodules").empty();
+                    for (var i=0;i<dict.modules_names.length;i++)
+                    {
+                        $("#addmodules").append('<option >' + dict.modules_names[i] + '</option>');
+                    }
+                });
+            });
+        }
+        //删除
+        function del(){
+            $("#btn3").click(function(){
+                //调整被勾选的值
+                change_checkedenv_ids();
+                $("#myAlert").css("display","none");
+                $("#myAlert1").css("display","none");
+                $("#myAlert2").css("display","none");
+                if (checkedenv_ids.length<=1){
+                    $("#myAlert1").css("display","inherit");
+                    return false;
+                }
+                else{
+                    $("#ipt1").val(checkedenv_ids);
+                }
+            });
+        }
+        //定义一个被选中的全局变量
+        var checkedenv_ids="{{ checkedenv_ids }}";
+        checkedenv_ids=checkedenv_ids.split(",");
+        // 根据返回值去勾选对应列
+        function check(){
+            //alert (checkedenv_ids);
+            //当前页的列id
+            $("#table").find(":checkbox.checknum").each(function(){
+                env_id=$(this).parent().next().text();
+                if (env_id != "") {
+                    //env_ids.push(env_id);
+                    //alert(env_id);
+                    if (checkedenv_ids.includes(String(env_id))){
+                        $(this).attr("checked", true);
+                    }
+                }
+            });
+            //全选
+            setAll();
+        }
+
+        //根据当前页的勾选变化改变checkedenv_ids值
+        function change_checkedenv_ids(){
+            //当前页的列id
+            $("#table").find(":checkbox.checknum").each(function(){
+                env_id=$(this).parent().next().text();
+                if (env_id != "") {
+                    //env_ids.push(env_id);
+                    //alert($(this).attr("checked"));
+                    //选中则判断数组是否存在，不存在则入栈
+                    if ($(this).is(":checked")){
+                        //alert(1);
+                        //$(this).attr("checked", true);
+                        if (!checkedenv_ids.includes(String(env_id))){
+                            checkedenv_ids.push(String(env_id));
+                        }
+                    }
+                    //未选中则判断数组是否存在，存在则出栈
+                    else{
+                        if (checkedenv_ids.includes(String(env_id))){
+                            checkedenv_ids = $.grep(checkedenv_ids, function(value) {
+                                return value != String(env_id);
+                            });
+                        }
+                    }
+                }
+            });
+            //alert(checkedenv_ids);
+        }
+        //生成脚本
+        function makepy(){
+            $("#btnmakepy").click(function(){
+                //调整被勾选的值
+                change_checkedenv_ids();
+                $("#myAlert").css("display","none");
+                $("#myAlert1").css("display","none");
+                $("#myAlert2").css("display","none");
+                if (checkedenv_ids.length<=1){
+                    $("#myAlert2").css("display","inherit");
+                    return false;
+                }
+                else{
+                    $("#iptmakepy").val(checkedenv_ids);
+                }
+            });
+        }
+        //分页
+        function paging(){
+            function merge(btn){
+                //调整被勾选的值
+                change_checkedenv_ids();
+
+                elementcase_name=$("#ipt2").val();
+                elementapi=$("#ipt3").val();
+                elementversion=$("#ipt4").val();
+                elementselect=$("#select1").val();
+                elementproject_name=$("#selectproject").val();
+                elementmodules_name=$("#selectmodules").val();
+                oldHref=$(btn).attr("href");
+                href=oldHref+"&case_name="+elementcase_name+"&project_name="+elementproject_name+"&modules_name="+elementmodules_name+
+                    "&api="+elementapi+ "&version="+elementversion+"&select="+elementselect+"&checkedenv_ids="+checkedenv_ids
+                $(btn).attr("href",href)
+            }
+            var elementcase_name,elementproject_name,elementapi,elementversion,elementselect,elementmodules_name,oldHref,href;
+            $("#first").click(function(){
+                merge(this);
+            });
+            $("#previous").click(function(){
+                merge(this);
+            });
+            $("#next").click(function(){
+                merge(this);
+            });
+            $("#last").click(function(){
+                merge(this);
+            });
+        }
+        //判断提交的表单name是否重复
+        function funisRepeat(){
+            var isRepeat;
+            isRepeat="{{ isRepeat }}";
+            if (isRepeat>=1){
+                RepeatMessage="{{ RepeatMessage }}"
+                $("#tipModalLabel").text(RepeatMessage);
+                $('#tipModal').modal("show");
+            }
+        }
+    </script>
+</head>
+<body role="document">
+    <!--环境搜索栏-->
+    <div class="page-header" >
+        <form id="seach"  class="navbar-form" method="GET" action="/case_search_name/">
+            <div class="form-group">
+                <input id="ipt2" name="case_name" type="text" placeholder="接口名称" class="form-control" value={{ case_name }}>
+                <select id="selectproject" name="project_name" class="form-control">
+                    <option value="0" class="select">项目名</option>
+                    {% for project_name in project_names %}
+                        <option>{{ project_name }}</option>
+                    {% endfor %}
+                </select>
+                <select id="selectmodules" name="modules_name" class="form-control">
+                    <option value="0" class="select">模块名</option>
+                    {% for selectmodules_name in selectmodules_names %}
+                        <option>{{ selectmodules_name }}</option>
+                    {% endfor %}
+                </select>
+                <input  id="ipt3" name="api" type="text" placeholder="接口路径" class="form-control" value={{ api }}>
+                <input id="ipt4" name="version" type="text" placeholder="版本" class="form-control" value={{ version }}>
+                <select id="select1" name='select' class="form-control" >
+                    <option  value="2"  class="select">状态</option>
+                    <option value="1" class="select">启用</option>
+                    <option value="0" class="select">禁用</option>
+                </select>
+            </div>
+            <button id="btn4" type="onclick"  class="btn layui-btn" >搜索</button>
+            {% csrf_token %}
+        </form>
+    </div>
+    <!--警告框-->
+    <div id="myAlert" class="alert alert-warning" style="display: none">
+	    <strong>警告！</strong>编辑时只能勾选一条。
+    </div>
+    <div id="myAlert1" class="alert alert-warning" style="display: none">
+	    <strong>警告！</strong>删除时一定要勾选一条。
+    </div>
+    <div id="myAlert2" class="alert alert-warning" style="display: none">
+	    <strong>警告！</strong>生成脚本时一定要勾选一条。
+    </div>
+    <!--按钮-->
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group">
+            <button id="btn1" class="btn layui-btn"  data-toggle="modal" data-target="#addMyModal" >
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+            </button>
+            <button id="btn2" class="btn layui-btn"  data-toggle="modal" data-target="#">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
+            </button>
+            <button id="btn3" type="onclick" class="btn layui-btn" data-toggle="modal" data-target="#delmyModal">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>删除
+            </button>
+            <button id="btnmakepy" class="btn layui-btn"  data-toggle="modal" data-target="#maketaskMyModal" >
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>生成脚本
+            </button>
+        </div>
+    </div>
+    <!--环境列表-->
+    <div>
+        <div>
+            <table id="table" class="table table-striped">
+                <tr>
+                    <th><input type="checkbox" id="allcheck"  onclick="demo()" /></th><th>id</th><th>接口名称</th><th>项目名</th><th>模块名</th><th>接口路径</th><th>版本</th><th>接口描述</th><th>状态</th>
+                </tr>
+                <tbody>
+                {% for case,project_listnames in cases %}
+                    <tr>
+                        <td class="che1"><input type="checkbox" name="choice" class="checknum"  onclick="setAll()"/></td>
+                        <td titlevalue={{ case.id }}>{{ case.id }}</td>
+                        <td titlevalue={{ case.case_name }}>{{ case.case_name }}</td>
+                        <td titlevalue={{ project_listnames }}>{{ project_listnames }}</td>
+                        <td titlevalue={{ case.Modules }}>{{ case.Modules }}</td>
+                        <td titlevalue={{ case.api }}>{{ case.api }}</td>
+                        <td titlevalue={{ case.version }}>{{ case.version }}</td>
+                        <td titlevalue={{ case.case_desc }}>{{ case.case_desc }}</td>
+                        {% if case.status %}
+                            <td titlevalue={{ case.status }}>启用</td>
+                        {% else %}
+                            <td titlevalue={{ case.status }}><font color="#AAAAAA">禁用</font></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 模态框示例（Modal） -->
+    <!--新增-->
+    <div class="modal fade" id="addMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					新增接口
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form role="form" method='POST' action="/case_add_data/">
+                    <div class="form-group">
+                        <label  for="case_name">接口名称</label>
+                        <input  type="text" class="form-control" name="case_name" placeholder="请输入接口名称" required  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                    </div>
+                    <div class="form-group">
+                        <label  for="project_name" >项目名</label>
+                        <select id="addproject" name="project_name" class="form-control" required>
+                            {% for project_name in project_names %}
+                                <option>{{ project_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label  for="modules_name" >模块名</label>
+                        <select id="addmodules" name="modules_name" class="form-control" required>
+                            {% for modules_name in modules_names %}
+                            <option>{{ modules_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label  for="api">接口路径</label>
+                        <input  type="text" class="form-control" name="api" placeholder="请输入接口路径" required>
+                    </div>
+                    <div class="form-group">
+                        <label  for="version">版本</label>
+                        <input  type="text" class="form-control" name="version" placeholder="请输入版本" >
+                    </div>
+                    <div class="form-group">
+                        <label for="case_desc">接口描述</label>
+                        <input  type="text" class="form-control" name="case_desc" placeholder="请输入接口描述">
+                    </div>
+                    <div class="form-group" >
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="status" id="optionsRadios1" checked> 状态
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn" data-dismiss="modal">关闭
+				        </button>
+				        <button type="submit" class="btn layui-btn">
+					    提交
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!-- 编辑 -->
+    <div class="modal fade" id="editMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					编辑接口
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form role="form" method='POST' action="/case_edit_data/">
+                    <div class="form-group" style="display: none">
+                        <label  for="id">id</label>
+                        <input  type="text" class="ipt form-control" name="id" placeholder="请输入id" >
+                    </div>
+                    <div class="form-group">
+                        <label  for="case_name">接口名称</label>
+                        <input  type="text" class="ipt form-control" name="case_name" placeholder="请输入接口名称" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                    </div>
+                    <div class="form-group">
+                        <label  for="project_name" >项目名</label>
+                        <select id="editproject" name="project_name" class="ipt form-control" required>
+                            {% for project_name in project_names %}
+                                <option>{{ project_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label  for="modules_name" >模块名</label>
+                        <select id="editmodules" name="modules_name" class="ipt form-control" required>
+                            {% for modules_name in modules_names %}
+                            <option>{{ modules_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label  for="api">接口路径</label>
+                        <input  type="text" class="ipt form-control" name="api" placeholder="请输入接口路径" required>
+                    </div>
+                    <div class="form-group">
+                        <label  for="version">版本</label>
+                        <input  type="text" class="ipt form-control" name="version" placeholder="请输入版本" >
+                    </div>
+                    <div class="form-group">
+                        <label for="case_desc">接口描述</label>
+                        <input  type="text" class="ipt form-control" name="case_desc" placeholder="请输入接口描述">
+                    </div>
+                    <div class="form-group" >
+                        <label class="checkbox-inline">
+                            <input type="checkbox" class="ipt" name="status" id="optionsRadios1"> 状态
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn" data-dismiss="modal">关闭
+				        </button>
+				        <button type="submit" class="btn layui-btn">
+					    提交
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!-- 生成脚本 -->
+    <div class="modal fade" id="maketaskMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					生成脚本
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form role="form" method='POST' action="/make_case_data/">
+                    <div class="form-group" style="display: none">
+                        <label  for="id">id</label>
+                        <input id="iptmakepy" type="text" class="form-control" name="id" style="display:none"/>
+                    </div>
+                    <div class="form-group">
+                        <label  for="case_name" >任务名</label>
+                        <input  type="text" class="form-control" name="task_name" placeholder="请输入任务名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                    </div>
+                    <div class="form-group">
+                        <label  for="remark">备注</label>
+                        <input  type="text" class="form-control" name="remark" placeholder="请输入备注">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn" data-dismiss="modal">关闭
+				        </button>
+				        <button type="submit" class="btn layui-btn">
+					    提交
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!--删除二次确认框-->
+    <div class="modal fade" id="delmyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					确认要删除吗？
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form role="form" method='POST' action="/case_delete_data/">
+                    <input id="ipt1" type="text" name="id" style="display:none"/>
+                    <div class="modal-body" align="center">
+                        <img src="../static/img/caveat.jpg"  width="50%" >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn" data-dismiss="modal">关闭
+				        </button>
+				        <button type="submit" class="btn layui-btn">
+					    确认
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!--自动填充提示内容模态框-->
+    <div class="modal fade" id="tipModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-body">
+                <h1 class="modal-title" id="tipModalLabel" style="font-size:18px;font-weight: bold;">
+				</h1>
+                <div class="modal-footer">
+                    <button type="button" class="btn layui-btn" data-dismiss="modal" aria-hidden="true" value="确认">
+                        确认
+                    </button>
+                </div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!--分页器-->
+    <div style="text-align: right;">
+        <ul class="pagination pagination-sm">
+            <li>
+                <span class="current">
+                    Page {{ casees.number }} of {{ casees.paginator.num_pages }}
+                </span>
+            </li>
+            <li>
+                <a id="first" href="/case/?page=1">
+                    <span class="glyphicon glyphicon-fast-backward"></span>
+                </a>
+            </li>
+            <li>
+                {% if casees.has_previous %}
+                <a id="previous" href="/case/?page={{ casees.previous_page_number }}">
+                    <span class="glyphicon glyphicon-backward"></span>
+                </a>
+                {% endif %}
+            </li>
+            <li>
+                {% if casees.has_next %}
+                <a id="next" href="/case/?page={{ casees.next_page_number }}">
+                    <span class="glyphicon glyphicon-forward"></span>
+                </a>
+                {% endif %}
+            </li>
+            <li>
+                <a id="last" href="/case/?page={{ casees.paginator.num_pages }}">
+                    <span class="glyphicon glyphicon-fast-forward"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

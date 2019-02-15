@@ -1,0 +1,725 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JSON 格式化解析工具</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/H-ui.min.css" />
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body { font:12px/1.5 Arial; color:#666; background:#fff;}
+        ul,li{ list-style:none;}
+        img{border:0 none;}
+        .ssNav{ height:40px; line-height:40px; background:#333; }
+        .ssNav .sxo{ overflow:hidden;zoom:1; width:960px; margin:0 auto;}
+        .ssNav .sxo li{ float:left;}
+        .ssNav .sxo li a{color:#fff; text-decoration:none; padding:0 8px; font-size:14px;font-family:Microsoft YaHei; float:left; display:block;}
+        .ssNav .sxo li a:hover{ text-decoration:none; background:#555;}
+        .ddNav{height:50px; line-height:50px; background:#111; width:960px; margin:15px auto;}
+        .ddNav .xdo{overflow:hidden;zoom:1;width:960px; margin:0 auto;}
+        .ddNav .xdo li{ float:left; background:#555; width:25%; display:inline; text-align:center;}
+        .ddNav .xdo li a{color:#fff; text-decoration:none; font-size:22px;font-family:Microsoft YaHei;display:block;text-align:center;}
+        .ddNav .xdo li a:hover{ text-decoration:none; background:#000;}
+        .ddNav .xdo li a.active{background:#54bfff;}
+        .tit-h1{font-size:34px;font-family:Microsoft YaHei;text-align:center; padding:10px 0; color:#333;}
+        .ddback a{ width:360px; margin:20px auto 0;font-size:26px;text-align:center; display:block; line-height:46px; height:46px;font-family:Microsoft YaHei;text-decoration:none; background:#54bfff; color:#fff;}
+        .ddback a:hover{ color:#fff; background:#666;}
+        .sdCon{}
+        .ddfooter{ padding:8px 20px; background:#555; text-align:center; color:#fff;}
+        .ddfooter a{ text-decoration:none; color:#fff;}
+        /*---------------------------------------demo css--------------------------------------------*/
+        .setBox{ width:800px; margin:0 auto;}
+        .textarea{width:100%;height:500px;border:#ccc 1px solid; border-radius:5px;box-shadow:0 0 4px #eee;padding:10px;font-size:12px;line-height:18px}
+        .textarea:focus{background:#fdfdfd;border:#ccc 1px solid}
+        .sbtn{padding:0 12px; font-weight:800;height:28px;line-height:27px;display:inline-block;margin-right:6px;border:#ccc 1px solid;border-radius:2px;box-shadow:0 0 4px #eee;background-color:#f9f9f9;background-image:-webkit-linear-gradient(#F9F9F9,#F2F2F2);background-image:-moz-linear-gradient(#F9F9F9,#F2F2F2);background-image:-o-linear-gradient(#F9F9F9,#F2F2F2);background-image:-ms-linear-gradient(#F9F9F9,#F2F2F2);background-image:linear-gradient(#F9F9F9,#F2F2F2);color:#666;cursor:pointer;}
+        .sbtn:hover,.sbtn:focus{border:#aaa 1px solid;color:#54BFFF;}
+        .select{padding:4px;border:#ccc 1px solid;border-radius:2px;box-shadow:0 0 4px #eee;margin-right:6px; color:#666;}
+        .select:hover{border:#aaa 1px solid;}
+        .subbtn{margin-bottom:12px;}
+
+        .flexbt{cursor:pointer;float:left;padding:0 12px; font-weight:800;height:28px;line-height:27px;display:inline-block;margin-right:6px;border:#ccc 1px solid;border-radius:2px;box-shadow:0 0 4px #eee;background-color:#f9f9f9;background-image:-webkit-linear-gradient(#F9F9F9,#F2F2F2);background-image:-moz-linear-gradient(#F9F9F9,#F2F2F2);background-image:-o-linear-gradient(#F9F9F9,#F2F2F2);background-image:-ms-linear-gradient(#F9F9F9,#F2F2F2);background-image:linear-gradient(#F9F9F9,#F2F2F2);color:#666;cursor:pointer}
+        .flexbt_over{cursor:pointer;float:left;padding:0 12px; font-weight:800;height:28px;line-height:27px;display:inline-block;margin-right:6px;border:#ccc 1px solid;border-radius:2px;box-shadow:0 0 4px #eee;background-color:#f9f9f9;background-image:-webkit-linear-gradient(#F9F9F9,#F2F2F2);background-image:-moz-linear-gradient(#F9F9F9,#F2F2F2);background-image:-o-linear-gradient(#F9F9F9,#F2F2F2);background-image:-ms-linear-gradient(#F9F9F9,#F2F2F2);background-image:linear-gradient(#F9F9F9,#F2F2F2);color:#666;cursor:pointer;border:#aaa 1px solid;color:#54BFFF;}
+        #tipstext{ padding:0 10px;}
+        #main{font-size:12px;}
+        #loading{position:relative;top:-320px;margin: auto;width:98px;height:109px;background:url(../static/img/load.gif) no-repeat;}
+        #title{margin-left: 50px;text-align: left;width: 460px;font-size: 17px;color: #999999;height: 35px;line-height: 35px;}
+        a{color: #000000;text-decoration: none;}
+        a:hover{color: #3366ff}
+        a:visited{color: #000000}
+        #cp{clear: both;padding-top: 9px;text-align: left;margin-left: 15px;}
+        .blank{width: 100%;height: 10px;overflow: hidden;}
+        #path{height:28px;line-height: 28px;}
+        #path,.oper{text-align:left;}
+        .oper{padding-top:5px;}
+        #cpath{width: 280px;border: 1px solid #ccc;padding-left: 0px;padding-right: 0px;}
+        #ctype{width: 60px;border: 1px solid #ccc;padding-left: 0px;padding-right: 0px;}
+        #cvalue{width: 240px;border: 1px solid #ccc;padding-left: 0px;padding-right: 0px;}
+        #jsondata{}
+        #error{border-top: 2px solid #000;height: 200px;font-size: 12px;background: #ffffff;border-bottom: 1px solid #000;}
+        #errorTitle{height: 20px;line-height: 20px;border-bottom: 1px solid #000;background-color: #999999;background-image:url(../static/img/arr_fold.gif);background-position: left center;background-repeat: no-repeat;cursor: ns-resize;-moz-user-select: none;-khtml-user-select: none;}
+        #errorAdv{padding: 5px;height: 89px;word-break: break-all;overflow-x: hidden;overflow-y: auto;}
+        .erroritem{width: 100%;height: 22px;line-height: 22px;overflow: hidden;word-wrap: nowrap;cursor: pointer;}
+        .errcls{color: #ffff00;}
+        .erroritemover{width: 100%;height: 22px;line-height: 22px;overflow: hidden;word-wrap: nowrap;cursor: pointer;background: #FFFF99;}
+        .erroritemclick{width: 100%;height: 22px;line-height: 22px;overflow: hidden;word-wrap: nowrap;cursor: pointer;background: #FF9933}
+        #rs{width:100%;height:300px;border:#ccc 1px solid; border-radius:5px;box-shadow:0 0 4px #eee;padding:10px;font-size:12px;line-height:18px;overflow:auto;-moz-user-select: none;-khtml-user-select: none;}
+        span{cursor: pointer;}
+        .bgline{color: #f1f1f1}
+        .sbt_arr1{background: url(../static/img/arr_fold.gif) no-repeat;background: url(../static/img/arr_fold.gif) 0px 4px no-repeat\0;border: 0px none #fff;width: 13px;height: 13px;padding: 0px;overflow: hidden;font-size: 1px;cursor: pointer;}
+        :root .sbt_arr1{background: url(../static/img/arr_fold.gif) 0px -2px no-repeat\0;}
+        .sbt_arr2{padding: 0px;background: url(../static/img/arr_unfold.gif) no-repeat;background: url(../static/img/arr_unfold.gif) 0px 4px no-repeat\0;border: 0px none #fff;width: 13px;height: 13px;overflow: hidden;font-size: 1px;cursor: pointer;}
+        :root .sbt_arr2{background: url(../static/img/arr_unfold.gif) 0px -2px no-repeat\0;}
+        .sbt_obj1{background: url(../static/img/fold.gif) no-repeat;background: url(../static/img/fold.gif) 0px 4px no-repeat\0;border: 0px none #fff;width: 13px;height: 13px;padding: 0px;overflow: hidden;font-size: 1px;cursor: pointer;}
+        :root .sbt_obj1{background: url(../static/img/fold.gif) 0px -2px no-repeat\0;}
+        .sbt_obj2{background: url(../static/img/unfold.gif) no-repeat;background: url(../static/img/unfold.gif) 0px 4px no-repeat\0;padding: 0px;border: 0px none #fff;width: 13px;height: 13px;overflow: hidden;font-size: 1px;cursor: pointer;}
+        :root .sbt_obj2{background: url(../static/img/unfold.gif) 0px -2px no-repeat\0;}
+        .sbt_normal{padding: 0px;background: url(../static/img/normal.gif) no-repeat;background: url(../static/img/normal.gif) 0px 4px no-repeat\0;border: 0px none #fff;width: 13px;height: 13px;overflow: hidden;font-size: 1px;cursor: pointer;}
+        :root .sbt_normal{background: url(../static/img/normal.gif) 0px -2px no-repeat\0;}
+        /*css hack for chrome*/
+        @media screen and (-webkit-min-device-pixel-ratio: 0){.sbt_arr1{background: url(../static/img/arr_fold.gif) 0px 3px no-repeat;border: 0px none #fff;width: 13px;height: 13px;padding: 0px;overflow: hidden;font-size: 1px;cursor: pointer;}
+            .sbt_arr2{background: url(../static/img/arr_unfold.gif) 0px 3px no-repeat;border: 0px none #fff;width: 13px;height: 13px;overflow: hidden;font-size: 1px;cursor: pointer;}
+            .sbt_obj1{background: url(../static/img/fold.gif) 0px 3px no-repeat;border: 0px none #fff;width: 13px;height: 13px;padding: 0px;overflow: hidden;font-size: 1px;cursor: pointer;}
+            .sbt_obj2{background: url(../static/img/unfold.gif) 0px 3px no-repeat;border: 0px none #fff;width: 13px;height: 13px;overflow: hidden;font-size: 1px;cursor: pointer;}
+            .sbt_normal{background: url(../static/img/normal.gif) 0px 3px no-repeat;border: 0px none #fff;width: 13px;height: 13px;overflow: hidden;font-size: 1px;cursor: pointer;}
+        }
+        /*css hack for firefox*/
+        @-moz-document url-prefix(){}
+        .error{color: red}
+        .sug{color: #3366ff}
+        .atp-btn-group {
+        	margin-top: 14px;
+        	margin-bottom: 10px;
+        }
+        .atp-btn-group > .btn {
+        	margin-left: 8px;
+        }
+        #showpath > input {margin-left: 6px;}
+        /*-----------------------------------------------------------------------------------*/
+    </style>
+    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <!----------------------------------------------------demo js---------------------------------------------------->
+    <script type="text/javascript" src="../static/js/browser.js"></script>
+    <script type="text/javascript" src="../static/js/jquery_button.js"></script>
+    <script type="text/javascript" src="../static/js/jsonparse.js"></script>
+    <script type="text/javascript" src="../static/js/jsonparse2.js"></script>
+    <script type="text/javascript" src="../static/js/caret.js"></script>
+    <script type="text/javascript">
+        /**
+         *返回按钮函数
+         */
+        function fanhui (){
+            $("#cpath").val("");
+            $("#oper").html("<div style=\"background:rgb(26,161,148)\">开始解析</div><div style=\"background:rgb(26,161,148)\">美化数据</div><div style=\"background:rgb(26,161,148)\">压缩数据</div><div id='flashData' style=\"background:rgb(26,161,148)\">清空数据</div>");
+            T("tipstext").show();
+            T("showpath").hid();
+            T("jsondata").show();
+            if(errorStat){
+                T("error").show();
+            }
+            T("rs").hid();
+            regButton("oper",[
+                parseData2,
+                function(){
+                    $("#loading").show();
+                    setTimeout(function(){
+                        meihua();
+                    },200);
+                },
+                function(){
+                    $("#loading").show();
+                    setTimeout(function(){
+                        yasuo();
+                    },200);
+                },
+                function(){
+                    $("#jsondata").val("");
+                }
+            ]);
+        }
+        /**
+         *展开数据
+         */
+        function parseData(){
+            folded=false;
+            if($('#foldbutton')){
+                $('#foldbutton').html("收起数据");
+            }
+            return pData();
+        }
+        /**
+         *收起数据
+         */
+        function parseDataFold(){
+            folded=true;
+            if($('#foldbutton')){
+                $('#foldbutton').html("展开数据");
+            }
+            return pData();
+        }
+        /**
+         *按钮点击事件
+         */
+        function parseData2 (){
+            var js=trim($("#jsondata").val());
+            $("#loading").show();
+            setTimeout(function(){
+                if(js){
+                    if(parseData()){
+                        $("#oper").html("<div style=\"background:rgb(26,161,148)\">返回输入</div><div id='foldbutton' style=\"background:rgb(26,161,148)\">收起数据</div>");
+                        T("tipstext").hid();
+                        T("showpath").show();
+                        T("jsondata").hid();
+                        T("error").hid();
+                        T("rs").show();
+                        regButton("oper",[
+                            fanhui,
+                            function(){
+                                !folded?parseDataFold():parseData();
+                            }
+                        ]);
+                    }
+                    $("#loading").hide();
+                }else{
+                    $("#loading").hide();
+                }
+            },500);
+        }
+        /**
+         *解析数据的函数
+         */
+        function pData (){
+            var js=$("#jsondata").val();
+            var obj=null;
+            try{
+                obj=eval("("+$T(js)+")");
+            }catch(e){
+                errorCheck(e,js);
+                return "";
+            }
+            clearError();
+            if(obj){
+                if($Y(obj)=="array"){
+                    $("#rs").html("<pre>"+arr2str(obj,"","",true)+"</pre>");
+                }else{
+                    $("#rs").html("<pre>"+obj2str(obj)+"</pre>");
+                }
+                return true;
+            }else{
+                layer.alert("数据为空或者对象为null",{icon:5});
+                return false;
+            }
+        }
+        /**
+         *美化代码操作
+         */
+        function meihua (config){
+            _json_config=config||{
+                        indent:"\t",
+                        br:"\r\n"
+                    }
+            var js=$("#jsondata").val();
+            var obj=null;
+            try{
+                obj=eval("("+$T(js)+")");
+                $("#loading").hide();
+            }catch(e){
+                errorCheck(e,js);
+                $("#loading").hide();
+                return "";
+            }
+            clearError();
+            if(obj){
+                if($Y(obj)=="array"){
+                    $("#jsondata").val(a2s(obj,"","",true));
+                }else{
+                    $("#jsondata").val(o2s(obj,1));
+                }
+                return true;
+            }else{
+                layer.alert("数据为空或者对象为null",{icon:5});
+                return false;
+            }
+
+        }
+        /**
+         *压缩代码操作
+         */
+        function yasuo (){
+            meihua({
+                "indent":"",
+                "br":""
+            });
+        }
+
+        /**
+         *json 数据错误处理
+         */
+        /**
+         *当前错误状态
+         */
+        var errorStat=false;
+        /**
+         *被添加的建议
+         */
+        var suggs={};
+        /**
+         *错误数目
+         */
+        var errno=0;
+        /**
+         *添加一个建议
+         */
+        function addSugg (txt,id){
+            var sugid=$R(8);
+            suggs[id||sugid]={
+                "shown":false,
+                "data":txt
+            };
+        }
+        /**
+         *显示建议
+         */
+        function showSugg (n,js,row,col,i){
+            var txt="";
+            switch(n){
+                case 1:
+                    addSugg("[\""+js.replace(/"/g,"\\\"")+"\"]");
+                    addSugg("{\"data\":\""+js.replace(/"/g,"\\\"")+"\"}");
+                    break;
+                case 2:
+                    var data=js.split(/[\r\n]+/);
+                    for(var i=0,l=data.length;i<l;i++){
+                        data[i]="\""+data[i].replace(/"/g,"\\\"")+"\"";
+                    }
+                    addSugg("["+data.join(",")+"]");
+                    showSugg(1,js.replace(/\r/g,"\\r").replace(/\n/g,"\\n"));
+                    break;
+            }
+            T("errorAdv").show();
+            for(var i in suggs){
+                if(!suggs[i]["shown"]){
+                    suggs[i]["shown"]=true;
+                    if(i=="sourcedata"){
+                        if(n==1||n==2){
+                            $("#errorAdv").append("<b>[<span class='sug'>恢复</span>]: [<span class='sug' onclick='adopt(\"sourcedata\")'>回复原始数据</span>]</b> <br/>");
+                        }
+                        continue;
+                    }
+                    $("#errorAdv").append("<b>[<span class='sug'>建议</span>]: [<span class='sug' onclick='adopt(\""+i+"\")'>采用此建议</span>] </b>修改原有内容为: "+tips(suggs[i]["data"],25," .. (省略)")+"<br/>");
+
+                }
+            }
+            $("#errorAdv").attr("scrollTop",$("#errorAdv").attr("scrollHeight"));
+        }
+        /**
+         *采取建议
+         */
+        function adopt (sugid){
+            //if(confirm("确定要采用此建议吗?")){
+            $("#jsondata").val(suggs[sugid]["data"]);
+            //}
+        }
+        /**
+         *显示错误信息
+         */
+        function showError (n,js,row,col,i){
+            errno++;
+            errorStat=true;
+            $("#error").show();
+            $("#errorAdv").show();
+            $("#jsondata").css({
+                height:"103px"
+            });
+            var txt="";
+            var code=(js&&n!=999)?tips(js,20," .."):"";
+            var start=i+1;
+            var end=i+js.length;
+            var cend="第"+row+"行,第"+col+"个字符";
+            switch(n){
+                case 1:
+                case 2:
+                    txt="数据不是一个JSON数据,JSON数据通常以{...}或[...]的结构出现";
+                    break;
+                case 3:
+                    txt="此处{...}内解析发生错误,"+cend;
+                    start=i[0];
+                    end=i[1]+1;
+                    break;
+                case 4:
+                    txt="发现以/结尾的语句,"+cend;
+                    break;
+                case 5:
+                    txt="字符串中不允许出现换行行为,第"+row+"行末尾";
+                    break;
+                case 6:
+                    txt="发现意外出现的 '<b>]</b>',"+cend;
+                    break;
+                case 7:
+                    txt="发现意外出现的 '<b>}</b>',"+cend;
+                    break;
+                case 8:
+                    start=i[0];
+                    end=i[1];
+                    txt="意外的收引号,附近可能有符号丢失,"+cend;
+                    break;
+                case 9:
+                    txt="此处[...]内解析发生错误,"+cend;
+                    start=i[0];
+                    end=i[1]+1;
+                    break;
+                case 10:
+                    txt="属性内发生错误,"+cend;
+                    start=i[0];
+                    end=i[1]+1;
+                    break;
+                case 999:
+                    txt="数据解析错误,可能的错误原因:"+js;
+                    break;
+            }
+            var stylechange=" onmouseover=\"setClass(this,'erroritemover');\" onmouseout=\"setClass(this,'erroritem')\" ";
+            if(n!=1&&n!=2){
+                $("#errorAdv").append("<div "+stylechange+" title=\""+dquote(code)+"\" onclick=\"Caret.set('jsondata',"+start+","+end+");\" class=\"erroritem\"><b>[<span class='error'>错误</span>]: </b>"+txt+"<br/></div>");
+            }else{
+                $("#errorAdv").append("<div "+stylechange+" class=\"erroritem\"><b>[<span class='error'>错误</span>]: </b>"+txt+"<br/></div>");
+            }
+            showSugg (n,js);
+            $("#errorAdv").attr("scrollTop",$("#errorAdv").attr("scrollHeight"));
+        }
+        /**
+         *清楚错误信息
+         */
+        function clearError(){
+            errorStat=false;
+            errno=0;
+            $("#error").hide();
+            $("#errorAdv").html("");
+            $("#jsondata").css({
+                height:"500px"
+            });
+        }
+        /**
+         *错误检查函数
+         */
+        function errorCheck (e,js){
+            addSugg(js,"sourcedata");
+            $("#errorAdv").html("");
+            if(!/[\[\]\{\}]/.test(js)){
+                if(!/[\r\n]/.test(js)){
+                    showError(1,js);
+                }else{
+                    showError(2,js);
+                }
+            }else{
+                //去除所有字符串中所有的\\转义符
+                //js=js.replace(/\\\\/g,"{$slash-in}");
+                //去除所有字符串中的字符串转义
+                //js=js.replace(/\\"/g,"{$quote-in}").replace(/\\'/g,"{$cite-in}");
+                //去除所有引号字符串
+                //js=js.replace(/"[^"]+?"/g,"{$string}").replace(/'[^']+?'/g,"{$string}");
+                //去掉所有的属性与值对
+                //js=js.replace(/(?!\{\$)\w(?!\{\$)(["']?):/g,"{$key}");
+                var tags={
+                    "str":1,
+                    "reg":2,
+                    "ann":4,
+                    "arr":8,
+                    "obj":16,
+                    "trans":32
+                };
+                var status=[];
+                var stack=[];
+                var inStr=false;
+                var inReg=false;
+                var inAnn=false;
+                var inObj=0;
+                var inTrans=false;
+                var inArr=0;
+                var row=1;
+                var col=1;
+                var pair={
+                    "{":"}",
+                    "[":"]"
+                };
+                function readStack(chr){
+                    var str=[];
+                    var i=stack.length-1;
+                    while((stack[i]!=chr)&&i>=0){
+                        if(stack[i]===null){
+                            i--;
+                            continue;
+                        }
+                        str.unshift(stack[i]);
+                        stack[i]=null;
+                        i--;
+                    }
+                    stack[i]=chr+pair[chr];
+                    return chr+str.join("");
+                }
+                function getlast (chr,i){
+                    var p=i-1;
+                    while((stack[p]!=chr||status[p]==tags.str||status[p]==tags.ann||status[p]==tags.reg)&&p>=0){
+                        p--;
+                    }
+                    return p;
+                }
+                function checkValue (i){
+                    //var p=getlast(":",i);
+                    //if(inArr){
+                    var p=Math.max(getlast(":",i),getlast(",",i),getlast("[",i));
+                    //}
+                    //$("#t").append(status[p]+"|"+js.substring(p,i)+"<br/>");
+                    try{
+                        var data=js.substring(p,i);
+                        data=data.replace(/^[:,\[]/g,"");
+                        //alert(data);
+                        eval("("+data+")");
+                    }catch(e){
+                        //alert(e.message);
+                        showError(10,js.substring(p,i),row,col,[p+1,i-1]);
+                    }
+                }
+                for(var i=0,l=js.length;i<l;i++){
+                    var tmp=js.charAt(i);
+                    stack.push(tmp);
+                    col++;
+                    if(inTrans&&tmp!="\\"){
+                        inTrans=false;
+                    }
+                    switch(tmp){
+                        case "[":
+                            if(!inTrans&&!inStr&&!inReg&&!inAnn){
+                                inArr++;
+                            }
+                            break;
+                        case "]":
+                            if(!inTrans&&!inStr&&!inReg&&!inAnn){
+                                if(inArr){
+                                    if(js.charAt(i-1)!="["){
+                                        checkValue(i);
+                                    }
+                                    var p=getlast("[",i);
+                                    var obj=readStack("[");
+                                    try{
+                                        eval("("+obj+")");
+                                    }catch(e){
+                                        showError(9,obj,row,col,[p,i]);
+                                    }
+                                    inArr--;
+                                }else{
+                                    var l=20;
+                                    if(i<l){l=i;}
+                                    var str=js.substring(i-l,i+1);
+                                    showError(6,str,row,col,i);
+                                }
+                            }
+                            break;
+                        case "{":
+                            if(!inTrans&&!inStr&&!inReg&&!inAnn){
+                                inObj++;
+                            }
+                            break;
+                        case "\\":
+                            inTrans=!inTrans;
+                            break;
+                        case "'":
+                        case "\"":
+                            if(!inTrans&&!inReg&&!inAnn){
+                                if(inStr){
+                                    //如果字符串结束后，不是 } , ] : 等则说明字符串后面出现了非预期的字符
+                                    var nchar=js.charAt(i+1);
+                                    var mchar={"}":1,",":1,"]":1,":":1,"|":1,"+":1,".":1,"\n":1,"\r":1};
+                                    var end=i+30;
+                                    var p=getlast("\"",i);
+                                    if(end>js.length){end=js.length;}
+                                    if(nchar&&!mchar[nchar]){
+                                        showError(8,js.substring(i+1,end),row,col,[p,i]);
+                                    }
+                                }
+                                inStr=!inStr;
+                            }
+                            break;
+                        case "*":
+                            if(inAnn){
+
+                            }
+                            break;
+                        case ":":
+                            if(!inStr&&!inAnn&&!inReg){
+                                var p1=getlast(",",i);
+                                var p2=getlast("{",i);
+                                var p=p1>p2?p1:p2;
+                                //$("#t").append(status[p]+"|"+js.substring(p,i)+"<br/>");
+                            }
+                            break;
+                        case ",":
+                            if(!inStr&&!inAnn&&!inReg){
+                                checkValue(i);
+                            }
+                            break;
+                        case "/":
+                            if(!inStr){
+                                if(!inAnn){
+                                    if(js.charAt(i+1)=="/"){
+                                        inAnn=1;
+                                    }else if(js.charAt(i+1)=="*"){
+                                        inAnn=2;
+                                    }else{
+                                        var end=i+30;
+                                        if(end>js.length){end=js.length;}
+                                        if(js.charAt(i+1)=="\r"||js.charAt(i+1)=="\n"){
+                                            showError(4,js.substring(i,end),row,col,i);
+                                        }else{
+                                            if(!inReg&&js.charAt(i-1)!="/"){
+                                                inReg=true;
+                                            }else{
+                                                inReg=false;
+                                            }
+                                        }
+                                    }
+                                }else{
+                                    if(js.charAt(i-1)=="*"){
+                                        /*以 /* .. 开头的注释结束*/
+                                        inAnn=0;
+                                    }
+                                }
+                            }
+                            break;
+                        case "\n":
+                            if(inStr){
+                                showError(5,"",row,col,i);
+                            }else{
+                                if(inAnn===1){
+                                    /*以 //开头的注释结束*/
+                                    inAnn=0;
+                                }
+                            }
+                            row++;
+                            col=0;
+                            break;
+                        case "}":
+                            if(!inTrans&&!inStr&&!inReg&&!inAnn){
+                                if(inObj){
+                                    if(js.charAt(i-1)!="{"){
+                                        checkValue(i);
+                                    }
+                                    var p=getlast("{",i);
+                                    var obj=readStack("{");
+                                    try{
+                                        eval("("+obj+")");
+                                    }catch(e){
+                                        showError(3,obj,row,col,[p,i]);
+                                    }
+                                    inObj--;
+                                }else{
+                                    var l=20;
+                                    if(i<l){l=i;}
+                                    var str=js.substring(i-l,i+1);
+                                    showError(7,str,row,col,i);
+                                }
+                            }
+                            break;
+                        default:
+
+                    }
+                    if(inStr){status[i]=tags.str;}
+                    if(inAnn){status[i]=tags.ann;}
+                    if(inReg){status[i]=tags.reg;}
+                }
+            }
+            if(errno==0){
+                showError(999,e.description||e.message,"","",i);
+            }
+        }
+    </script>
+    <!-------------------------------------------------------------------------------------------------------->
+</head>
+<body>
+<h1 class="tit-h1">断言解析辅助工具</h1>
+    <div class="setBox">
+        <h3 style="font-family:Microsoft YaHei; font-size:14px; line-height:20px; height:20px;">请粘贴您要解析的json返回值：</h3>
+		<br>
+        <div id="main">
+            <div id="wrap">
+                <textarea class="textarea" id="jsondata"></textarea>
+                <div id="error" style="display:none;">
+                    <div id="errorTitle" onselectstart="return false">&nbsp;&nbsp;&nbsp;数据解析错误 [<span onclick="clearError()" class="errcls">关闭窗口</span>]</div>
+                    <div id="errorAdv"></div>
+                </div>
+                <div id="rs" style="display:none;" onselectstart="return false"></div>
+
+            </div>
+            <div id="oper" class="oper">
+                <div style="background:rgb(26,161,148)">开始解析</div><div style="background:rgb(26,161,148)">美化数据</div><div style="background:rgb(26,161,148)">压缩数据</div><div id='flashData'style="background:rgb(26,161,148)">清空数据</div>
+            </div>
+            <div id="path"><span id="tipstext" style="color:#3333FF"></span><span id="showpath" style="display:none;"><strong>当前路径: </strong>
+            <input type="text" value="" id="cpath" class="input-text radius"/>
+            <input type="text" id="ctype" value="" class="input-text radius"></input>
+            <input type="text" id="cvalue" value="" class="input-text radius"></input>
+            </span></div>
+        </div>
+        <div id="loading" style="display:none"></div>
+        <textarea id="sampledata" style="display:none;"></textarea>
+        <script type="text/javascript">	/**
+         *注册按钮事件
+         */
+        regButton("oper",[
+            parseData2,
+            function(){
+                $("#loading").show();
+                setTimeout(function(){
+                    meihua();
+                },200);
+            },
+            function(){
+                $("#loading").show();
+                setTimeout(function(){
+                    yasuo();
+                },200);
+            },
+            function(){
+                $("#jsondata").val("");
+            }
+        ]);
+        </script>
+        <div id="t"></div>
+        <script type="text/javascript">
+            /**
+             *错误信息栏的拖动
+             */
+            var move=false;
+            var pos={x:0,y:0};
+            $("#errorTitle").mousedown(function(event){
+                move=true;
+                pos.x=event.pageX;
+                pos.y=event.pageY;
+            });
+            $(document).mousemove(function(event){
+                if(move){
+                    var dis={};
+                    dis.y=event.pageY-pos.y;
+                    var h=$("#error").height();
+                    h-=dis.y;
+                    if(h<20){
+                        h=20;
+                    }
+                    if(h>200){
+                        h=200;
+                    }
+                    var h2=500 - h;
+                    $("#error").css({
+                        height:h + "px"
+                    });
+                    $("#jsondata").css({
+                        height:h2 + "px"
+                    });
+                    pos.x=event.pageX;
+                    pos.y=event.pageY;
+                }
+            });
+            $(document).mouseup(function(){
+                move=false;
+            });
+        </script>
+
+    </div>
+</body>
+</html>

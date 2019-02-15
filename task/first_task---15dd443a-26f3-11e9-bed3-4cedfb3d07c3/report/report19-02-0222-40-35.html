@@ -1,0 +1,541 @@
+
+    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <meta name='description' content=''/>
+    <meta name='robots' content='noodp, noydir'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='http://extentreports.com/resx/dist/css/extent.css' type='text/css' rel='stylesheet'/>
+    <title>first_task - TestReport</title>
+    
+    <style type="text/css">
+        .node.level-1 ul {
+            display: none;
+        }
+        .node.level-1.active ul {
+            display: block;
+        }
+        .card-panel.environment th:first-child {
+            width: 30%;
+        }
+        .small_img{
+            height: 180px; 
+            width: 100px; 
+            padding: 10px;
+            float: left;
+            background-repeat: no-repeat; 
+            background-position: center center; 
+            background-size: cover; 
+          } 
+        .black_overlay{ 
+            display: none; 
+            position: absolute; 
+            top: 0%; 
+            left: 0%; 
+            width: 100%; 
+            height: 100%; 
+            background-color: white; 
+            z-index:1001; 
+            -moz-opacity: 0.8; 
+            opacity:.80; 
+            filter: alpha(opacity=80);  
+        } 
+        .big_img { 
+            cursor: pointer;
+            display: none; 
+            position: absolute; 
+            height: 650px;
+            left:50%; 
+            top: 50%;
+            margin: -300px 0px 0px -200px;
+            z-index:1002; 
+            overflow: auto; 
+        }
+    </style>
+
+
+</head>
+<body class='extent standard default hide-overflow dark'>
+<div id='theme-selector' alt='切换主题，默认黑色' title='切换主题'>
+    <span><i class='material-icons'>desktop_windows</i></span>
+</div>
+
+    <nav>
+    <div class="nav-wrapper">
+        <img  src="//qhstaticssl.kujiale.com/as/c15149e4e8596375a988df166762f185/coops-icon.png">
+        <!-- slideout menu -->
+        <ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+            <li class='waves-effect active'><a href='#!' view='test-view'
+                                               onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a>
+            </li>
+            <!-- <li class='waves-effect'><a href='#!' view='category-view' onclick="configureView(1)"><i
+                    class='material-icons'>label_outline</i></a></li>
+            <li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');"
+                                        view='dashboard-view'><i class='material-icons'>track_changes</i></a></li> -->
+        </ul>
+        <!-- report name -->
+        <span class='report-name'>Test Report: first_task</span>
+        <!-- report headline -->
+        <span class='report-headline'></span>
+        <!-- nav-right -->
+        <ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+            <li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>Start_time: 2019-02-02 22:40:35</span>
+                </a>
+            </li>
+            <li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>Duration: 0:00:03.994294 </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+    
+<div class='container'>
+    
+    <div id='test-view' class='view'>
+        
+    <section id='controls'>
+            <div class='controls grey lighten-4'>
+                <!-- test toggle -->
+                <div class='chip transparent'>
+                    <a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true'
+                       data-beloworigin='true' data-hover='true' href='#'>
+                        <i class='material-icons'>warning</i> Status
+                    </a>
+                    <ul id='tests-toggle' class='dropdown-content'>
+                        <li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a>
+                        </li>
+                        <li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+                        <li status="skip"><a href="#!">Skip <i class="material-icons cyan-text">redo</i></a></li>
+                        <li class='divider'></li>
+                        <li status='clear' clear='true'><a href='#!'>Clear Filters <i
+                                class='material-icons'>clear</i></a></li>
+                    </ul>
+                </div>
+                <!-- test toggle -->
+                <!-- category toggle -->
+                <div class='chip transparent'>
+                    <a class='dropdown-button category-toggle' data-activates='category-toggle'
+                       data-constrainwidth='false' data-beloworigin='true' data-hover='true' href='#'>
+                        <i class='material-icons'>local_offer</i> Category
+                    </a>
+                    <ul id='category-toggle' class='dropdown-content'>
+                        
+    <li><a href='#'>UserLogin</a></li>
+    
+                        <li class='divider'></li>
+                        <li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
+                    </ul>
+                </div>
+                <!-- category toggle -->
+                <!-- clear filters -->
+                <div class='chip transparent hide'>
+                    <a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+                        <i class='material-icons'>close</i> Clear
+                    </a>
+                </div>
+                <!-- clear filters -->
+                <!-- enable dashboard -->
+                <div id='toggle-test-view-charts' class='chip transparent'>
+                    <a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+                        <i class='material-icons'>track_changes</i> Dashboard
+                    </a>
+                </div>
+                <!-- enable dashboard -->
+                <!-- search -->
+                <div class='chip transparent' alt='Search Tests' title='Search Tests'>
+                    <a href="#" class='search-div'>
+                        <i class='material-icons'>search</i> Search
+                    </a>
+                    <div class='input-field left hide'>
+                        <input style="color: red" id='search-tests' type='text' class='validate browser-default'
+                               placeholder='Search Tests...'>
+                    </div>
+                </div>
+                <!-- search -->
+            </div>
+        </section>
+    
+        
+    <div id='test-view-charts' class='subview-full'>
+            <div id='test-view-charts' class='subview-full'>
+                <div id='charts-row' class='row nm-v nm-h'>
+                    <div class=''>
+                        <div class='card-panel nm-v' style="font-weight: bold;font-size:30px;">
+                            <div class='left panel-name'>执行结果</div>
+                            <div class='chart-box'>
+                                <canvas id='parent-analysis' width='100' height='80'></canvas>
+                            </div>
+                            <div class='block text-small'>
+                            <span class='tooltipped' data-position='top' style="font-weight: bold;font-size:15px;color:#00af00"><span
+                                    class='strong'>2</span> 个用例 passed</span>
+                                <span class='tooltipped' data-position='top' style="font-weight: bold;font-size:15px;color:#F7464A"><span
+                                        class='strong'>0</span> 个用例 failed</span>
+                            </div>
+                            <div class='block text-small' style="font-weight: bold;font-size:15px;color:#ff6347">
+                            <span class='strong tooltipped' data-position='top'
+                            >0</span>
+                                个用例 errored
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+    <div class='subview-left left'>
+            <div class='view-summary'>
+                <h5>接口</h5>
+                <ul id='test-collection' class='test-collection'>
+                
+    <li class="test displayed active has-leaf pass" status="pass" bdd="true" test-id="UserLogin_1">
+    <div class='test-heading'>
+        <span class='test-name'>UserLogin</span>
+        <span class='test-time'>desc: 测试 </span>
+        <span class="test-status right pass">pass</span>
+    </div>
+    <div class='test-content hide'>
+        <div class='test-desc'>Pass: 2 ;
+                                Fail: 0 ;
+                                Error: 0 ;
+        </div>
+        <div class='test-attributes'>
+            <div class='category-list'>
+                <span class='category label white-text'>UserLogin</span>
+            </div>
+        </div>
+        <ul class='collapsible node-list' data-collapsible='accordion'>
+            
+            <li class="node level-1 leaf pass" status="pass" test-id="test_UserLoginMobileError_pt1.1_1">
+            <div class='collapsible-header'>
+                <div class='node-name'>test_UserLoginMobileError</div>
+                <span class='node-time'>desc: </span>
+                <span class="test-status right pass">pass</span>
+            </div>
+            <div class='collapsible-body'>
+                <div class='category-list right'>
+                    <span class='category label white-text'>test_UserLoginMobileError</span>
+                </div>
+                <div class='node-steps'>
+                    <table class='bordered table-results'>
+                        <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Identity</th>
+                            <th>Details</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+        <tr class='info' status='info'>
+            <td class='status info' title='info' alt='info'><i
+                    class='material-icons'>low_priority</i></td>
+            <td class='timestamp'>output</td>
+            <td class='step-details'>
+<br/>[time:2019-02-02 22:40:38,005 - file:log.py] - INFO : UserLoginMobileError
+<br/>[time:2019-02-02 22:40:38,006 - file:log.py] - INFO : http://api.saas.cfpu.com/cloud-permission/user/login.do
+<br/>[time:2019-02-02 22:40:38,006 - file:log.py] - INFO : get
+<br/>[time:2019-02-02 22:40:38,006 - file:log.py] - INFO : {'version': '4'}
+<br/>[time:2019-02-02 22:40:38,006 - file:log.py] - INFO : {'phone': '14100001111', 'password': 'e10adc3949ba59abbe56e057f20f883e'}
+<br/>[time:2019-02-02 22:40:38,006 - file:log.py] - INFO : 用例通过
+write Successlogname
+<br/>[time:2019-02-02 22:40:38] - INFO : 请求返回值为: {"msg": "手机号格式不正确", "code": 1}
+
+</td>
+        </tr>
+        <tr class='info' status='info'>
+            <td class='status info' title='info' alt='info'><i
+                    class='material-icons'>low_priority</i></td>
+            <td class='timestamp'>outputexcept</td>
+            <td class='step-details'>
+
+
+            </td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                 </div>
+             </div>
+            </li>
+    
+            <li class="node level-1 leaf pass" status="pass" test-id="test_UserLoginMobileError1_pt1.2_1">
+            <div class='collapsible-header'>
+                <div class='node-name'>test_UserLoginMobileError1</div>
+                <span class='node-time'>desc: </span>
+                <span class="test-status right pass">pass</span>
+            </div>
+            <div class='collapsible-body'>
+                <div class='category-list right'>
+                    <span class='category label white-text'>test_UserLoginMobileError1</span>
+                </div>
+                <div class='node-steps'>
+                    <table class='bordered table-results'>
+                        <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Identity</th>
+                            <th>Details</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+        <tr class='info' status='info'>
+            <td class='status info' title='info' alt='info'><i
+                    class='material-icons'>low_priority</i></td>
+            <td class='timestamp'>output</td>
+            <td class='step-details'>
+<br/>[time:2019-02-02 22:40:39,726 - file:log.py] - INFO : UserLoginMobileError1
+<br/>[time:2019-02-02 22:40:39,726 - file:log.py] - INFO : http://api.saas.cfpu.com/cloud-permission/user/login.do
+<br/>[time:2019-02-02 22:40:39,726 - file:log.py] - INFO : get
+<br/>[time:2019-02-02 22:40:39,726 - file:log.py] - INFO : {'version': '4'}
+<br/>[time:2019-02-02 22:40:39,726 - file:log.py] - INFO : {'phone': '14100001111', 'password': 'e10adc3949ba59abbe56e057f20f883e'}
+<br/>[time:2019-02-02 22:40:39,726 - file:log.py] - INFO : 用例通过
+write Successlogname
+<br/>[time:2019-02-02 22:40:39] - INFO : 请求返回值为: {"msg": "手机号格式不正确", "code": 1}
+
+</td>
+        </tr>
+        <tr class='info' status='info'>
+            <td class='status info' title='info' alt='info'><i
+                    class='material-icons'>low_priority</i></td>
+            <td class='timestamp'>outputexcept</td>
+            <td class='step-details'>
+
+
+            </td>
+        </tr>
+    
+                        </tbody>
+                    </table>
+                 </div>
+             </div>
+            </li>
+    
+        </ul>
+    </div>
+    
+                </ul>
+            </div>
+    </div>            
+    
+
+        <div class='subview-right left'>
+            <div class='view-summary'>
+                <h5 class='test-name'></h5>
+                <div id='step-filters' class="right">
+                    <span class="blue-text" status="info" alt="info" title="info"><i
+                            class="material-icons">info_outline</i></span>
+                    <span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+                    <span class="red-text" status="fail" alt="fail" title="fail"><i
+                            class="material-icons">cancel</i></span>
+                    <span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i
+                            class="material-icons">cancel</i></span>
+                    <span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i
+                            class="material-icons">error</i></span>
+                    <span class="orange-text" alt="warning" status="warning" title="warning"><i
+                            class="material-icons">warning</i></span>
+                    <span class="teal-text" status="skip" alt="skip" title="skip"><i
+                            class="material-icons">redo</i></span>
+                    <span status="clear" alt="Clear filters" title="Clear filters"><i
+                            class="material-icons">clear</i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id='category-view' class='view hide'>
+        <section id='controls'>
+            <div class='controls grey lighten-4'>
+                <!-- search -->
+                <div class='chip transparent' alt='Search Tests' title='Search Tests'>
+                    <a href="#" class='search-div'>
+                        <i class='material-icons'>search</i> Search
+                    </a>
+
+                    <div class='input-field left hide'>
+                        <input tyle="color: red;" id='search-tests' type='text'
+                               class='validate browser-default'
+                               placeholder='Search Tests...'>
+                    </div>
+
+                </div>
+                <!-- search -->
+            </div>
+        </section>
+
+        <div class='subview-left left'>
+            <div class='view-summary'>
+                <h5>Categories</h5>
+                <ul id='category-collection' class='category-collection'>
+                    <li class='category displayed active'>
+                        <div class='category-heading'>
+                            <span class='category-name'>All Suites</span>
+                            <span class='category-status right'>
+                                <span class='label pass'>2 </span>
+                                <span class='label fail'>0</span>
+                            </span>
+                        </div>
+                        <div class='category-content hide'>
+                            <div class='category-status-counts'>
+                                <span class='label green accent-4 white-text'>Passed: 2</span>
+                                <span class='label red lighten-1 white-text'>Failed: 0</span>
+                                <span class='label blue lighten-1 white-text'>Errored: 0</span>
+                                <span class="label yellow darken-2 white-text">Skipped: </span>
+                            </div>
+                            <div class='category-tests'>
+                                <table class='bordered table-results'>
+                                    <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>TestName</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    ['\n    <tr style="border: 1px solid #49cc90; background-color: rgba(73, 204, 144, .1)">\n        <td>2019-02-02 22:40:35.736007</td>\n        <td class=\'linked\' test-id=\'first_task---15dd443a-26f3-11e9-bed3-4cedfb3d07c3.testcase.UserLogin.UserLogin_0\'>UserLogin</td>\n        <td><span class="test-status pass">pass</span></td>\n    </tr>\n    <tr>\n        <td></td>\n        <td class=\'linked\' test-id=\'暂未处理\'></td>\n        <td><span class="test-status pass">pass</span></td>\n    </tr>\n\n    ']
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    ["\n    <li class='category displayed active'>\n        <div class='category-heading'>\n            <span class='category-name'>UserLogin</span>\n            <span class='category-status right'>\n                <span class='label pass'>2 </span>\n                <span class='label fail'>0</span>\n            </span>\n        </div>\n        <div class='category-content hide'>\n            <div class='category-status-counts'>\n                <span class='label green accent-4 white-text'>Passed: 2</span>\n                <span class='label red lighten-1 white-text'>Failed: 0</span>\n                <span class='label blue lighten-1 white-text'>Errored: 0</span>\n            </div>\n            <div class='category-tests'>\n                <table class='bordered table-results'>\n                    <thead>\n                    <tr>\n                        <th>Timestamp</th>\n                        <th>TestName</th>\n                        <th>Status</th>\n                    </tr>\n                    </thead>\n                    <tbody>\n\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    </li>\n    "]
+                <div class='subview-right left'>
+            <div class='view-summary'>
+                <h5 class='category-name'></h5>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+
+    
+    <div id='dashboard-view' class='view hide'>
+        <div class='card-panel transparent np-v'>
+            <h5>Dashboard</h5>
+            <div class='row'>
+                <div class='col s2'>
+                    <div class='card-panel r'>
+                        Pass
+                        <div class='panel-lead'>2</div>
+                    </div>
+                </div>
+                <div class='col s2'>
+                    <div class='card-panel r'>
+                        Fail
+                        <div class='panel-lead'>0</div>
+                    </div>
+                </div>
+                <div class='col s2'>
+                    <div class='card-panel r'>
+                        Error
+                        <div class='panel-lead'>0</div>
+                    </div>
+                </div>
+                <div class='col s2'>
+                    <div class='card-panel r'>
+                        Skip
+                        <div class='panel-lead'></div>
+                    </div>
+                </div>
+                <div class='col s2'>
+                    <div class='card-panel r'>
+                        Start
+                        <div class='panel-lead'>2019-02-02 22:40:35</div>
+                    </div>
+                </div>
+                <div class='col s2'>
+                    <div class='card-panel r'>
+                        Time Taken
+                        <div class='panel-lead'>0:00:03.994294 seconds</div>
+                    </div>
+                </div>
+                <div class='col s4'>
+                    <div class='card-panel'>
+                        <span class='right label cyan white-text'>Categories</span>
+                        <p>&nbsp;</p>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Passed</th>
+                                <th>Failed</th>
+                                <th>Errored</th>
+                                <th>Skipped</th>
+                            </tr>
+                            <tr>
+                                <td>All Suites</td>
+                                <td class="pass">2</td>
+                                <td class="fail">0</td>
+                                <td class="error">0</td>
+                                <td class="skip"></td>
+                            </tr>
+                                <tr>
+                                    <td id="unknown"></td>
+                                    <td class="pass"></td>
+                                    <td class="fail"></td>
+                                    <td class="error"></td>
+                                    <td class="skip"></td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+</body>
+
+    <script>
+        var test_suite_success = 2;
+
+
+        var statusGroup = {
+            passParent: 2,
+            failParent: 0,
+            fatalParent: 0,
+            errorParent: 0,
+            warningParent: 0,
+            skipParent: 0,
+            exceptionsParent: 0,
+
+            passChild: test_suite_success,
+            failChild: 0,
+            fatalChild: 0,
+            errorChild: 0,
+            warningChild: 0,
+            skipChild: 0,
+            infoChild: 0,
+            exceptionsChild: 0,
+
+            passGrandChild: 0,
+            failGrandChild: 0,
+            fatalGrandChild: 0,
+            errorGrandChild: 0,
+            warningGrandChild: 0,
+            skipGrandChild: 0,
+            infoGrandChild: 0,
+            exceptionsGrandChild: 0,
+        };
+
+    </script>
+
+    <script src='http://extentreports.com/resx/dist/js/extent.js' type='text/javascript'></script>
+
+
+    <script type='text/javascript'>
+        $(window).off("keydown");
+    </script>
+    
+</html>

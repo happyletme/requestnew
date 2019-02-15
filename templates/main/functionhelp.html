@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    <title>Env</title>
+    <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js">
+    </script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/frame/static/css/style.css">
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body { font:12px/1.5 Arial; color:#666; background:#fff;}
+        ul,li{ list-style:none;}
+        .tit-h1{font-size:34px;font-family:Microsoft YaHei;text-align:center; padding:10px 0; color:#333;}
+        .setBox{ width:800px; margin:0 auto;}
+        .textarea{width:100%;height:500px;border:#ccc 1px solid; border-radius:5px;box-shadow:0 0 4px #eee;padding:10px;font-size:12px;line-height:18px}
+        .textarea:focus{background:#fdfdfd;border:#ccc 1px solid}
+    </style>
+    <script>
+
+        $(function(){
+            change();
+        });
+        function change(){
+            message=$("#data").val();
+            var reg = new RegExp("\r\n", "g");
+            message = message.replace(reg, "<br/>");
+            $("#data").val(message);
+        }
+    </script>
+</head>
+<body role="document">
+<h1 class="tit-h1">函数助手</h1>
+    <div class="setBox" style="text-align:center">
+		<br>
+        <div id="main">
+            <div id="wrap">
+                <textarea class="textarea" id="data">{{ responsemessage }}</textarea>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

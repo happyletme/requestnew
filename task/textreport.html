@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>textreport</title>
+    <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        $(function(){
+            show();
+            select();
+        });
+        //换行变<br/>
+        function changemessage(p) {
+            $(p).each(function () {
+                $(this).html($(this).text().replace(new RegExp("\n", "gm"), '<br/>'))
+            });
+        }
+        function show(){
+            changemessage("#p1");
+            changemessage("#p2");
+        }
+        //选择查看正确日志还是错误日志
+        function display(btn,showmessage,unshowmessage){
+            $(btn).click(function (){
+                $(showmessage).removeAttr("style");
+                $(unshowmessage).attr("style","display: None");
+            });
+        }
+        function select(){
+            display("#btn1","#p1","#p2");
+            display("#btn2","#p2","#p1")
+        }
+    </script>
+</head>
+<body>
+    <!--按钮-->
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group">
+            <button id="btn1" type="button" class="btn btn-default">正确日志</button>
+            <button id="btn2" type="button" class="btn btn-default">错误日志</button>
+        </div>
+    </div>
+    <p id="p1">{{ successmessage }}</p>
+    <p id="p2" style="display: None">{{ failmessage }}</p>
+</body>
+</html>

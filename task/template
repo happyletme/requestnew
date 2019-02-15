@@ -1,0 +1,31 @@
+#!/usr/bin/python
+#-*- encoding:UTF-8 -*-
+
+from public.request import *
+from public.sqldb import *
+from public.log import *
+from public.run import *
+from public.sqldb import Transferip_db
+from public.mongodb import Transferip_mongodb
+from public.carryfunction import Transferfunction
+from public.script_function import *
+from django.db.models import F
+import unittest,re,json,jsonpath
+class ${case_name}(unittest.TestCase):
+    '''${case_desc}'''
+    @classmethod
+    def setUpClass(cls):
+        cls.transferlogname=Transferlogname()
+        cls.transferip_db=Transferip_db()
+        cls.transfermongodb = Transferip_mongodb()
+        cls.transferfunction = Transferfunction()
+        api="${api}"
+        cls.url=cls.transferip_db.ip+api
+        pass
+
+    @classmethod
+    def tearDownClass(cls):
+        pass
+
+
+

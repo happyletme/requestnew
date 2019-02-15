@@ -1,0 +1,12 @@
+[time:2019-02-02 22:03:07,044 - file:log.py] - INFO : UserLoginMobileError
+[time:2019-02-02 22:03:07,044 - file:log.py] - INFO : http://api.saas.cfpu.com/cloud-permission/user/login.do
+[time:2019-02-02 22:03:07,044 - file:log.py] - INFO : get
+[time:2019-02-02 22:03:07,044 - file:log.py] - INFO : {'version': '4'}
+[time:2019-02-02 22:03:07,044 - file:log.py] - INFO : {'phone': '14100001111', 'password': 'e10adc3949ba59abbe56e057f20f883e'}
+[time:2019-02-02 22:03:07,044 - file:log.py] - INFO : 用例通过
+[time:2019-02-02 22:03:08,724 - file:log.py] - INFO : UserLoginMobileError1
+[time:2019-02-02 22:03:08,724 - file:log.py] - INFO : http://api.saas.cfpu.com/cloud-permission/user/login.do
+[time:2019-02-02 22:03:08,724 - file:log.py] - INFO : get
+[time:2019-02-02 22:03:08,724 - file:log.py] - INFO : {'version': '4'}
+[time:2019-02-02 22:03:08,724 - file:log.py] - INFO : {'phone': '14100001111', 'password': 'e10adc3949ba59abbe56e057f20f883e'}
+[time:2019-02-02 22:03:08,724 - file:log.py] - INFO : 用例通过

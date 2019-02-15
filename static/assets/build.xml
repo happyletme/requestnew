@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="lplib.build" default="build" basedir=".">
+	
+	<property name="tools.dir" location="./tools"/>
+  <property name="build.dir" location="./"/>
+  <property name="charset" value="UTF-8"/>
+	
+	<target name="build" depends="build-all">
+  </target>
+
+  <target name="build-all">
+      <subant target="" failonerror="false" inheritall="false">
+          <fileset dir="${build.dir}/js" includes="**/build.xml"/>
+      </subant>
+      <subant target="" failonerror="false" inheritall="false">
+          <fileset dir="${build.dir}/css" includes="**/build.xml"/>
+      </subant>
+  </target>
+
+</project>
