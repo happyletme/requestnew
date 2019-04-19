@@ -104,7 +104,6 @@ urlpatterns = [
     url('^update_task_status/$', views.update_task_status),
     url('^task_status/$', views.task_status),
     url('^start_timing_task/$', views.start_timing_task),
-    url('^get_progress_bar/$', views.get_progress_bar),
 
     #执行结果
     url('^htmlreport/$', views.htmlreport),
