@@ -228,6 +228,7 @@
         }
         //请求执行状态
         var carrystatus;
+        var firstcarry=0;
         //查询执行状态
         function requestCarryingStatus(){
             //判断任务是1还是2，展示模态框数据
@@ -300,6 +301,18 @@
                         $(".disable").attr("style","background: #1AA194;color: whitesmoke;");
                         $(".disable").removeAttr("disabled");
                      }
+
+                     //如果刚开始执行firstcarry
+                     if(firstcarry==1){
+                        $("#carryText").text("任务开始执行");
+                        $("#buttonsure").removeAttr("style");
+                        $("#buttonsure").removeAttr("disabled");
+                        $(".disable").attr("style","background: #1AA194;color: whitesmoke;");
+                        $(".disable").removeAttr("disabled");
+                        setTimeout(function(){
+                            firstcarry=0
+                        }, 1000 * 3);
+                     }
                  }
             })
         }
@@ -317,7 +330,7 @@
             //console.log("开启轮询")
             id=setTimeout(runEvery3Sec, 1000 * 3);
             requestCarryingList()
-            if (carrystatus==3){
+            if (carrystatus==2 || carrystatus==3){
                 //console.log("轮询关闭")
                 clearTimeout(id);
             }
@@ -626,6 +639,9 @@
             $("#carrysubmit").click(function(){
                 $("#carryform").attr("target","rfFrame");
                 $("#carryform").submit();
+                //状态置换成1开始执行
+                firstcarry=1;
+                requestUpdateCarryingStatus(1);
                 //关闭不刷新
                 $('#editMyModal').modal("hide");
                 carrying();

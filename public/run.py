@@ -21,7 +21,7 @@ class Transferlogname:
         self.test_carryid=test_carryid
 
 def interface(task_name,failcount,email_data):
-
+    print (1)
     #获取权重
     case_names_weights={}
     task_cases=Task.objects.filter(task_name=task_name).values("case_id")
@@ -87,7 +87,7 @@ def interface(task_name,failcount,email_data):
     CarryTask.objects.create(task_name=task_name, htmlreport=filename, successlogname=Successlogname,
                              errorlogname=Errorlogname,stepcountall=stepcountall,out_id=out_id)
     #任务表的carrystatus置成1
-    Task.objects.filter(task_name=task_name).update(carrystatus=1)
+    #Task.objects.filter(task_name=task_name).update(carrystatus=1)
     #test_carryTaskid = CarryTask.objects.values("id").aggregate(id=Max('id'))['id']
     test_carryTaskid = CarryTask.objects.filter(out_id=out_id).values("id")[0]['id']
 

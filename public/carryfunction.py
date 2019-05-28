@@ -11,14 +11,42 @@ class Carryfunction(Expandfunction):
         patternfunction = re.compile(r'\${__(.*?)}')  # 把函数给提取出来
         functionstrlist = patternfunction.findall(string)
         for functionstr in functionstrlist:
+            patternSeparation = re.compile(r'(.*)?\((.*)?\)')  # 把函数名和参数剥离
+            Separationfunctionstrlist = patternSeparation.findall(functionstr)
+            functionname = Separationfunctionstrlist[0][0]
+
+            # 生成函数
+            func = getattr(self, functionname)
+            functionparamslist = Separationfunctionstrlist[0][1].split(',')
+
+            # 如果参数是字符串的去掉';如果是整数转换成整数
+            changeregex = r"'"
+            newfunctionparamslist = []
+            for functionparams in functionparamslist:
+                #有参数走正常
+                try:
+                    if len(re.findall(changeregex, functionparams)) == 0:
+                        functionparams = eval(functionparams)
+                    else:
+                        functionparams = re.sub(changeregex, "", functionparams)
+                    newfunctionparamslist.append(functionparams)
+                except:
+                    newfunctionparamslist=[]
+            result = func(*newfunctionparamslist)
+
+            # 替换原先的字符串
+            regex = r"\${__" + functionname + r"\(" + Separationfunctionstrlist[0][1] + r"\)}"
+            string = re.sub(regex, str(result), string)
             try:
                 patternSeparation = re.compile(r'(.*)?\((.*)?\)')  # 把函数名和参数剥离
                 Separationfunctionstrlist = patternSeparation.findall(functionstr)
                 functionname = Separationfunctionstrlist[0][0]
 
                 # 生成函数
+                print (functionname)
                 func = getattr(self, functionname)
                 functionparamslist = Separationfunctionstrlist[0][1].split(',')
+
 
                 # 如果参数是字符串的去掉';如果是整数转换成整数
                 changeregex = r"'"

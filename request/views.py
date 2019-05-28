@@ -24,13 +24,13 @@ from decimal import Decimal
 from django.utils.timezone import now, timedelta
 from django.db.models import Min,Avg,Max,Sum
 from django.apps import apps
+from threading import Thread
 
 
 # Create your views here.
 #分页显示数
 NumberColumns=15
-#进度条
-finish="0"
+
 #当页面编辑新增删除后拿的全部数据，返回第一页的数据
 def get_firstPage(dataModel):
     data_list = dataModel.objects.all().order_by("-id")
@@ -515,6 +515,7 @@ def project(request):
                                                   Q(Developer__contains=Developer)).order_by("-id")
     except:
         project_list=Project.objects.all().order_by("-id")
+    print (project_list)
     paginator=Paginator(project_list,NumberColumns)
     page=request.GET.get("page")
     try:
@@ -1177,8 +1178,11 @@ def case_search_name(request):
     # 把项目名和用例列表数据打包
     contactszip = zip(contacts, project_listnames)
     project_names = get_project_name(filiterdata)
-    project_name = project_names[0]
-    modules_names = get_modules_name(project_name,filiterdata)
+    if project_names:
+        project_name = project_names[0]
+        modules_names = get_modules_name(project_name,filiterdata)
+    else:
+        modules_names=[]
     #给项目选择框对应的数据
     if selectproject!="0":
         selectmodules_names=get_modules_name(selectproject,filiterdata)
@@ -2397,7 +2401,6 @@ def write_task(request,task_name,env_desc,nosqldb_desc,failcount,schedule,status
 #执行任务
 @login_required
 def task_run(request):
-    global finish
     task_name=request.POST.get("task_name")
     env_desc = request.POST.get("env_desc")
     #database_desc = request.POST.get("database_desc")
@@ -2424,9 +2427,8 @@ def task_run(request):
     if schedule==None:
         #拼接ip
         get_ip_database(request,task_name,env_desc,nosqldb_desc)
-        interface(task_name,failcount,email_data)
-        #job = Job(task_name, schedule)
-        #job.create_one_job(request,env_desc,nosqldb_desc,failcount,subject)
+        t = Thread(target=interface, args=(task_name, failcount, email_data))
+        t.start()
     else:
         write_task(request,task_name,env_desc,nosqldb_desc,failcount,schedule,status,email_data)
         job = Job(task_name, schedule)
@@ -2458,7 +2460,6 @@ def task_run(request):
         response["Nosqldb_descs"] = Nosqldb_descs
     if subjects!=None:
         response["subjects"]=subjects
-    finish=1
     return render(request, "./main/task.html",response)
     #return JsonResponse(response)
 
@@ -2545,16 +2546,6 @@ def start_timing_task(request):
         response["subjects"]=subjects
 
     return render(request, "./main/task.html",response)
-#请求进度条
-@login_required
-def get_progress_bar(request):
-    response={}
-    global finish
-    getfinish=finish
-    print (getfinish)
-    finish = 0
-    response["getfinish"]=getfinish
-    return JsonResponse(response)
 
 #定时任务
 @login_required
