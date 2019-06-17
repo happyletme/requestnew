@@ -85,7 +85,7 @@ urlpatterns = [
     url('^database_delete_data/$', views.database_delete_data),
     url('^database_search_name/$', views.database_search_name),
 
-    #环境配置
+    #非关系数据库配置
     url('^NosqlDatabase/$',views.NosqlDatabase),
     url('^NosqlDatabase_add_data/$', views.NosqlDatabase_add_data),
     url('^NosqlDatabase_edit_data/$', views.NosqlDatabase_edit_data),

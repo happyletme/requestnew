@@ -1,42 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load bootstrap3 %}
-    {% bootstrap_css %}
-    <title>Env</title>
-    <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js">
+    <title>NosqlDb</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <script src="../static/js/jquery-1.11.1.min.js">
     </script>
-	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/js/pageDeal.js"></script>
     <link rel="stylesheet" href="../static/frame/layui/css/layui.css">
     <link rel="stylesheet" href="../static/frame/static/css/style.css">
     <script>
-        //点击全选按钮勾选子节点操作
-        function demo(){
-            var allcheck=document.getElementById("allcheck");
-            var choice=document.getElementsByName("choice");
-            for(var i=0;i<choice.length;i++){
-                choice[i].checked=allcheck.checked;
-            }
-        }
-        //点击子复选框,全选框 选中、取消
-        function setAll(){
-            if(!$(".checknum").checked){
-                $("#allcheck").prop("checked",false); // 子复选框某个不选择，全选也被取消
-            }
-            var choicelength=$("input[type='checkbox'][class='checknum']").length;
-            var choiceselect=$("input[type='checkbox'][class='checknum']:checked").length;
+        //定义一个被选中的全局变量
+        var checked_ids="{{ checkedenv_ids }}";
+        var code = "{{ code }}";
+        var codeMessage = "{{ codeMessage }}";
 
-            if(choicelength==choiceselect){
-                $("#allcheck").prop("checked",true);   // 子复选框全部部被选择，全选也被选择；1.对于HTML元素我们自己自定义的DOM属性，在处理时，使用attr方法；2.对于HTML元素本身就带有的固有属性，在处理时，使用prop方法。
-            }
-        }
         $(function(){
             edit();
             add();
-            del();
+            del("btn3","ipt1","table","checkbox","checknum","myAlert1");
             paging();
-            check()
-            funisRepeat();
+            check("table","allcheck","checkbox","checknum"); // 根据返回值去勾选对应列
+            funisError("tipModalLabel","tipModal");//判断提交的表单是否错误
         });
         //编辑
         function edit(){
@@ -77,82 +62,17 @@
                 $("#myAlert1").css("display","none");
             });
         }
-        //删除
-        function del(){
-            $("#btn3").click(function(){
-                //调整被勾选的值
-                change_checkedenv_ids();
-                $("#myAlert").css("display","none");
-                $("#myAlert1").css("display","none");
-                $("#myAlert2").css("display","none");
-                if (checkedenv_ids.length<=1){
-                    $("#myAlert1").css("display","inherit");
-                    return false;
-                }
-                else{
-                    $("#ipt1").val(checkedenv_ids);
-                }
-            });
-        }
-        //定义一个被选中的全局变量
-        var checkedenv_ids="{{ checkedenv_ids }}";
-        checkedenv_ids=checkedenv_ids.split(",");
-        // 根据返回值去勾选对应列,如果全部勾选顺便把全选也勾上
-        function check(){
-            //alert (checkedenv_ids);
-            //当前页的列id
-            $("#table").find(":checkbox.checknum").each(function(){
-                env_id=$(this).parent().next().text();
-                if (env_id != "") {
-                    //env_ids.push(env_id);
-                    //alert(env_id);
-                    if (checkedenv_ids.includes(String(env_id))){
-                        $(this).attr("checked", true);
-                    }
-                }
-            });
-            //全选
-            setAll();
-        }
 
-        //根据当前页的勾选变化改变checkedenv_ids值
-        function change_checkedenv_ids(){
-            //当前页的列id
-            $("#table").find(":checkbox.checknum").each(function(){
-                env_id=$(this).parent().next().text();
-                if (env_id != "") {
-                    //env_ids.push(env_id);
-                    //alert($(this).attr("checked"));
-                    //选中则判断数组是否存在，不存在则入栈
-                    if ($(this).is(":checked")){
-                        //alert(1);
-                        //$(this).attr("checked", true);
-                        if (!checkedenv_ids.includes(String(env_id))){
-                            checkedenv_ids.push(String(env_id));
-                        }
-                    }
-                    //未选中则判断数组是否存在，存在则出栈
-                    else{
-                        if (checkedenv_ids.includes(String(env_id))){
-                            checkedenv_ids = $.grep(checkedenv_ids, function(value) {
-                                return value != String(env_id);
-                            });
-                        }
-                    }
-                }
-            });
-            //alert(checkedenv_ids);
-        }
         //分页
         function paging(){
             function merge(btn){
                 //调整被勾选的值
-                change_checkedenv_ids();
+                checked_ids=change_checked_ids(checked_ids,"table","checkbox","checknum");
 
                 elementhost=$("#ipt3").val();
                 elementport=$("#ipt4").val();
                 oldHref=$(btn).attr("href");
-                href=oldHref+"&host="+elementhost+"&port="+elementport+"&checkedenv_ids="+checkedenv_ids
+                href=oldHref+"&host="+elementhost+"&port="+elementport+"&checkedenv_ids="+checked_ids
                 $(btn).attr("href",href)
             }
             var elementip,elementhost,elementport;
@@ -168,16 +88,6 @@
             $("#last").click(function(){
                 merge(this);
             });
-        }
-        //判断提交的表单访问地址名称是否重复
-        function funisRepeat(){
-            var isRepeat;
-            isRepeat="{{ isRepeat }}";
-            if (isRepeat>=1){
-                RepeatMessage="{{ RepeatMessage }}"
-                $("#tipModalLabel").text(RepeatMessage);
-                $('#tipModal').modal("show");
-            }
         }
     </script>
 </head>
@@ -219,12 +129,12 @@
         <div>
             <table id="table" class="table table-striped">
                 <tr>
-                    <th><input type="checkbox" id="allcheck"  onclick="demo()" /></th><th>id</th><th>NosqlDb名称</th><th>服务器名称或ip</th><th>端口</th><th>密码</th>
+                    <th><input type="checkbox" id="allcheck"  onclick='checkAll("allcheck","choice")' /></th><th>id</th><th>NosqlDb名称</th><th>服务器名称或ip</th><th>端口</th><th>密码</th>
                 </tr>
                 <tbody>
                 {% for NosqlDb in NosqlDbs %}
                     <tr>
-                        <td id="che1" ><input type="checkbox" name="choice" class="checknum"  onclick="setAll()"/></td>
+                        <td id="che1" ><input type="checkbox" name="choice" class="checknum"  onclick='setAll("allcheck","checkbox","checknum")'/></td>
                         <td>{{ NosqlDb.id }}</td>
                         <td>{{ NosqlDb.NosqlDb_desc }}</td>
                         <td>{{ NosqlDb.host }}</td>

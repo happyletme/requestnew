@@ -55,8 +55,6 @@ class Email(models.Model):
 #项目表
 class Project(models.Model):
     project_name=models.CharField(max_length=20,verbose_name="项目名")
-    Testers=models.CharField(max_length=100,default="",blank=True,verbose_name="测试人员")
-    Developer = models.CharField(max_length=100,default="",blank=True,verbose_name="开发人员")
     project_desc = models.CharField(max_length=200, blank=True, verbose_name="项目描述")
     status= models.BooleanField( verbose_name="状态")
 
@@ -91,6 +89,7 @@ class Case(models.Model):
     Modules=models.ForeignKey(Modules,on_delete=models.CASCADE)
     case_name = models.CharField(max_length=100)
     api = models.CharField(max_length=100)
+    stepCount = models.IntegerField(default=0)
     status = models.BooleanField()
     version = models.CharField(max_length=20)
     case_weights = models.IntegerField(default=0)

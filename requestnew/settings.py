@@ -25,7 +25,7 @@ SECRET_KEY = '2l24cj%pl_8iku9x+vo)1h+!s+e+ga-i86zmx&y$s9k07w!19x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.10.31.246']
+ALLOWED_HOSTS = ['10.10.31.243']
 #ALLOWED_HOSTS = []
 
 
@@ -101,7 +101,7 @@ DATABASES = {
         'PORT' : '3306',
         'NAME':'request',
         'USER':'admin',
-        'PASSWORD': '123456',
+        'PASSWORD': 'XXXXXX',
         'OPTIONS': {
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
         }

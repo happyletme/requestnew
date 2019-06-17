@@ -25,6 +25,7 @@ from django.utils.timezone import now, timedelta
 from django.db.models import Min,Avg,Max,Sum
 from django.apps import apps
 from threading import Thread
+from request import db
 
 
 # Create your views here.
@@ -118,16 +119,16 @@ def env_add_data(request):
     env_host=request.POST.get("host")
     env_port=request.POST.get("port")
     env_desc=request.POST.get("desc")
-    isRepeat = len(Environment.objects.filter(env_desc=env_desc).values())
+    code = len(Environment.objects.filter(env_desc=env_desc).values())
     # 不重复则新增数据
-    if isRepeat == 0:
+    if code == 0:
         Environment.objects.create(env_ip=env_ip,env_host=env_host,env_port=env_port,env_desc=env_desc)
-        RepeatMessage =""
+        codeMessage =""
     # 重复则不新增数据
     else:
-        RepeatMessage="访问地址名称重复，新增失败"
+        codeMessage="访问地址名称重复，新增失败"
     contacts=get_firstPage(Environment)
-    return render(request, "./main/env.html", {"envs": contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/env.html", {"envs": contacts,"code":code,"codeMessage":codeMessage})
 
 @login_required
 def env_edit_data(request):
@@ -136,17 +137,17 @@ def env_edit_data(request):
     env_host=request.POST.get("host")
     env_port=request.POST.get("port")
     env_desc=request.POST.get("desc")
-    isRepeat = len(Environment.objects.filter(~Q(id=env_id),env_desc=env_desc).values())
+    code = len(Environment.objects.filter(~Q(id=env_id),env_desc=env_desc).values())
     # 不重复则更新数据
-    if isRepeat == 0:
+    if code == 0:
         Environment.objects.filter(id=env_id).update(env_ip=env_ip, env_host=env_host, env_port=env_port,
                                                      env_desc=env_desc)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不更新数据
     else:
-        RepeatMessage = "访问地址名称重复，修改失败"
+        codeMessage = "访问地址名称重复，修改失败"
     contacts = get_firstPage(Environment)
-    return render(request, "./main/env.html", {"envs": contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/env.html", {"envs": contacts,"code":code,"codeMessage":codeMessage})
 
 @login_required
 def env_delete_data(request):
@@ -216,18 +217,18 @@ def email_add_data(request):
     email_Headerfrom = request.POST.get("Headerfrom")
     email_Headerto = request.POST.get("Headerto")
     email_subject = request.POST.get("subject")
-    isRepeat = len(Email.objects.filter(subject=email_subject).values())
+    code = len(Email.objects.filter(subject=email_subject).values())
     # 不重复则新增数据
-    if isRepeat == 0:
+    if code == 0:
         encryptionEmail_passwd = base64.b64encode(bytes(email_passwd, 'utf-8')).decode()
         Email.objects.create(sender=email_sender,receivers=email_receivers,host_dir=email_host_dir,email_port=email_port,username=email_username, \
                                    passwd=encryptionEmail_passwd, Headerfrom=email_Headerfrom, Headerto=email_Headerto,subject=email_subject)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不新增数据
     else:
-        RepeatMessage = "邮件标题重复，新增失败"
+        codeMessage = "邮件标题重复，新增失败"
     contacts = get_firstPage(Email)
-    return render(request, "./main/email.html", {"emails": contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/email.html", {"emails": contacts,"code":code,"codeMessage":codeMessage})
 
 @login_required
 def email_edit_data(request):
@@ -242,9 +243,9 @@ def email_edit_data(request):
     email_Headerto = request.POST.get("Headerto")
     email_subject = request.POST.get("subject")
 
-    isRepeat = len(Email.objects.filter(~Q(id=email_id), subject=email_subject).values())
+    code = len(Email.objects.filter(~Q(id=email_id), subject=email_subject).values())
     # 不重复则更新数据
-    if isRepeat == 0:
+    if code == 0:
         # 先去数据库中获取密码比对，若一致不修改
         oldEmail_passwd = Email.objects.filter(id=email_id).values('passwd')
         if oldEmail_passwd[0]['passwd'] != email_passwd:
@@ -261,13 +262,13 @@ def email_edit_data(request):
                                                      username=email_username, \
                                                      Headerfrom=email_Headerfrom, Headerto=email_Headerto,
                                                      subject=email_subject)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不更新数据
     else:
-        RepeatMessage = "邮件标题重复，修改失败"
+        codeMessage = "邮件标题重复，修改失败"
 
     contacts = get_firstPage(Email)
-    return render(request, "./main/email.html", {"emails": contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/email.html", {"emails": contacts,"code":code,"codeMessage":codeMessage})
 
 @login_required
 def email_delete_data(request):
@@ -337,21 +338,21 @@ def database_add_data(request):
     db_user = request.POST.get("db_user")
     db_password = request.POST.get("db_password")
     db_remark = request.POST.get("db_remark")
-    isRepeat = len(Db.objects.filter(db_remark=db_remark).values())
+    code = len(Db.objects.filter(db_remark=db_remark).values())
     # 不重复则新增数据
-    if isRepeat == 0:
+    if code == 0:
         if db_typename=="Mysql":
             Db.objects.create(db_type=0,db_typename=db_typename,db_name=db_name,db_ip=db_ip,db_port=db_port,\
                                     db_user=db_user,db_password=db_password,db_remark=db_remark)
         elif db_typename=="SqlServer":
             Db.objects.create(db_type=1,db_typename=db_typename,db_name=db_name,db_ip=db_ip,db_user=db_user,\
                                     db_password=db_password,db_remark=db_remark)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不新增数据
     else:
-        RepeatMessage = "数据库的连接名称重复，新增失败"
+        codeMessage = "数据库的连接名称重复，新增失败"
     contacts = get_firstPage(Db)
-    return render(request, "./main/database.html", {"databases": contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/database.html", {"databases": contacts,"code":code,"codeMessage":codeMessage})
 @login_required
 def database_edit_data(request):
     db_id = request.POST.get("id")
@@ -362,8 +363,8 @@ def database_edit_data(request):
     db_user = request.POST.get("db_user")
     db_password = request.POST.get("db_password")
     db_remark = request.POST.get("db_remark")
-    isRepeat = len(Db.objects.filter(~Q(id=db_id), db_remark=db_remark).values())
-    if isRepeat == 0:
+    code = len(Db.objects.filter(~Q(id=db_id), db_remark=db_remark).values())
+    if code == 0:
         old_db_remark=Db.objects.filter(id=db_id).values('db_remark')[0]['db_remark']
         if db_typename == "Mysql":
             Db.objects.filter(id=db_id).update(db_type=0, db_typename=db_typename, db_name=db_name, db_ip=db_ip,
@@ -376,12 +377,12 @@ def database_edit_data(request):
         #监控若修改了数据库的连接名，则变更sql表的数据库字段
         if old_db_remark!=db_remark:
             Sql.objects.filter(db=db_id).update(db_remark=db_remark)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不更新数据
     else:
-        RepeatMessage = "数据库的连接名称重复，修改失败"
+        codeMessage = "数据库的连接名称重复，修改失败"
     contacts = get_firstPage(Db)
-    return render(request, "./main/database.html", {"databases": contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/database.html", {"databases": contacts,"code":code,"codeMessage":codeMessage})
 
 @login_required
 def database_delete_data(request):
@@ -441,21 +442,16 @@ def NosqlDatabase_add_data(request):
     port=request.POST.get("port")
     NosqlDb_desc=request.POST.get("desc")
     password = request.POST.get("password")
-    print (host)
-    print(port)
-    print(NosqlDb_desc)
-    print(password)
-    isRepeat = len(NosqlDb.objects.filter(NosqlDb_desc=NosqlDb_desc).values())
+    code = len(NosqlDb.objects.filter(NosqlDb_desc=NosqlDb_desc).values())
     # 不重复则新增数据
-    if isRepeat == 0:
-        print (1)
+    if code == 0:
         NosqlDb.objects.create(password=password,host=host,port=port,NosqlDb_desc=NosqlDb_desc)
-        RepeatMessage =""
+        codeMessage =""
     # 重复则不新增数据
     else:
-        RepeatMessage="NosqlDb名称重复，新增失败"
+        codeMessage="NosqlDb名称重复，新增失败"
     contacts=get_firstPage(NosqlDb)
-    return render(request, "./main/NosqlDb.html", {"NosqlDbs": contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/NosqlDb.html", {"NosqlDbs": contacts,"code":code,"codeMessage":codeMessage})
 
 @login_required
 def NosqlDatabase_edit_data(request):
@@ -463,17 +459,17 @@ def NosqlDatabase_edit_data(request):
     host=request.POST.get("host")
     port=request.POST.get("port")
     desc=request.POST.get("desc")
-    isRepeat = len(NosqlDb.objects.filter(~Q(id=id),NosqlDb_desc=desc).values())
+    code = len(NosqlDb.objects.filter(~Q(id=id),NosqlDb_desc=desc).values())
     # 不重复则更新数据
-    if isRepeat == 0:
+    if code == 0:
         NosqlDb.objects.filter(id=id).update(host=host, port=port,
                                              NosqlDb_desc=desc)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不更新数据
     else:
-        RepeatMessage = "NosqlDb名称重复，修改失败"
+        codeMessage = "NosqlDb名称重复，修改失败"
     contacts = get_firstPage(NosqlDb)
-    return render(request, "./main/NosqlDb.html", {"NosqlDbs": contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/NosqlDb.html", {"NosqlDbs": contacts,"code":code,"codeMessage":codeMessage})
 
 @login_required
 def NosqlDatabase_delete_data(request):
@@ -502,20 +498,15 @@ def NosqlDatabase_search_name(request):
 @login_required
 def project(request):
     project_name = request.GET.get("project_name")
-    Testers = request.GET.get("Testers")
-    Developer = request.GET.get("Developer")
     select = request.GET.get("select")
     checkedenv_ids = request.GET.get("checkedenv_ids")
     try:
         if select != '2':
-            project_list = Project.objects.filter(Q(project_name__contains=project_name), Q(Testers__contains=Testers),
-                                                  Q(Developer__contains=Developer), Q(status=select)).order_by("-id")
+            project_list = Project.objects.filter(Q(project_name__contains=project_name), Q(status=select)).order_by("-id")
         else:
-            project_list = Project.objects.filter(Q(project_name__contains=project_name), Q(Testers__contains=Testers),
-                                                  Q(Developer__contains=Developer)).order_by("-id")
+            project_list = Project.objects.filter(Q(project_name__contains=project_name)).order_by("-id")
     except:
         project_list=Project.objects.all().order_by("-id")
-    print (project_list)
     paginator=Paginator(project_list,NumberColumns)
     page=request.GET.get("page")
     try:
@@ -527,10 +518,6 @@ def project(request):
     response={"projects":contacts}
     if project_name!=None:
         response["project_name"]=project_name
-    if Testers!=None:
-        response["Testers"]=Testers
-    if Developer!=None:
-        response["Developer"]=Developer
     if select!=None:
         response["select"]=select
     else:
@@ -548,20 +535,20 @@ def project_add_data(request):
     testers = request.POST.get("testers")
     developer = request.POST.get("developer")
     status = request.POST.get("status")
-    isRepeat=len(Project.objects.filter(project_name=project_name).values())
+    code=len(Project.objects.filter(project_name=project_name).values())
     #不重复则新增数据
-    if isRepeat==0:
+    if code==0:
         if status!=None:
             Project.objects.create(project_name=project_name,project_desc=project_desc,Testers=testers,Developer=developer,status=1)
         else:
             Project.objects.create(project_name=project_name, project_desc=project_desc, Testers=testers,
                                Developer=developer, status=0)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不新增数据
     else:
-        RepeatMessage = "项目名重复，新增失败"
+        codeMessage = "项目名重复，新增失败"
     contacts = get_firstPage(Project)
-    return render(request, "./main/project.html", {"projects": contacts,"select":'2',"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/project.html", {"projects": contacts,"select":'2',"code":code,"codeMessage":codeMessage})
 
 @login_required
 def project_edit_data(request):
@@ -571,21 +558,21 @@ def project_edit_data(request):
     testers = request.POST.get("testers")
     developer = request.POST.get("developer")
     status = request.POST.get("status")
-    isRepeat = len(Project.objects.filter(~Q(id=project_id), project_name=project_name).values())
+    code = len(Project.objects.filter(~Q(id=project_id), project_name=project_name).values())
     # 不重复则更新数据
-    if isRepeat == 0:
+    if code == 0:
         if status != None:
             Project.objects.filter(id=project_id).update(project_name=project_name, project_desc=project_desc,
                                                          Testers=testers, Developer=developer, status=1)
         else:
             Project.objects.filter(id=project_id).update(project_name=project_name, project_desc=project_desc,
                                                          Testers=testers, Developer=developer, status=0)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不更新数据
     else:
-        RepeatMessage = "项目名重复，编辑失败"
+        codeMessage = "项目名重复，编辑失败"
     contacts = get_firstPage(Project)
-    return render(request, "./main/project.html", {"projects": contacts,"select":'2',"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/project.html", {"projects": contacts,"select":'2',"code":code,"codeMessage":codeMessage})
 
 @login_required
 def project_delete_data(request):
@@ -604,19 +591,15 @@ def project_delete_data(request):
 @login_required
 def project_search_name(request):
     project_name = request.GET.get("project_name")
-    Testers = request.GET.get("Testers")
-    Developer = request.GET.get("Developer")
     select = request.GET.get("select")
     if select!='2':
-        project_list = Project.objects.filter(Q(project_name__contains=project_name), Q(Testers__contains=Testers),
-                                            Q(Developer__contains=Developer),Q(status=select)).order_by("-id")
+        project_list = Project.objects.filter(Q(project_name__contains=project_name),Q(status=select)).order_by("-id")
     else:
-        project_list = Project.objects.filter(Q(project_name__contains=project_name), Q(Testers__contains=Testers),
-                                              Q(Developer__contains=Developer)).order_by("-id")
+        project_list = Project.objects.filter(Q(project_name__contains=project_name)).order_by("-id")
     paginator = Paginator(project_list, NumberColumns)
     contacts = paginator.page(1)
     return render(request, "./main/project.html", {"projects": contacts,"project_name":project_name,\
-                                                   "Testers":Testers,"Developer":Developer,"select":select})
+                                                   "select":select})
 
 
 #测试模块
@@ -722,19 +705,18 @@ def modules_add_data(request):
     project_name=request.POST.get('project_name')
     #得到外键数据
     project=Project.objects.get(project_name=project_name)
-    isRepeat = len(Modules.objects.filter(Modules_name=Modules_name,Project=project).values())
-    print (isRepeat)
+    code = len(Modules.objects.filter(Modules_name=Modules_name,Project=project).values())
     # 不重复则新增数据
-    if isRepeat == 0:
+    if code == 0:
         if status!=None:
             Modules.objects.create(Modules_name=Modules_name,Modules_desc=Modules_desc,Developer=developer,status=1,Project=project)
         else:
             Modules.objects.create(Modules_name=Modules_name, Modules_desc=Modules_desc,
                                    Developer=developer, status=0,Project=project)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不新增数据
     else:
-        RepeatMessage = "同一个项目名下新增相同模块名，新增失败"
+        codeMessage = "同一个项目名下新增相同模块名，新增失败"
     # 根据用户过滤数据权限
     filiterdata = get_filiterdata(request)
     contacts = get_firstPagefiliterdata(Modules,filiterdata)
@@ -746,7 +728,7 @@ def modules_add_data(request):
     contactszip = zip(contacts, testers_list)
 
     project_names=get_project_name(filiterdata)
-    return render(request, "./main/modules.html", {"modules": contactszip,"project_names":project_names,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage,"modulees":contacts})
+    return render(request, "./main/modules.html", {"modules": contactszip,"project_names":project_names,"code":code,"codeMessage":codeMessage,"modulees":contacts})
 
 @login_required
 def modules_edit_data(request):
@@ -759,9 +741,9 @@ def modules_edit_data(request):
     # 得到外键数据
     project = Project.objects.get(project_name=project_name)
 
-    isRepeat = len(Modules.objects.filter(~Q(id=Modules_id), Modules_name=Modules_name,Project=project).values())
+    code = len(Modules.objects.filter(~Q(id=Modules_id), Modules_name=Modules_name,Project=project).values())
     # 不重复则更新数据
-    if isRepeat == 0:
+    if code == 0:
         if status != None:
             Modules.objects.filter(id=Modules_id).update(Modules_name=Modules_name, Modules_desc=Modules_desc, \
                                                           Developer=developer, status=1,
@@ -769,10 +751,10 @@ def modules_edit_data(request):
         else:
             Modules.objects.filter(id=Modules_id).update(Modules_name=Modules_name, Modules_desc=Modules_desc,
                                                          Developer=developer, status=0, Project=project)
-        RepeatMessage = ""
+        codeMessage = ""
     # 重复则不更新数据
     else:
-        RepeatMessage = "同一个项目名下新增相同模块名，编辑失败"
+        codeMessage = "同一个项目名下新增相同模块名，编辑失败"
     # 根据用户过滤数据权限
     filiterdata = get_filiterdata(request)
     contacts = get_firstPagefiliterdata(Modules, filiterdata)
@@ -782,7 +764,7 @@ def modules_edit_data(request):
     # 将模块数据和测试人员打包
     contactszip = zip(contacts, testers_list)
     project_names = get_project_name(filiterdata)
-    return render(request, "./main/modules.html", {"modules": contactszip, "project_names": project_names,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage,"modulees":contacts})
+    return render(request, "./main/modules.html", {"modules": contactszip, "project_names": project_names,"code":code,"codeMessage":codeMessage,"modulees":contacts})
 
 @login_required
 def modules_delete_data(request):
@@ -850,15 +832,6 @@ def modules_search_name(request):
 #当数据是部分时把列表的项目名取出
 def filter_project_listnames(case_list):
     modules = case_list.values('Modules')
-    project_listnames = []
-    for i in modules:
-        projects_id = Modules.objects.filter(id=i['Modules']).values("Project")
-        project_name = Project.objects.filter(id=projects_id[0]['Project']).values("project_name")
-        project_listnames.append(project_name[0]['project_name'])
-    return project_listnames
-#当数据是全部时把列表的项目名取出
-def get_project_listnames():
-    modules = Case.objects.all().values('Modules').order_by("-id")
     project_listnames = []
     for i in modules:
         projects_id = Modules.objects.filter(id=i['Modules']).values("Project")
@@ -950,7 +923,7 @@ def case(request):
     except EmptyPage:
         contacts=paginator.page(paginator.num_pages)
     #得到列表项目名根据页面去提取
-    project_listnames=get_project_listnames()
+    project_listnames=filter_project_listnames(case_list)
 
     newproject_listnames=[]
     try:
@@ -975,7 +948,6 @@ def case(request):
         project_name=None
         modules_names=None
     #把项目名和用例列表数据打包
-    #print (project_listnames)
     contactszip=zip(contacts,newproject_listnames)
     #给项目选择框对应的数据
     if selectproject!="0" and selectproject!=None :
@@ -1039,30 +1011,40 @@ def case_add_data(request):
     project=Project.objects.get(project_name=project_name)
     #得到用例的外键数据
     modules=Modules.objects.get(Modules_name=modules_name,Project=project)
-    #print(case_desc)
-    isRepeat = len(Case.objects.filter(case_name=case_name).values())
-    # 不重复则新增数据
-    if isRepeat == 0:
-        if status!=None:
-            Case.objects.create(case_name=case_name,case_desc=case_desc,api=api,version=version,status=1,Modules=modules)
+
+    try:
+        int(case_name)
+        code = -1  # 名字不允许全部为数字
+        codeMessage = "接口名不允许全部为数字，新增失败"
+
+    except:
+        code = len(Case.objects.filter(case_name=case_name).values())
+        # 不重复则新增数据
+        if code == 0:
+            if status!=None:
+                Case.objects.create(case_name=case_name,case_desc=case_desc,api=api,version=version,status=1,Modules=modules)
+            else:
+                Case.objects.create(case_name=case_name,case_desc=case_desc,api=api,version=version,status=0,Modules=modules)
+            codeMessage = ""
+        # 重复则不新增数据
         else:
-            Case.objects.create(case_name=case_name,case_desc=case_desc,api=api,version=version,status=0,Modules=modules)
-        RepeatMessage = ""
-    # 重复则不新增数据
-    else:
-        RepeatMessage = "接口名称重复，新增失败"
+            codeMessage = "接口名称重复，新增失败"
 
     # 根据用户过滤数据权限
     filiterdata = get_filiterdata(request)
-    contacts = get_firstPagefiliterdata(Case,filiterdata)
+    Case_list = Case.objects.all().order_by("-id")
+    Case_list = Case_list.filter(Modules__in=filiterdata)
+    paginator = Paginator(Case_list, NumberColumns)
+    contacts = paginator.page(1)
+
     # 得到列表项目名
-    project_listnames = get_project_listnames()
+    project_listnames = filter_project_listnames(Case_list)
     # 把项目名和用例列表数据打包
     contactszip = zip(contacts, project_listnames)
     project_names=get_project_name(filiterdata)
     project_name = project_names[0]
     modules_names = get_modules_name(project_name,filiterdata)
-    return render(request, "./main/case.html", {"cases": contactszip,"modules_names": modules_names, "project_names": project_names,"casees":contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/case.html", {"cases": contactszip,"modules_names": modules_names, "project_names": project_names,"casees":contacts,"code":code,"codeMessage":codeMessage})
 
 @login_required
 def case_edit_data(request):
@@ -1078,31 +1060,42 @@ def case_edit_data(request):
     project = Project.objects.get(project_name=project_name)
     # 得到用例的外键数据
     modules = Modules.objects.get(Modules_name=modules_name, Project=project)
-    isRepeat = len(Case.objects.filter(~Q(id=case_id), case_name=case_name).values())
-    # 不重复则更新数据
-    if isRepeat == 0:
-        if status != None:
-            Case.objects.filter(id=case_id).update(case_name=case_name, case_desc=case_desc, api=api, version=version,
-                                                   status=1, Modules=modules)
+
+    try:
+        int(case_name)
+        code = -1  # 名字不允许全部为数字
+        codeMessage = "接口名不允许全部为数字，编辑失败"
+
+    except:
+        code = len(Case.objects.filter(~Q(id=case_id), case_name=case_name).values())
+        # 不重复则更新数据
+        if code == 0:
+            if status != None:
+                Case.objects.filter(id=case_id).update(case_name=case_name, case_desc=case_desc, api=api, version=version,
+                                                       status=1, Modules=modules)
+            else:
+                Case.objects.filter(id=case_id).update(case_name=case_name, case_desc=case_desc, api=api, version=version,
+                                                       status=0, Modules=modules)
+            codeMessage = ""
+        # 重复则不更新数据
         else:
-            Case.objects.filter(id=case_id).update(case_name=case_name, case_desc=case_desc, api=api, version=version,
-                                                   status=0, Modules=modules)
-        RepeatMessage = ""
-    # 重复则不更新数据
-    else:
-        RepeatMessage = "接口名称重复，修改失败"
+            codeMessage = "接口名称重复，修改失败"
     # 根据用户过滤数据权限
     filiterdata = get_filiterdata(request)
-    contacts = get_firstPagefiliterdata(Case,filiterdata)
+    Case_list = Case.objects.all().order_by("-id")
+    Case_list = Case_list.filter(Modules__in=filiterdata)
+    paginator = Paginator(Case_list, NumberColumns)
+    contacts = paginator.page(1)
+
     # 得到列表项目名
-    project_listnames = get_project_listnames()
+    project_listnames = filter_project_listnames(Case_list)
     #把项目名和用例列表数据打包
     contactszip = zip(contacts, project_listnames)
     project_names = get_project_name(filiterdata)
     project_name = project_names[0]
     modules_names = get_modules_name(project_name,filiterdata)
     return render(request, "./main/case.html",
-                  {"cases": contactszip, "modules_names": modules_names, "project_names": project_names,"casees":contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+                  {"cases": contactszip, "modules_names": modules_names, "project_names": project_names,"casees":contacts,"code":code,"codeMessage":codeMessage})
 
 @login_required
 def case_delete_data(request):
@@ -1117,10 +1110,13 @@ def case_delete_data(request):
 
     # 根据用户过滤数据权限
     filiterdata = get_filiterdata(request)
-    contacts = get_firstPagefiliterdata(Case,filiterdata)
+    Case_list = Case.objects.all().order_by("-id")
+    Case_list = Case_list.filter(Modules__in=filiterdata)
+    paginator = Paginator(Case_list, NumberColumns)
+    contacts = paginator.page(1)
 
     # 得到列表项目名
-    project_listnames = get_project_listnames()
+    project_listnames = filter_project_listnames(Case_list)
     #把项目名和用例列表数据打包
     contactszip = zip(contacts, project_listnames)
     project_names = get_project_name(filiterdata)
@@ -1205,7 +1201,7 @@ def get_case_name(Case_dataqueryset):
 #根据登录用户获取case的数据
 def get_filiterCasedata(request):
     return Case.objects.filter(Modules__in=get_filiterdata(request))
-@login_required
+
 def step(request):
     step_name = request.GET.get("step_name")
     method = request.GET.get("method")
@@ -1388,45 +1384,57 @@ def step_add_data(request):
         asserts=""
     if api_dependency == None:
         api_dependency=""
-    isRepeat = len(Step.objects.filter(step_name=step_name).values())
+    try:
+        int(step_name)
+        code = -1  # 名字不允许全部为数字
+        codeMessage = "用例名不允许全部为数字，新增失败"
 
-    # 不重复则新增数据
-    if isRepeat == 0:
-        if method=="get" or method=="postform":
-            if status != None:
-                Step.objects.create(step_name=step_name,step_desc=step_desc,steplevel=steplevel,method=method, \
-                                    headers=headers,params=params,assert_response=asserts,api_dependency=api_dependency,status=1,case=case)
+    except:
+        code = len(Step.objects.filter(step_name=step_name).values())
+
+        # 不重复则新增数据
+        if code == 0:
+            if method == "get" or method == "postform":
+                if status != None:
+                    Step.objects.create(step_name=step_name, step_desc=step_desc, steplevel=steplevel, method=method, \
+                                        headers=headers, params=params, assert_response=asserts,
+                                        api_dependency=api_dependency, status=1, case=case)
+                else:
+                    Step.objects.create(step_name=step_name, step_desc=step_desc, steplevel=steplevel, method=method, \
+                                        headers=headers, params=params, assert_response=asserts,
+                                        api_dependency=api_dependency, status=0, case=case)
+            elif method == "postbody" or method == "put" or method == "delete":
+                if status != None:
+                    Step.objects.create(step_name=step_name, step_desc=step_desc, steplevel=steplevel, method=method, \
+                                        headers=headers, params=paramsbody, assert_response=asserts,
+                                        api_dependency=api_dependency, status=1, case=case)
+                else:
+                    Step.objects.create(step_name=step_name, step_desc=step_desc, steplevel=steplevel, method=method, \
+                                        headers=headers, params=paramsbody, assert_response=asserts,
+                                        api_dependency=api_dependency, status=0, case=case)
+            if api_dependency != "":
+                # 得到外键数据
+                step = Step.objects.get(step_name=step_name)
+                # 插入接口依赖数据
+                api_dependencyjson = json.loads(api_dependency)
+                for variable in api_dependencyjson.keys():
+                    for reference_step_name in api_dependencyjson[variable].keys():
+                        Reference_step.objects.create(variable=variable, step_name=step_name,
+                                                      path=api_dependencyjson[variable][reference_step_name],
+                                                      reference_step_name=reference_step_name, step=step)
+                # 获取权重
+                get_weights(step_name, api_dependency)
             else:
-                Step.objects.create(step_name=step_name, step_desc=step_desc, steplevel=steplevel, method=method, \
-                                    headers=headers, params=params, assert_response=asserts,api_dependency=api_dependency, status=0, case=case)
-        elif method=="postbody" or method=="put" or method=="delete":
-            if status != None:
-                Step.objects.create(step_name=step_name,step_desc=step_desc,steplevel=steplevel,method=method, \
-                                    headers=headers,params=paramsbody,assert_response=asserts,api_dependency=api_dependency,status=1,case=case)
-            else:
-                Step.objects.create(step_name=step_name, step_desc=step_desc, steplevel=steplevel, method=method, \
-                                    headers=headers, params=paramsbody, assert_response=asserts,api_dependency=api_dependency, status=0, case=case)
-        if api_dependency != "":
-            # 得到外键数据
-            step = Step.objects.get(step_name=step_name)
-            # 插入接口依赖数据
-            api_dependencyjson = json.loads(api_dependency)
-            for variable in api_dependencyjson.keys():
-                for reference_step_name in api_dependencyjson[variable].keys():
-                    Reference_step.objects.create(variable=variable, step_name=step_name,
-                                                  path=api_dependencyjson[variable][reference_step_name],
-                                                  reference_step_name=reference_step_name, step=step)
-            # 获取权重
-            get_weights(step_name, api_dependency)
+                Step.objects.filter(step_name=step_name).update(step_weights=0)
+            # 获得权重
+            get_case_weights(step_name, api_dependency)
+            change_step_case(step_name)
+            codeMessage = ""
+            # 更新用例的stepCount
+            db.updateStepCount(step_name)
+        # 重复则不新增数据
         else:
-            Step.objects.filter(step_name=step_name).update(step_weights=0)
-        # 获得权重
-        get_case_weights(step_name, api_dependency)
-        change_step_case(step_name)
-        RepeatMessage = ""
-    # 重复则不新增数据
-    else:
-        RepeatMessage = "用例名重复，新增失败"
+            codeMessage = "用例名重复，新增失败"
 
     #用作接口依赖选择框
     Step_dataqueryset = get_filiterStepdata(request)
@@ -1436,7 +1444,7 @@ def step_add_data(request):
     Case_dataqueryset = get_filiterCasedata(request)
     contacts = get_firstPagefiliterdata(Step, Case_dataqueryset)
     case_names = get_case_name(Case_dataqueryset)
-    return render(request, "./main/step.html", {"steps": contacts,"case_names": case_names,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage,"step_names":step_names})
+    return render(request, "./main/step.html", {"steps": contacts,"case_names": case_names,"code":code,"codeMessage":codeMessage,"step_names":step_names})
 
 @login_required
 def step_edit_data(request):
@@ -1456,66 +1464,74 @@ def step_edit_data(request):
     # 得到外键数据
     case = Case.objects.get(case_name=case_name)
 
-    isRepeat = len(Step.objects.filter(~Q(id=step_id), step_name=step_name).values())
-    # 不重复则更新数据
-    if isRepeat == 0:
-        if asserts == None:
-            asserts = ""
-        if api_dependency == None:
-            api_dependency = ""
+    try:
+        int(step_name)
+        code = -1  # 名字不允许全部为数字
+        codeMessage = "用例名不允许全部为数字，编辑失败"
+    except:
+        code = len(Step.objects.filter(~Q(id=step_id), step_name=step_name).values())
+        # 不重复则更新数据
+        if code == 0:
+            if asserts == None:
+                asserts = ""
+            if api_dependency == None:
+                api_dependency = ""
 
-        oldapi_dependencys = Step.objects.filter(step_name=step_name).values('api_dependency')
+            oldapi_dependencys = Step.objects.filter(step_name=step_name).values('api_dependency')
 
-        if method == "get" or method == "postform":
-            if status != None:
-                Step.objects.filter(id=step_id).update(step_name=step_name, step_desc=step_desc, steplevel=steplevel,
-                                                       method=method, \
-                                                       headers=headers, params=params, assert_response=asserts,
-                                                       api_dependency=api_dependency, status=1, case=case)
+            if method == "get" or method == "postform":
+                if status != None:
+                    Step.objects.filter(id=step_id).update(step_name=step_name, step_desc=step_desc, steplevel=steplevel,
+                                                           method=method, \
+                                                           headers=headers, params=params, assert_response=asserts,
+                                                           api_dependency=api_dependency, status=1, case=case)
+                else:
+                    Step.objects.filter(id=step_id).update(step_name=step_name, step_desc=step_desc, steplevel=steplevel,
+                                                           method=method, \
+                                                           headers=headers, params=params, assert_response=asserts,
+                                                           api_dependency=api_dependency, status=0, case=case)
+            elif method == "postbody" or method == "put" or method == "delete":
+                if status != None:
+                    Step.objects.filter(id=step_id).update(step_name=step_name, step_desc=step_desc, steplevel=steplevel,
+                                                           method=method, \
+                                                           headers=headers, params=paramsbody, assert_response=asserts,
+                                                           api_dependency=api_dependency, status=1, case=case)
+                else:
+                    Step.objects.filter(id=step_id).update(step_name=step_name, step_desc=step_desc, steplevel=steplevel,
+                                                           method=method, \
+                                                           headers=headers, params=paramsbody, assert_response=asserts,
+                                                           api_dependency=api_dependency, status=0, case=case)
+            # 得到外键数据
+            step = Step.objects.get(step_name=step_name)
+
+            if api_dependency != "":
+                # 先删除接口依赖的数据
+                Reference_step.objects.filter(step=step).delete()
+                # 插入接口依赖数据
+                api_dependencyjson = json.loads(api_dependency)
+                for variable in api_dependencyjson.keys():
+                    for reference_step_name in api_dependencyjson[variable].keys():
+                        Reference_step.objects.create(variable=variable, step_name=step_name,
+                                                      path=api_dependencyjson[variable][reference_step_name],
+                                                      reference_step_name=reference_step_name, step=step)
+
+                # 获取权重
+                get_weights(step_name, api_dependency)
             else:
-                Step.objects.filter(id=step_id).update(step_name=step_name, step_desc=step_desc, steplevel=steplevel,
-                                                       method=method, \
-                                                       headers=headers, params=params, assert_response=asserts,
-                                                       api_dependency=api_dependency, status=0, case=case)
-        elif method == "postbody" or method == "put" or method == "delete":
-            if status != None:
-                Step.objects.filter(id=step_id).update(step_name=step_name, step_desc=step_desc, steplevel=steplevel,
-                                                       method=method, \
-                                                       headers=headers, params=paramsbody, assert_response=asserts,
-                                                       api_dependency=api_dependency, status=1, case=case)
-            else:
-                Step.objects.filter(id=step_id).update(step_name=step_name, step_desc=step_desc, steplevel=steplevel,
-                                                       method=method, \
-                                                       headers=headers, params=paramsbody, assert_response=asserts,
-                                                       api_dependency=api_dependency, status=0, case=case)
-        # 得到外键数据
-        step = Step.objects.get(step_name=step_name)
+                # 先删除接口依赖的数据
+                Reference_step.objects.filter(step=step).delete()
+                # 写入权重
+                Step.objects.filter(step_name=step_name).update(step_weights=0)
+            # 获得权重
+            get_case_weights(step_name, api_dependency)
+            change_step_case(step_name)
+            codeMessage = ""
 
-        if api_dependency != "":
-            # 先删除接口依赖的数据
-            Reference_step.objects.filter(step=step).delete()
-            # 插入接口依赖数据
-            api_dependencyjson = json.loads(api_dependency)
-            for variable in api_dependencyjson.keys():
-                for reference_step_name in api_dependencyjson[variable].keys():
-                    Reference_step.objects.create(variable=variable, step_name=step_name,
-                                                  path=api_dependencyjson[variable][reference_step_name],
-                                                  reference_step_name=reference_step_name, step=step)
-
-            # 获取权重
-            get_weights(step_name, api_dependency)
+            #更新用例的stepCount
+            db.updateStepCount(step_name)
+        # 重复则不更新数据
         else:
-            # 先删除接口依赖的数据
-            Reference_step.objects.filter(step=step).delete()
-            # 写入权重
-            Step.objects.filter(step_name=step_name).update(step_weights=0)
-        # 获得权重
-        get_case_weights(step_name, api_dependency)
-        change_step_case(step_name)
-        RepeatMessage = ""
-    # 重复则不更新数据
-    else:
-        RepeatMessage = "用例名重复，修改失败"
+            codeMessage = "用例名重复，修改失败"
 
     # 用作接口依赖选择框
     Step_dataqueryset = get_filiterStepdata(request)
@@ -1526,7 +1542,7 @@ def step_edit_data(request):
     contacts = get_firstPagefiliterdata(Step, Case_dataqueryset)
 
     case_names = get_case_name(Case_dataqueryset)
-    return render(request, "./main/step.html", {"steps": contacts, "case_names": case_names,"step_names":step_names,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+    return render(request, "./main/step.html", {"steps": contacts, "case_names": case_names,"step_names":step_names,"code":code,"codeMessage":codeMessage})
 #获取表的列名
 def get_columu(modelstr):
     modelobj = apps.get_model("request", modelstr)
@@ -1548,34 +1564,43 @@ def set_data(modelstr,model,copystep,step):
 def step_copy_data(request):
     step_name=request.POST.get('step_name')
     copystep_name=request.POST.get('copystep_name')
-    isRepeat = len(Step.objects.filter(step_name=step_name).values())
 
-    # 不重复则新增数据
-    if isRepeat == 0:
-        # 得到复制源数据外键
-        copystep = Step.objects.get(step_name=copystep_name)
+    try:
+        int(step_name)
+        code = -1  # 名字不允许全部为数字
+        codeMessage = "用例名不允许全部为数字，复制失败"
 
-        fields=get_columu("Step")
-        #插入step表的数据
-        dataslist=Step.objects.filter(step_name=copystep_name).values_list()
-        for tupledata in dataslist:
-            listdata=list(tupledata)
-            listdata[2]=step_name
-            # 得到外键数据
-            listdata[1] = Case.objects.get(id=listdata[1])
-            Step.objects.create(**dict(zip(fields[1:],listdata[1:])))
-        # 得到将要新建数据的外键
-        step = Step.objects.get(step_name=step_name)
-        #插入sql表的数据
-        set_data("Sql",Sql, copystep,step)
-        #插入nosql表的数据
-        set_data("NoSql",NoSql,copystep, step)
-        #插入Reference_step表的数据
-        set_data("Reference_step",Reference_step,copystep, step)
-        RepeatMessage = ""
-    # 重复则不新增数据
-    else:
-        RepeatMessage = "用例名重复，复制失败"
+    except:
+        code = len(Step.objects.filter(step_name=step_name).values())
+
+        # 不重复则新增数据
+        if code == 0:
+            # 得到复制源数据外键
+            copystep = Step.objects.get(step_name=copystep_name)
+
+            fields=get_columu("Step")
+            #插入step表的数据
+            dataslist=Step.objects.filter(step_name=copystep_name).values_list()
+            for tupledata in dataslist:
+                listdata=list(tupledata)
+                listdata[2]=step_name
+                # 得到外键数据
+                listdata[1] = Case.objects.get(id=listdata[1])
+                Step.objects.create(**dict(zip(fields[1:],listdata[1:])))
+            # 得到将要新建数据的外键
+            step = Step.objects.get(step_name=step_name)
+            #插入sql表的数据
+            set_data("Sql",Sql, copystep,step)
+            #插入nosql表的数据
+            set_data("NoSql",NoSql,copystep, step)
+            #插入Reference_step表的数据
+            set_data("Reference_step",Reference_step,copystep, step)
+            codeMessage = ""
+            # 更新用例的stepCount
+            db.updateStepCount(step_name)
+        # 重复则不新增数据
+        else:
+            codeMessage = "用例名重复，复制失败"
 
     #用作接口依赖选择框
     Step_dataqueryset = get_filiterStepdata(request)
@@ -1585,7 +1610,7 @@ def step_copy_data(request):
     Case_dataqueryset = get_filiterCasedata(request)
     contacts = get_firstPagefiliterdata(Step, Case_dataqueryset)
     case_names = get_case_name(Case_dataqueryset)
-    return render(request, "./main/step.html", {"steps": contacts,"case_names": case_names,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage,"step_names":step_names})
+    return render(request, "./main/step.html", {"steps": contacts,"case_names": case_names,"code":code,"codeMessage":codeMessage,"step_names":step_names})
 
 @login_required
 def step_delete_data(request):
@@ -1596,6 +1621,9 @@ def step_delete_data(request):
 
     # 批量删除
     idstring = ','.join(step_ids)
+
+    # 更新用例的stepCount
+    db.updateDeleteStepCount(idstring)
     Step.objects.extra(where=['id IN (' + idstring + ')']).delete()
 
     # 用作接口依赖选择框
@@ -1616,6 +1644,7 @@ def step_search_name(request):
     steplevel = request.GET.get("steplevel")
     select = request.GET.get("select")
     case_name=request.GET.get("case_name")
+    print (1)
     if case_name=="0":
         if method=="0":
             if select == '2':
@@ -1693,12 +1722,12 @@ def sql(request):
     db_remarks=get_sqldb(request)
 
     step_name = request.GET.get("step_name")
-    #print (step_name)
+    selectdb_remark = request.GET.get("selectdb_remark")
     selectisselect = request.GET.get("selectisselect")
     select = request.GET.get("select")
     checkedenv_ids = request.GET.get("checkedenv_ids")
     try:
-        if step_name == "0":
+        if step_name == "0" and selectdb_remark == "0":
             if select != '2':
                 if selectisselect != '2':
                     sql_list = Sql.objects.filter(Q(is_select=selectisselect), Q(status=select)).order_by("-id")
@@ -1709,12 +1738,42 @@ def sql(request):
                     sql_list = Sql.objects.filter(Q(is_select=selectisselect)).order_by("-id")
                 else:
                     sql_list = Sql.objects.filter().order_by("-id")
+        elif step_name == "0" and selectdb_remark != "0":
+            if select != '2':
+                if selectisselect != '2':
+                    sql_list = Sql.objects.filter(Q(db_remark=selectdb_remark), Q(is_select=selectisselect),
+                                                  Q(status=select)).order_by("-id")
+                else:
+                    sql_list = Sql.objects.filter(Q(db_remark=selectdb_remark), Q(status=select)).order_by("-id")
+            else:
+                if selectisselect != '2':
+                    sql_list = Sql.objects.filter(Q(db_remark=selectdb_remark), Q(is_select=selectisselect)).order_by("-id")
+                else:
+                    sql_list = Sql.objects.filter(Q(db_remark=selectdb_remark)).order_by("-id")
+        elif step_name != "0" and selectdb_remark != "0":
+            # 得到外键数据
+            step = Step.objects.get(step_name=step_name)
+            if select != '2':
+                if selectisselect != '2':
+                    sql_list = Sql.objects.filter(Q(step=step), Q(db_remark=selectdb_remark), Q(is_select=selectisselect),
+                                                  Q(status=select)).order_by(
+                        "-id")
+                else:
+                    sql_list = Sql.objects.filter(Q(step=step), Q(db_remark=selectdb_remark), Q(status=select)).order_by(
+                        "-id")
+            else:
+                if selectisselect != '2':
+                    sql_list = Sql.objects.filter(Q(step=step), Q(db_remark=selectdb_remark),
+                                                  Q(is_select=selectisselect)).order_by("-id")
+                else:
+                    sql_list = Sql.objects.filter(Q(step=step), Q(db_remark=selectdb_remark)).order_by("-id")
         else:
             # 得到外键数据
             step = Step.objects.get(step_name=step_name)
             if select != '2':
                 if selectisselect != '2':
-                    sql_list = Sql.objects.filter(Q(step=step), Q(is_select=selectisselect), Q(status=select)).order_by("-id")
+                    sql_list = Sql.objects.filter(Q(step=step), Q(is_select=selectisselect), Q(status=select)).order_by(
+                        "-id")
                 else:
                     sql_list = Sql.objects.filter(Q(step=step), Q(status=select)).order_by("-id")
             else:
@@ -1746,6 +1805,11 @@ def sql(request):
     else:
         step_name = '0'
         response["selectstep"] = step_name
+    if selectdb_remark!=None:
+        response["selectdb_remark"]=selectdb_remark
+    else:
+        selectdb_remark = '0'
+        response["selectdb_remark"] = selectdb_remark
     if selectisselect!=None:
         response["selectisselect"]=selectisselect
     else:
@@ -1888,13 +1952,14 @@ def sql_editDb(request):
 @login_required
 def sql_search_name(request):
     step_name = request.GET.get("step_name")
+    selectdb_remark = request.GET.get("selectdb_remark")
     selectisselect = request.GET.get("selectisselect")
     select = request.GET.get("select")
 
     # 需要添加数据库信息
     db_remarks = get_sqldb(request)
 
-    if step_name=="0":
+    if step_name=="0" and selectdb_remark=="0":
         if select != '2':
             if selectisselect!='2':
                 sql_list = Sql.objects.filter(Q(is_select=selectisselect), Q(status=select)).order_by("-id")
@@ -1905,6 +1970,31 @@ def sql_search_name(request):
                 sql_list = Sql.objects.filter(Q(is_select=selectisselect)).order_by("-id")
             else:
                 sql_list = Sql.objects.filter().order_by("-id")
+    elif step_name=="0" and selectdb_remark!="0":
+        if select != '2':
+            if selectisselect!='2':
+                sql_list = Sql.objects.filter(Q(db_remark=selectdb_remark), Q(is_select=selectisselect), Q(status=select)).order_by("-id")
+            else:
+                sql_list = Sql.objects.filter(Q(db_remark=selectdb_remark), Q(status=select)).order_by("-id")
+        else:
+            if selectisselect!='2':
+                sql_list = Sql.objects.filter(Q(db_remark=selectdb_remark), Q(is_select=selectisselect)).order_by("-id")
+            else:
+                sql_list = Sql.objects.filter(Q(db_remark=selectdb_remark)).order_by("-id")
+    elif step_name!="0" and selectdb_remark!="0":
+        # 得到外键数据
+        step = Step.objects.get(step_name=step_name)
+        if select != '2':
+            if selectisselect != '2':
+                sql_list = Sql.objects.filter(Q(step=step), Q(db_remark=selectdb_remark), Q(is_select=selectisselect), Q(status=select)).order_by(
+                    "-id")
+            else:
+                sql_list = Sql.objects.filter(Q(step=step), Q(db_remark=selectdb_remark), Q(status=select)).order_by("-id")
+        else:
+            if selectisselect != '2':
+                sql_list = Sql.objects.filter(Q(step=step), Q(db_remark=selectdb_remark), Q(is_select=selectisselect)).order_by("-id")
+            else:
+                sql_list = Sql.objects.filter(Q(step=step), Q(db_remark=selectdb_remark)).order_by("-id")
     else:
         # 得到外键数据
         step = Step.objects.get(step_name=step_name)
@@ -1925,7 +2015,7 @@ def sql_search_name(request):
     paginator = Paginator(sql_list, NumberColumns)
     contacts = paginator.page(1)
     step_names = get_step_name(Step_dataqueryset)
-    return render(request, "./main/sql.html", {"sqls": contacts,"selectstep":step_name,"selectisselect":selectisselect,\
+    return render(request, "./main/sql.html", {"sqls": contacts,"selectstep":step_name,"selectdb_remark":selectdb_remark,"selectisselect":selectisselect,\
                                                    "select":select,"step_names": step_names,"db_remarks":db_remarks})
 
 @login_required
@@ -2180,29 +2270,41 @@ def make_case_data(request):
     task_name=request.POST.get("task_name")
     remark=request.POST.get("remark")
     task_name+="---"+str((uuid.uuid1()))
-    isRepeat = len(Task.objects.filter(task_name=task_name).values())
+    code = len(Task.objects.filter(task_name=task_name).values())
 
     # 不重复则新增数据
-    if isRepeat == 0:
+    if code == 0:
         case_ids=case_ids.split(',')
         #print(case_ids)
         #第一个传过来的值为None字符串 不需要
         case_ids=case_ids[1:]
         #print (case_ids)
-        #创建任务表
-        create_task(case_ids,task_name,remark)
-        #创建对应目录
-        testcasedir=crate_task(task_name)
-        #整合数据
-        get_py_data(case_ids,testcasedir,task_name)
-        RepeatMessage = ""
+
+        # 校验生成任务接口必须含有用例
+        code = db.checkTask(case_ids)
+        if code == -1:
+            codeMessage = "接口必须包含至少一个用例，生成脚本失败"
+        else:
+            #创建任务表
+            create_task(case_ids,task_name,remark)
+            #创建对应目录
+            testcasedir=crate_task(task_name)
+            #整合数据
+            get_py_data(case_ids,testcasedir,task_name)
+            codeMessage = ""
     # 重复则不新增数据
     else:
-        RepeatMessage = "任务名重复，生成脚本失败"
+        codeMessage = "任务名重复，生成脚本失败"
 
-    contacts = get_firstPage(Case)
+    # 根据用户过滤数据权限
+    filiterdata = get_filiterdata(request)
+    Case_list = Case.objects.all().order_by("-id")
+    Case_list = Case_list.filter(Modules__in=filiterdata)
+    paginator = Paginator(Case_list, NumberColumns)
+    contacts = paginator.page(1)
+
     # 得到列表项目名
-    project_listnames = get_project_listnames()
+    project_listnames = filter_project_listnames(Case_list)
     #把项目名和用例列表数据打包
     contactszip = zip(contacts, project_listnames)
     # 根据用户过滤数据权限
@@ -2212,7 +2314,7 @@ def make_case_data(request):
 
     modules_names = get_modules_name(project_name,filiterdata)
     return render(request, "./main/case.html",
-                  {"cases": contactszip, "modules_names": modules_names, "project_names": project_names,"casees":contacts,"isRepeat":isRepeat,"RepeatMessage":RepeatMessage})
+                  {"cases": contactszip, "modules_names": modules_names, "project_names": project_names,"casees":contacts,"code":code,"codeMessage":codeMessage})
 
 #得到环境和数据库的描述和邮件
 @login_required
