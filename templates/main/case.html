@@ -42,9 +42,6 @@
             var selectmodules="{{ selectmodules }}";
             get_option(elementsmodules,selectmodules);
 
-            $("#btn4").click(function(){
-                $("#seach").submit();
-            });
             //根据项目名去获取模块名
             $("#selectproject").change(function(){
                 if($(this).val()==0){
@@ -373,6 +370,10 @@
                     <div class="form-group">
                         <label  for="api">接口路径</label>
                         <input  type="text" class="ipt form-control" name="api" placeholder="ex:/login/login_on" required>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <label  for="version" >生效用例数</label>
+                        <input  type="text" class="ipt form-control" name="stepCount" placeholder="请输入生效用例数" >
                     </div>
                     <div class="form-group">
                         <label  for="version">版本</label>

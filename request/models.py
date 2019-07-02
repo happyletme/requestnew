@@ -74,7 +74,7 @@ class Modules(models.Model):
     Modules_name=models.CharField(max_length=20,verbose_name="模块名")
     Testers=models.ManyToManyField('auth.User',blank=True,verbose_name="测试人员")
     Developer = models.CharField(max_length=100,blank=True,verbose_name="开发人员")
-    Modules_desc = models.CharField(max_length=200, blank=True, verbose_name="项目描述")
+    Modules_desc = models.CharField(max_length=200, blank=True, verbose_name="模块描述")
     status = models.BooleanField(verbose_name="状态")
 
     class Meta:

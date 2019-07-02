@@ -1013,9 +1013,9 @@ def case_add_data(request):
     modules=Modules.objects.get(Modules_name=modules_name,Project=project)
 
     try:
-        int(case_name)
-        code = -1  # 名字不允许全部为数字
-        codeMessage = "接口名不允许全部为数字，新增失败"
+        int(case_name[0])
+        code = -1  # 名字首个字符不允许为数字
+        codeMessage = "接口名首个字符不允许为数字，新增失败"
 
     except:
         code = len(Case.objects.filter(case_name=case_name).values())
@@ -1062,9 +1062,9 @@ def case_edit_data(request):
     modules = Modules.objects.get(Modules_name=modules_name, Project=project)
 
     try:
-        int(case_name)
-        code = -1  # 名字不允许全部为数字
-        codeMessage = "接口名不允许全部为数字，编辑失败"
+        int(case_name[0])
+        code = -1  # 接口名首个字符不允许为数字
+        codeMessage = "接口名首个字符不允许为数字，编辑失败"
 
     except:
         code = len(Case.objects.filter(~Q(id=case_id), case_name=case_name).values())
