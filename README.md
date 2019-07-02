@@ -1,9 +1,3 @@
-当前版本2.2.3  
-1.接口名首字母不允许为数字  
-2.接口查询请求发了两次  
-3.修复编辑接口数据呈现  
- 
-
 # 相关文章  
 第一篇：https://testerhome.com/topics/13269  
 第二篇：https://testerhome.com/topics/14801  
