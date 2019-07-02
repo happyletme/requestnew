@@ -21,7 +21,6 @@ class Transferlogname:
         self.test_carryid=test_carryid
 
 def interface(task_name,failcount,email_data):
-    print (1)
     #获取权重
     case_names_weights={}
     task_cases=Task.objects.filter(task_name=task_name).values("case_id")

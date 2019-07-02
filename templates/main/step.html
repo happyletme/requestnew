@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load bootstrap3 %}
-    {% bootstrap_css %}
-    <title>Env</title>
+    <title>Step</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
     <style>
         #editdivbig{
         width: 32px;
@@ -86,15 +85,15 @@
         }
     </style>
 
-    <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js">
+    <script src="../static/js/jquery-1.11.1.min.js">
     </script>
-	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="../static/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../static/js/bootstrap-select.js"></script>
     <script src="../static/frame/layui/layui.js" charset="utf-8"></script>
+    <script src="../static/js/pageDeal.js"></script>
     <link rel="stylesheet" href="../static/frame/layui/css/layui.css">
     <link rel="stylesheet" href="../static/frame/static/css/style.css">
-    <link rel="icon" href="../static/frame/static/image/code.png">
-    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-select.css">
     <script>
         //模态框关闭刷新当前页面数据避免2个bug
         function close(){
@@ -102,111 +101,26 @@
                 location.replace("/step/")
             });
         }
+        //定义一个被选中的全局变量
+        var checked_ids="{{ checkedenv_ids }}";
+        var code = "{{ code }}";
+        var codeMessage = "{{ codeMessage }}"
 
-        //列表数据一旦超过30个字符串就只显示，25个字符串+...
-        function display(){
-            var elements=$("#table").find("td");
-            for (var i=0;i<elements.length;i++){
-                $(elements[i]).attr("title",$(elements[i]).text());
-                if ($(elements[i]).text().length>=25){
-                    var str=$(elements[i]).text().substring(0,25)+"...";
-                    $(elements[i]).html(str);
-                }
-                //当鼠标在列表上悬停时，出现内容
-                $(elements[i]).mouseover(function(){
-                    $(this).tooltip;
-                 });
-            }
-        }
-        //点击全选按钮勾选子节点操作
-        function demo(){
-            var allcheck=document.getElementById("allcheck");
-            var choice=document.getElementsByName("choice");
-            for(var i=0;i<choice.length;i++){
-                choice[i].checked=allcheck.checked;
-            }
-        }
-        //点击子复选框,全选框 选中、取消
-        function setAll(){
-            if(!$(".checknum").checked){
-                $("#allcheck").prop("checked",false); // 子复选框某个不选择，全选也被取消
-            }
-            var choicelength=$("input[type='checkbox'][class='checknum']").length;
-            var choiceselect=$("input[type='checkbox'][class='checknum']:checked").length;
-
-            if(choicelength==choiceselect){
-                $("#allcheck").prop("checked",true);   // 子复选框全部部被选择，全选也被选择；1.对于HTML元素我们自己自定义的DOM属性，在处理时，使用attr方法；2.对于HTML元素本身就带有的固有属性，在处理时，使用prop方法。
-            }
-        }
-        //修改select框
-        function changeSelect(){
-            $('.selectpicker').selectpicker({
-                'selectedText': 'cat'
-            });
-        }
-        //根据返回值确认带模糊查询的搜索框
-        function get_option_new_select(elements,selectstep,startValue){
-            //带input的select
-            if (selectstep==0){
-                $(elements+" :button").attr("title",startValue);
-                $(elements+" :button >span:nth-child(1)").text(startValue);
-            }
-            else{
-                $(elements+" :button").attr("title",selectstep);
-                $(elements+" :button >span:nth-child(1)").text(selectstep);
-            }
-        }
-        //根据返回值确认带模糊查询的搜索框下拉框选择的位置
-        function choose_new_select(elements,selectstep){
-            $(elements).find("ul").find("a").children("span:nth-child(1)").each(function(){
-                if (selectstep==$(this).text()){
-                    //去除所有高亮
-                    $(elements).find("li").each(function(){
-                        $(this).attr("class","");
-                    });
-                    /*
-                    for (var i=0;i<lielsements.length;i++){
-                        lielsements[i].attr("class","");
-                    }*/
-                    //把匹配的高亮
-                    $(this).parent().parent().attr("class","selected");
-                    return false;
-                }
-            })
-        }
         //搜索或者搜索分页后去根据select返回的value去确定第几个option被选中
         $(function(){
-            tip();
-            changeSelect();//修改select框
+            tip("table","icon");//ICON提示
+            changeSelect("selectpicker");//修改select框
             close();
             edit();
             add();
             copy();
-            del();
+            del("btn3","ipt1","table","checkbox","checknum","myAlert1");
             paging();
             search();
-            display();
-            check()
-            funisRepeat();
+            display("table","td",25,25);//列表数据一旦超过多少个字符串就只显示，多少个字符串+...
+            check("table","allcheck","checkbox","checknum"); // 根据返回值去勾选对应列
+            funisError("tipModalLabel","tipModal");//判断提交的表单是否错误
         });
-        //icon提示
-        function tip(){
-            $("#table").find(".icon").each(function(){
-                $(this).mouseover(function(){
-                    $(this).tooltip;
-                 });
-            });
-        }
-        //搜索或者搜索分页后去根据select返回的value去确定第几个option被选中
-        function get_option(elements,value){
-           $(elements).each(function(index,element){
-                if($(element).val()==value){
-                    $(element).attr("selected",true);
-                    //console.log($(element).val());
-                    return;
-                }
-            });
-        }
         function search(){
             var elementsStatus="#select1 option";
             var valueStatus="{{ select }}";
@@ -219,7 +133,7 @@
             //带input的select
             startValue="接口名称";
             elements="#searchdiv"
-            get_option_new_select(elements,selectcase_name,startValue);
+            get_option_new_select(elements,selectcase_name,startValue); //根据返回值确认带模糊查询的搜索框
             choose_new_select(elements,selectcase_name);
 
             var elementsmethod="#selectmethod option";
@@ -784,77 +698,12 @@
                 }
             });
         }
-        //删除
-        function del(){
-            $("#btn3").click(function(){
-                //调整被勾选的值
-                change_checkedenv_ids();
-                $("#myAlert").css("display","none");
-                $("#myAlert1").css("display","none");
-                $("#myAlert2").css("display","none");
-                if (checkedenv_ids.length<=1){
-                    $("#myAlert1").css("display","inherit");
-                    return false;
-                }
-                else{
-                    $("#ipt1").val(checkedenv_ids);
-                }
-            });
-        }
-        //定义一个被选中的全局变量
-        var checkedenv_ids="{{ checkedenv_ids }}";
-        checkedenv_ids=checkedenv_ids.split(",");
-        // 根据返回值去勾选对应列
-        function check(){
-            //alert (checkedenv_ids);
-            //当前页的列id
-            $("#table").find(":checkbox.checknum").each(function(){
-                env_id=$(this).parent().next().text();
-                if (env_id != "") {
-                    //env_ids.push(env_id);
-                    //alert(env_id);
-                    if (checkedenv_ids.includes(String(env_id))){
-                        $(this).attr("checked", true);
-                    }
-                }
-            });
-            //全选
-            setAll();
-        }
 
-        //根据当前页的勾选变化改变checkedenv_ids值
-        function change_checkedenv_ids(){
-            //当前页的列id
-            $("#table").find(":checkbox.checknum").each(function(){
-                env_id=$(this).parent().next().text();
-                if (env_id != "") {
-                    //env_ids.push(env_id);
-                    //alert($(this).attr("checked"));
-                    //选中则判断数组是否存在，不存在则入栈
-                    if ($(this).is(":checked")){
-                        //alert(1);
-                        //$(this).attr("checked", true);
-                        if (!checkedenv_ids.includes(String(env_id))){
-                            checkedenv_ids.push(String(env_id));
-                        }
-                    }
-                    //未选中则判断数组是否存在，存在则出栈
-                    else{
-                        if (checkedenv_ids.includes(String(env_id))){
-                            checkedenv_ids = $.grep(checkedenv_ids, function(value) {
-                                return value != String(env_id);
-                            });
-                        }
-                    }
-                }
-            });
-            //alert(checkedenv_ids);
-        }
         //分页
         function paging(){
             function merge(btn){
                 //调整被勾选的值
-                change_checkedenv_ids();
+                checked_ids=change_checked_ids(checked_ids,"table","checkbox","checknum");
 
                 elementstep_name=$("#ipt2").val();
                 elementmethod=$("#selectmethod").val();
@@ -862,7 +711,7 @@
                 elementselect=$("#select1").val();
                 elementcase_name=$("#selectcase_name").val();
                 oldHref=$(btn).attr("href");
-                href=oldHref+"&step_name="+elementstep_name+"&case_name="+elementcase_name+"&method="+elementmethod+"&steplevel="+elementsteplevel+"&select="+elementselect+"&checkedenv_ids="+checkedenv_ids
+                href=oldHref+"&step_name="+elementstep_name+"&case_name="+elementcase_name+"&method="+elementmethod+"&steplevel="+elementsteplevel+"&select="+elementselect+"&checkedenv_ids="+checked_ids
                 $(btn).attr("href",href)
             }
             var elementstep_name,elementcase_name,elementmethod,elementsteplevel,elementselect;
@@ -878,16 +727,6 @@
             $("#last").click(function(){
                 merge(this);
             });
-        }
-        //判断提交的表单name是否重复
-        function funisRepeat(){
-            var isRepeat;
-            isRepeat="{{ isRepeat }}";
-            if (isRepeat>=1){
-                RepeatMessage="{{ RepeatMessage }}"
-                $("#tipModalLabel").text(RepeatMessage);
-                $('#tipModal').modal("show");
-            }
         }
     </script>
 </head>
@@ -917,8 +756,8 @@
                 <input id="ipt4" name="steplevel" type="text" placeholder="优先级" class="form-control" value={{ steplevel }}>
                 <select id="select1" name='select' class="form-control" >
                     <option  value="2"  class="select">状态</option>
-                    <option value="1" class="select">启用</option>
-                    <option value="0" class="select">禁用</option>
+                    <option value="1" class="select">生效中</option>
+                    <option value="0" class="select">已禁用</option>
                 </select>
             </div>
             <button id="btn4" type="submit" class="btn layui-btn" >搜索</button>
@@ -954,12 +793,12 @@
         <div>
             <table id="table" class="table table-striped">
                 <tr>
-                    <th><input type="checkbox" id="allcheck"  onclick="demo()" /></th><th>id</th><th>用例名</th><th>接口名称</th><th>方式</th><th>信息头</th><th>请求参数</th><th>请求文件</th><th>断言</th><th style="display:None">接口依赖</th><th>优先级</th><th>用例描述</th><th>状态</th>
+                    <th><input type="checkbox" id="allcheck"  onclick='checkAll("allcheck","choice")' /></th><th>id</th><th>用例名</th><th>接口名称</th><th>方式</th><th>信息头</th><th>请求参数</th><th>请求文件</th><th>断言</th><th style="display:None">接口依赖</th><th>优先级</th><th>用例描述</th><th>状态</th>
                 </tr>
                 <tbody>
                 {% for step in steps %}
                     <tr>
-                        <td id="che1"><input type="checkbox" name="choice" class="checknum"  onclick="setAll()"/></td>
+                        <td id="che1"><input type="checkbox" name="choice" class="checknum"  onclick='setAll("allcheck","checkbox","checknum")'/></td>
                         <td titlevalue="{{ step.id }}">{{ step.id }}</td>
                         <td titlevalue="{{ step.step_name }}">{{ step.step_name }}</td>
                         <td titlevalue="{{ step.case }}">{{ step.case }}</td>
@@ -972,9 +811,9 @@
                         <td titlevalue="{{ step.steplevel }}">{{ step.steplevel }}</td>
                         <td titlevalue="{{ step.step_desc }}">{{ step.step_desc }}</td>
                         {% if step.status %}
-                            <td titlevalue="{{ step.status }}">启用</td>
+                            <td titlevalue="{{ step.status }}"><span class="choosespan label label-success" >生效中</span></td>
                         {% else %}
-                            <td titlevalue="{{ step.status }}"><font color="#AAAAAA">禁用</font></td>
+                            <td titlevalue="{{ step.status }}"><span class="choosespan label label-danger">已禁用</span></td>
                         {% endif %}
                     </tr>
                 {% endfor %}
@@ -1003,7 +842,8 @@
                 <form id="add"  role="form" method='POST' action="/step_add_data/">
                     <div class="form-group">
                         <label  for="step_name">用例名</label>
-                        <input  id="step_name" type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <!--<input  id="step_name" type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">-->
+                        <input  id="step_name" type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
                         <label  for="case_name" >接口名称</label>
@@ -1089,7 +929,7 @@
                                 <input   type="text" class="addApiDependency" placeholder="变量名"  /><input   type="text" class="addApiDependency" placeholder="路径" />
                                 <input id="addApiDependency" type="button" class="btn btn-default"  style="height:24px;width:24px;text-align:center; margin:0px; padding:0px;" value="+">
                                 <input id="delApiDependency" type="button" class="btn btn-default"  style="height:24px;width:24px;text-align:center; margin:0px; padding:0px;" value="-">
-                                <input id="addmergeApiDependencys" type="text" style="display:None" name="ApiDependencys"/>
+                                <input id="addmergeApiDependencys" type="text" style="display:None" />
                             </li>
                        </ul>
                     </div>
