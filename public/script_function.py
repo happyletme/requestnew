@@ -29,20 +29,20 @@ def getAssertWay(assertway):
         Assertwaymessage="不在列表中"
     return Assertwaymessage
 #执行sql取出变量
-def carry_sql(transferip_db,transferfunction,sqlDatalist,sql_condition,newVariableObj):
+def carry_sql(transferip_db,test_carryid,transferfunction,sqlDatalist,sql_condition,newVariableObj):
     sqlDatalist = replace_newVariableObj(transferfunction,newVariableObj, sqlDatalist)
     makesqldata = None
     for sqlDatalistCount in range(len(sqlDatalist)):
         sqlData = sqlDatalist[sqlDatalistCount]
         if sqlData['sql_condition'] == sql_condition:
             if sqlData['is_select'] != True:
-                transferip_db.db[sqlData['db']].ExecNoQuery(sqlData['sql'])
+                transferip_db.db[str(test_carryid)+"db"][sqlData['db']].ExecNoQuery(sqlData['sql'])
             else:
-                makesqldata = MakeSqlData(transferip_db.db[sqlData['db']],sqlData['variable'], sqlData['sql'])
+                makesqldata = MakeSqlData(transferip_db.db[str(test_carryid)+"db"][sqlData['db']],sqlData['variable'], sqlData['sql'])
                 newVariableObj = dict(newVariableObj, **makesqldata.variableObj)
     return makesqldata,newVariableObj,sqlDatalist
 #执行nosql
-def carry_nosql(transferip_db,transferfunction,nosqlDatalist,Nosql_condition,newVariableObj):
+def carry_nosql(transferip_db,test_carryid,transferfunction,nosqlDatalist,Nosql_condition,newVariableObj):
     nosqlDatalist = replace_newVariableObj(transferfunction,newVariableObj, nosqlDatalist)
     for nosqlDatalistCount in range(len(nosqlDatalist)):
         nosqlData = nosqlDatalist[nosqlDatalistCount]
@@ -54,12 +54,12 @@ def carry_nosql(transferip_db,transferfunction,nosqlDatalist,Nosql_condition,new
             if nosqlData['Nosql_dataType']==0:
                 if nosqlData['is_select'] != True:
                     if isinstance(Nosql,dict):
-                        transferip_db.NoSqlredis.r.mset(Nosql)
+                        transferip_db.NoSqlredis[str(test_carryid)+"NoSqlredis"].r.mset(Nosql)
                     elif isinstance(Nosql,list):
-                        transferip_db.NoSqlredis.delete(Nosql)
+                        transferip_db.NoSqlredis[str(test_carryid)+"NoSqlredis"].delete(Nosql)
                 else:
                     variables = nosqlData['variable'].split(',')
-                    nosqlvariablesvalue = transferip_db.NoSqlredis.r.mget(Nosql)
+                    nosqlvariablesvalue = transferip_db.NoSqlredis[str(test_carryid)+"NoSqlredis"].r.mget(Nosql)
                     for nosqlvariablecount in range(len(nosqlvariablesvalue)):
                         if nosqlvariablesvalue[nosqlvariablecount]:
                             nosqlvariablesvalue[nosqlvariablecount] = nosqlvariablesvalue[
@@ -69,12 +69,12 @@ def carry_nosql(transferip_db,transferfunction,nosqlDatalist,Nosql_condition,new
             elif nosqlData['Nosql_dataType']==1:
                 if nosqlData['is_select'] != True:
                     if isinstance(Nosql,dict):
-                        transferip_db.NoSqlredis.lpush(Nosql)
+                        transferip_db.NoSqlredis[str(test_carryid)+"NoSqlredis"].lpush(Nosql)
                     elif isinstance(Nosql,list):
-                        transferip_db.NoSqlredis.delete(Nosql)
+                        transferip_db.NoSqlredis[str(test_carryid)+"NoSqlredis"].delete(Nosql)
                 else:
                     variables = nosqlData['variable'].split(',')
-                    nosqlvariablesvalue = transferip_db.NoSqlredis.lindex(Nosql)
+                    nosqlvariablesvalue = transferip_db.NoSqlredis[str(test_carryid)+"NoSqlredis"].lindex(Nosql)
                     newVariableObj = dict(newVariableObj, **dict(zip(variables, nosqlvariablesvalue)))
     return newVariableObj,nosqlDatalist
 
@@ -100,7 +100,7 @@ def replace_function(transferfunction,jsonObj):
     return jsonObj
 
 #断言
-def carry_assert(assert_response,responseJson,status_code,step_name,url,way,headers,params,chooseAssertWay,transferlogname):
+def carry_assert(assert_response,responseJson,status_code,step_name,url,way,headers,params,chooseAssertWay,transferlogname,test_carryid):
     for i in assert_response.keys():
         # 是否不采用数据库断言开关
         switch = 1
@@ -138,7 +138,7 @@ def carry_assert(assert_response,responseJson,status_code,step_name,url,way,head
                 for d in range(len(resultlist)):
                     chooseAssertWay(str(resultlist[d]), k, valuelist[d])
             except:
-                @Log(transferlogname.Errorlogname, level="ERROR")
+                @Log(transferlogname.errorlogname[str(test_carryid)+"errorlogname"], level="ERROR")
                 def writeLog(step_name, url, way, header, params, message, assertResult):
                     print("write Errorlogname")
 
@@ -161,7 +161,7 @@ def carry_assert(assert_response,responseJson,status_code,step_name,url,way,head
                 for k in assert_response[i].keys():
                     chooseAssertWay(str(responseJsonAssert), k, assert_response[i][k])
             except:
-                @Log(transferlogname.Errorlogname, level="ERROR")
+                @Log(transferlogname.errorlogname[str(test_carryid)+"errorlogname"], level="ERROR")
                 def writeLog(step_name, url, way, header, params, message, assertResult):
                     print("write Errorlogname")
 
@@ -175,9 +175,9 @@ def carry_assert(assert_response,responseJson,status_code,step_name,url,way,head
         else:
             pass
 
-    @Log(transferlogname.Successlogname, level="INFO")
+    @Log(transferlogname.successlogname[str(test_carryid)+"successlogname"], level="INFO")
     def writeLog(step_name, url, way, header, params, message):
-        print("write Successlogname")
+        print("write successlogname")
 
     writeLog(step_name, url, way, headers, params, "用例通过")
     echo('请求返回值为: ' + json.dumps(responseJson, ensure_ascii=False))

@@ -25,7 +25,7 @@ from django.utils.timezone import now, timedelta
 from django.db.models import Min,Avg,Max,Sum
 from django.apps import apps
 from threading import Thread
-from request import db
+from request import db as dbview
 
 
 # Create your views here.
@@ -115,6 +115,7 @@ def env(request):
 
 @login_required
 def env_add_data(request):
+    protocol = request.POST.get("protocol")
     env_ip=request.POST.get("ip")
     env_host=request.POST.get("host")
     env_port=request.POST.get("port")
@@ -122,7 +123,7 @@ def env_add_data(request):
     code = len(Environment.objects.filter(env_desc=env_desc).values())
     # 不重复则新增数据
     if code == 0:
-        Environment.objects.create(env_ip=env_ip,env_host=env_host,env_port=env_port,env_desc=env_desc)
+        Environment.objects.create(protocol=protocol,env_ip=env_ip,env_host=env_host,env_port=env_port,env_desc=env_desc)
         codeMessage =""
     # 重复则不新增数据
     else:
@@ -133,6 +134,7 @@ def env_add_data(request):
 @login_required
 def env_edit_data(request):
     env_id = request.POST.get("id")
+    protocol = request.POST.get("protocol")
     env_ip=request.POST.get("ip")
     env_host=request.POST.get("host")
     env_port=request.POST.get("port")
@@ -140,7 +142,7 @@ def env_edit_data(request):
     code = len(Environment.objects.filter(~Q(id=env_id),env_desc=env_desc).values())
     # 不重复则更新数据
     if code == 0:
-        Environment.objects.filter(id=env_id).update(env_ip=env_ip, env_host=env_host, env_port=env_port,
+        Environment.objects.filter(id=env_id).update(protocol=protocol,env_ip=env_ip, env_host=env_host, env_port=env_port,
                                                      env_desc=env_desc)
         codeMessage = ""
     # 重复则不更新数据
@@ -1205,7 +1207,6 @@ def get_filiterCasedata(request):
 def step(request):
     step_name = request.GET.get("step_name")
     method = request.GET.get("method")
-    steplevel = request.GET.get("steplevel")
     select = request.GET.get("select")
     case_name = request.GET.get("case_name")
     checkedenv_ids = request.GET.get("checkedenv_ids")
@@ -1213,33 +1214,33 @@ def step(request):
         if case_name == "0":
             if method == "0":
                 if select == '2':
-                    step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel)).order_by("-id")
+                    step_list = Step.objects.filter(Q(step_name__contains=step_name)).order_by("-id")
                 else:
-                    step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel), \
+                    step_list = Step.objects.filter(Q(step_name__contains=step_name), \
                                                     Q(status=select)).order_by("-id")
             else:
                 if select == '2':
-                    step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel), \
+                    step_list = Step.objects.filter(Q(step_name__contains=step_name), \
                                                     Q(method=method)).order_by("-id")
                 else:
-                    step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel), \
+                    step_list = Step.objects.filter(Q(step_name__contains=step_name), \
                                                     Q(status=select), Q(method=method)).order_by("-id")
         else:
             # 得到外键数据
             case = Case.objects.get(case_name=case_name)
             if method == "0":
                 if select == '2':
-                    step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel), \
+                    step_list = Step.objects.filter(Q(step_name__contains=step_name), \
                                                     Q(case=case)).order_by("-id")
                 else:
-                    step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel), \
+                    step_list = Step.objects.filter(Q(step_name__contains=step_name), \
                                                     Q(status=select), Q(case=case)).order_by("-id")
             else:
                 if select == '2':
-                    step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel), \
+                    step_list = Step.objects.filter(Q(step_name__contains=step_name), \
                                                     Q(method=method), Q(case=case)).order_by("-id")
                 else:
-                    step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel), \
+                    step_list = Step.objects.filter(Q(step_name__contains=step_name), \
                                                     Q(status=select), Q(method=method), Q(case=case)).order_by("-id")
     except:
         step_list=Step.objects.all().order_by("-id")
@@ -1264,8 +1265,6 @@ def step(request):
 
     if step_name!=None:
         response["step_name"]=step_name
-    if steplevel!=None:
-        response["steplevel"]=steplevel
     if case_names!=None:
         response["case_names"]=case_names
     if step_names!=None:
@@ -1431,7 +1430,7 @@ def step_add_data(request):
             change_step_case(step_name)
             codeMessage = ""
             # 更新用例的stepCount
-            db.updateStepCount(step_name)
+            dbview.updateStepCount(case)
         # 重复则不新增数据
         else:
             codeMessage = "用例名重复，新增失败"
@@ -1463,6 +1462,10 @@ def step_edit_data(request):
 
     # 得到外键数据
     case = Case.objects.get(case_name=case_name)
+
+    # 修改之前的step
+    caseId = Step.objects.filter(id=step_id).values('case')[0]['case']
+    oldCase = Case.objects.get(id=caseId)
 
     try:
         int(step_name)
@@ -1528,7 +1531,8 @@ def step_edit_data(request):
             codeMessage = ""
 
             #更新用例的stepCount
-            db.updateStepCount(step_name)
+            dbview.updateStepCount(oldCase)
+            dbview.updateStepCount(case)
         # 重复则不更新数据
         else:
             codeMessage = "用例名重复，修改失败"
@@ -1597,7 +1601,11 @@ def step_copy_data(request):
             set_data("Reference_step",Reference_step,copystep, step)
             codeMessage = ""
             # 更新用例的stepCount
-            db.updateStepCount(step_name)
+            # 得到外键数据
+            # 修改之前的step
+            caseId = Step.objects.filter(step_name=step_name).values('case')[0]['case']
+            case = Case.objects.get(id=caseId)
+            dbview.updateStepCount(case)
         # 重复则不新增数据
         else:
             codeMessage = "用例名重复，复制失败"
@@ -1623,7 +1631,7 @@ def step_delete_data(request):
     idstring = ','.join(step_ids)
 
     # 更新用例的stepCount
-    db.updateDeleteStepCount(idstring)
+    dbview.updateDeleteStepCount(idstring)
     Step.objects.extra(where=['id IN (' + idstring + ')']).delete()
 
     # 用作接口依赖选择框
@@ -1641,40 +1649,38 @@ def step_delete_data(request):
 def step_search_name(request):
     step_name = request.GET.get("step_name")
     method = request.GET.get("method")
-    steplevel = request.GET.get("steplevel")
     select = request.GET.get("select")
     case_name=request.GET.get("case_name")
-    print (1)
     if case_name=="0":
         if method=="0":
             if select == '2':
-                step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel)).order_by("-id")
+                step_list = Step.objects.filter(Q(step_name__contains=step_name)).order_by("-id")
             else:
-                step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel),\
+                step_list = Step.objects.filter(Q(step_name__contains=step_name),\
                                                   Q(status=select)).order_by("-id")
         else:
             if select == '2':
-                step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel), \
+                step_list = Step.objects.filter(Q(step_name__contains=step_name), \
                                                     Q(method=method)).order_by("-id")
             else:
-                step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel),\
+                step_list = Step.objects.filter(Q(step_name__contains=step_name),\
                                                   Q(status=select),Q(method=method)).order_by("-id")
     else:
         # 得到外键数据
         case = Case.objects.get(case_name=case_name)
         if method=="0":
             if select == '2':
-                step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel),\
+                step_list = Step.objects.filter(Q(step_name__contains=step_name),\
                                                 Q(case=case)).order_by("-id")
             else:
-                step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel),\
+                step_list = Step.objects.filter(Q(step_name__contains=step_name),\
                                                   Q(status=select),Q(case=case)).order_by("-id")
         else:
             if select == '2':
-                step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel), \
+                step_list = Step.objects.filter(Q(step_name__contains=step_name), \
                                                     Q(method=method),Q(case=case)).order_by("-id")
             else:
-                step_list = Step.objects.filter(Q(step_name__contains=step_name), Q(steplevel__contains=steplevel),\
+                step_list = Step.objects.filter(Q(step_name__contains=step_name),\
                                                   Q(status=select),Q(method=method),Q(case=case)).order_by("-id")
     # 根据登录用户获取相关数据
     Case_dataqueryset = get_filiterCasedata(request)
@@ -1687,7 +1693,7 @@ def step_search_name(request):
     contacts = paginator.page(1)
     case_names = get_case_name(Case_dataqueryset)
     return render(request, "./main/step.html", {"steps": contacts, "case_names": case_names,"select":select,"step_name":step_name,\
-                                                "steplevel":steplevel,"selectcase_name":case_name,"selectmethod":method,"step_names":step_names})
+                                                "selectcase_name":case_name,"selectmethod":method,"step_names":step_names})
 
 
 #测试sql
@@ -1862,6 +1868,9 @@ def sql_add_data(request):
         Sql.objects.create(is_select=isselect,variable=variable,sql=sql,sql_condition=sql_condition,remake=remake,status=1,step=step,db_remark=database_desc,db=db)
     else:
         Sql.objects.create(is_select=isselect,variable=variable,sql=sql,sql_condition=sql_condition,remake=remake,status=0,step=step,db_remark=database_desc,db=db)
+
+    # 跟新用例中的sqlCount
+    dbview.updateSqlCount(step)
     # 根据登录用户获取相关数据
     Step_dataqueryset = get_filiterStepdata(request)
     contacts = get_firstPagefiliterdata(Sql, Step_dataqueryset)
@@ -1886,6 +1895,9 @@ def sql_edit_data(request):
     # 将选择的db和db_remark
     db = get_db_id(request, database_desc)
 
+    #修改之前的step
+    stepId = Sql.objects.filter(id=sql_id).values('step')[0]['step']
+    oldStep = Step.objects.get(id=stepId)
     # 得到外键数据
     step = Step.objects.get(step_name=step_name)
     if isselect == None:
@@ -1897,6 +1909,10 @@ def sql_edit_data(request):
         Sql.objects.filter(id=sql_id).update(is_select=isselect,variable=variable,sql=sql,sql_condition=sql_condition,remake=remake,status=1,step=step,db_remark=database_desc,db=db)
     else:
         Sql.objects.filter(id=sql_id).update(is_select=isselect,variable=variable,sql=sql,sql_condition=sql_condition,remake=remake,status=0,step=step,db_remark=database_desc,db=db)
+
+    # 跟新用例中的sqlCount
+    dbview.updateSqlCount(oldStep)
+    dbview.updateSqlCount(step)
     # 根据登录用户获取相关数据
     Step_dataqueryset = get_filiterStepdata(request)
     contacts = get_firstPagefiliterdata(Sql, Step_dataqueryset)
@@ -1916,6 +1932,10 @@ def sql_delete_data(request):
 
     # 批量删除
     idstring = ','.join(sql_ids)
+
+    # 更新sql的sqlCount
+    dbview.updateDeleteSqlCount(idstring)
+
     Sql.objects.extra(where=['id IN (' + idstring + ')']).delete()
 
     # 根据登录用户获取相关数据
@@ -2111,6 +2131,9 @@ def Nosql_add_data(request):
         NoSql.objects.create(Nosql_dataType=Nosql_dataType,is_select=isselect,variable=variable,Nosql=Nosql,Nosql_condition=Nosql_condition,remake=remake,status=1,step=step)
     else:
         NoSql.objects.create(Nosql_dataType=Nosql_dataType,is_select=isselect,variable=variable,Nosql=Nosql,Nosql_condition=Nosql_condition,remake=remake,status=0,step=step)
+
+    # 跟新用例中的sqlCount
+    dbview.updateNoSqlCount(step)
     # 根据登录用户获取相关数据
     Step_dataqueryset = get_filiterStepdata(request)
     contacts = get_firstPagefiliterdata(NoSql, Step_dataqueryset)
@@ -2129,6 +2152,10 @@ def Nosql_edit_data(request):
     remake = request.POST.get('remake')
     status = request.POST.get('status')
 
+    # 修改之前的step
+    stepId = NoSql.objects.filter(id=Nosql_id).values('step')[0]['step']
+    oldStep = Step.objects.get(id=stepId)
+
     # 得到外键数据
     step = Step.objects.get(step_name=step_name)
     if isselect == None:
@@ -2140,6 +2167,10 @@ def Nosql_edit_data(request):
         NoSql.objects.filter(id=Nosql_id).update(Nosql_dataType=Nosql_dataType,is_select=isselect,variable=variable,Nosql=Nosql,Nosql_condition=Nosql_condition,remake=remake,status=1,step=step)
     else:
         NoSql.objects.filter(id=Nosql_id).update(Nosql_dataType=Nosql_dataType,is_select=isselect,variable=variable,Nosql=Nosql,Nosql_condition=Nosql_condition,remake=remake,status=0,step=step)
+
+    # 跟新用例中的sqlCount
+    dbview.updateNoSqlCount(oldStep)
+    dbview.updateNoSqlCount(step)
     # 根据登录用户获取相关数据
     Step_dataqueryset = get_filiterStepdata(request)
     contacts = get_firstPagefiliterdata(NoSql, Step_dataqueryset)
@@ -2155,6 +2186,8 @@ def Nosql_delete_data(request):
 
     # 批量删除
     idstring = ','.join(Nosql_ids)
+    # 更新sql的sqlCount
+    dbview.updateDeletenoSqlCount(idstring)
     NoSql.objects.extra(where=['id IN (' + idstring + ')']).delete()
     # 根据登录用户获取相关数据
     Step_dataqueryset = get_filiterStepdata(request)
@@ -2202,12 +2235,12 @@ def Nosql_search_name(request):
                                                    "select":select,"step_names": step_names})
 
 #创建任务表
-def create_task(case_ids,task_name,remark):
+def create_task(case_ids,task_name,remark,UUID):
     for case_id in case_ids:
         case_data=Case.objects.filter(id=case_id).values("case_name","api")[0]
         # 得到外键数据
         case = Case.objects.get(id=case_id)
-        Task.objects.create(task_name=task_name,case=case,remark=remark,status=0)
+        Task.objects.create(task_name=task_name,uuid=UUID,case=case,remark=remark,status=0)
 #用例生成脚本
 #得到根据用例id拿到数据
 def get_py_data(case_ids,testcasedir,task_name):
@@ -2269,7 +2302,8 @@ def make_case_data(request):
     case_ids = request.POST.get("id")
     task_name=request.POST.get("task_name")
     remark=request.POST.get("remark")
-    task_name+="---"+str((uuid.uuid1()))
+    UUID=str((uuid.uuid1()))
+    task_nameUuid=task_name+"---"+UUID
     code = len(Task.objects.filter(task_name=task_name).values())
 
     # 不重复则新增数据
@@ -2281,14 +2315,14 @@ def make_case_data(request):
         #print (case_ids)
 
         # 校验生成任务接口必须含有用例
-        code = db.checkTask(case_ids)
+        code = dbview.checkTask(case_ids)
         if code == -1:
             codeMessage = "接口必须包含至少一个用例，生成脚本失败"
         else:
             #创建任务表
-            create_task(case_ids,task_name,remark)
+            create_task(case_ids,task_name,remark,UUID)
             #创建对应目录
-            testcasedir=crate_task(task_name)
+            testcasedir=crate_task(task_nameUuid)
             #整合数据
             get_py_data(case_ids,testcasedir,task_name)
             codeMessage = ""
@@ -2398,8 +2432,10 @@ def tasks_delete_data(request):
 
     for task_name in task_names:
         if task_name!="":
+            #获取uuid
+            UUID = Task.objects.filter(task_name=task_name).values("uuid")[0]['uuid']
             # 删除任务目录以及文件
-            rm_task(task_name)
+            rm_task(task_name+"---"+UUID)
             Task.objects.filter(task_name=task_name).delete()
 
     # 得到一页数据
@@ -2419,19 +2455,19 @@ def task_search_name(request):
     return render(request, "./main/task.html", {"tasks": contacts,"task_name":task_name,"env_descs":env_descs,"subjects":subjects,"Nosqldb_descs":Nosqldb_descs})
 #拼接ip和启动数据库对象
 @login_required
-def get_ip_database(request,task_name,env_desc,nosqldb_desc):
+def get_ip_database(request,task_name,env_desc,nosqldb_desc,test_carryTaskid):
     #环境
-    env_list=Environment.objects.filter(env_desc=env_desc).values("env_ip","env_host","env_port")
+    env_list=Environment.objects.filter(env_desc=env_desc).values("protocol","env_ip","env_host","env_port")
     if env_list[0]['env_ip'] != "":
         if env_list[0]['env_port'] != "":
-            env_ip = "http://{host}:{port}".format(host=env_list[0]['env_ip'], port=env_list[0]['env_port'])
+            env_ip = "{protocol}://{host}:{port}".format(protocol=env_list[0]['protocol'],host=env_list[0]['env_ip'], port=env_list[0]['env_port'])
         else:
-            env_ip = "http://{host}".format(host=env_list[0]['env_ip'])
+            env_ip = "{protocol}://{host}".format(protocol=env_list[0]['protocol'],host=env_list[0]['env_ip'])
     else:
         if env_list[0]['env_port'] != "":
-            env_ip = "http://{host}:{port}".format(host=env_list[0]['env_host'], port=env_list[0]['env_port'])
+            env_ip = "{protocol}://{host}:{port}".format(protocol=env_list[0]['protocol'],host=env_list[0]['env_host'], port=env_list[0]['env_port'])
         else:
-            env_ip = "http://{host}".format(host=env_list[0]['env_host'])
+            env_ip = "{protocol}://{host}".format(protocol=env_list[0]['protocol'],host=env_list[0]['env_host'])
 
     #需要启动的开发数据库
     db={}
@@ -2470,11 +2506,11 @@ def get_ip_database(request,task_name,env_desc,nosqldb_desc):
             password=NosqlDbresult[0]['password']
         redis=Redis(host,port,password)
 
-    create_db(db,env_ip,redis)
+    create_db(db,env_ip,redis,test_carryTaskid)
 
 #写入定时任务数据
 @login_required
-def write_task(request,task_name,env_desc,nosqldb_desc,failcount,schedule,status,email_data):
+def write_task(request,task_name,env_desc,nosqldb_desc,failcount,schedule,status,email_data,out_id,test_carryTaskid):
     #环境
     env_id=Environment.objects.filter(env_desc=env_desc).values("id")[0]['id']
     # Nosql数据库
@@ -2486,19 +2522,19 @@ def write_task(request,task_name,env_desc,nosqldb_desc,failcount,schedule,status
     if status != None:
         if email_data==None:
             Task.objects.filter(task_name=task_name).update(ip=env_id,Nosqldb=Nosqldb_id, failcount=failcount,
-                                                        task_run_time_regular=schedule, status=1, env_desc=env_desc,Nosqldb_desc=nosqldb_desc)
+                                                        task_run_time_regular=schedule, status=1, env_desc=env_desc,Nosqldb_desc=nosqldb_desc,out_id=out_id,carryId=test_carryTaskid)
         else:
             Task.objects.filter(task_name=task_name).update(ip=env_id,Nosqldb=Nosqldb_id, failcount=failcount,
                                                             task_run_time_regular=schedule, status=1, env_desc=env_desc,Nosqldb_desc=nosqldb_desc,
-                                                            email=email_data['id'],subject=email_data['subject'])
+                                                            email=email_data['id'],subject=email_data['subject'],out_id=out_id,carryId=test_carryTaskid)
     else:
         if email_data == None:
             Task.objects.filter(task_name=task_name).update(ip=env_id,Nosqldb=Nosqldb_id, failcount=failcount,
-                                                        task_run_time_regular=schedule, status=0, env_desc=env_desc,Nosqldb_desc=nosqldb_desc)
+                                                        task_run_time_regular=schedule, status=0, env_desc=env_desc,Nosqldb_desc=nosqldb_desc,out_id=out_id,carryId=test_carryTaskid)
         else:
             Task.objects.filter(task_name=task_name).update(ip=env_id,Nosqldb=Nosqldb_id, failcount=failcount,
                                                             task_run_time_regular=schedule, status=0, env_desc=env_desc,Nosqldb_desc=nosqldb_desc,
-                                                            email=email_data['id'],subject=email_data['subject'])
+                                                            email=email_data['id'],subject=email_data['subject'],out_id=out_id,carryId=test_carryTaskid)
 
 #执行任务
 @login_required
@@ -2525,18 +2561,23 @@ def task_run(request):
     else:
         email_data=None
 
+    # 把执行表新增一次执行任务
+    out_id = str(uuid.uuid1())
+    CarryTask.objects.create(task_name=task_name, out_id=out_id)
+    test_carryTaskid = CarryTask.objects.filter(out_id=out_id).values("id")[0]['id']
+
     #选择一次性执行还是配置定时任务
     if schedule==None:
         #拼接ip
-        get_ip_database(request,task_name,env_desc,nosqldb_desc)
-        t = Thread(target=interface, args=(task_name, failcount, email_data))
+        get_ip_database(request,task_name,env_desc,nosqldb_desc,test_carryTaskid)
+        t = Thread(target=interface, args=(task_name,failcount,email_data,env_desc,nosqldb_desc,out_id,test_carryTaskid))
         t.start()
     else:
-        write_task(request,task_name,env_desc,nosqldb_desc,failcount,schedule,status,email_data)
+        write_task(request,task_name,env_desc,nosqldb_desc,failcount,schedule,status,email_data,out_id,test_carryTaskid)
         job = Job(task_name, schedule)
         if status != None:
             #新建任务
-            job.create_job(request,env_desc,nosqldb_desc,failcount,subject)
+            job.create_job(request,env_desc,nosqldb_desc,failcount,subject,out_id,test_carryTaskid)
         else:
             job.delete_job()
     search_task_name=None
@@ -2579,20 +2620,24 @@ def task_list(request):
     task_name = request.GET.get("task_name")
     # 状态1运行中，2未开始，3已结束
     carrystatus=Task.objects.filter(task_name=task_name).values('carrystatus')[0]['carrystatus']
+    taskCreateTime = Task.objects.filter(task_name=task_name).values('create_time')[0]['create_time']
     tasklist={"task_name":task_name,"carrystatus":carrystatus}
     tasklist['data']=[]
-    taskdata=CarryTask.objects.filter(task_name=task_name).values('id','stepcountnow','stepcountall','create_time').order_by('-create_time')
-    for i in range(len(taskdata)):
-        if i==0:
-            tasklist['stepcountnow'] = taskdata[i]['stepcountnow']
-            tasklist['stepcountall'] = taskdata[i]['stepcountall']
-        data = {}
-        data['id']=taskdata[i]['id']
-        data['stepcountnow']=taskdata[i]['stepcountnow']
-        data['stepcountall'] = taskdata[i]['stepcountall']
-        data['stepcountrate'] = int(data['stepcountnow']/data['stepcountall']*100)
-        data['create_time'] = taskdata[i]['create_time'].strftime('%Y-%m-%d %H:%M:%S')
-        tasklist['data'].append(data)
+    taskdata=CarryTask.objects.filter(task_name=task_name,create_time__gte=taskCreateTime).values('id','stepcountnow','stepcountall','create_time').order_by('-create_time')
+    try:
+        for i in range(len(taskdata)):
+            if i==0:
+                tasklist['stepcountnow'] = taskdata[i]['stepcountnow']
+                tasklist['stepcountall'] = taskdata[i]['stepcountall']
+            data = {}
+            data['id']=taskdata[i]['id']
+            data['stepcountnow']=taskdata[i]['stepcountnow']
+            data['stepcountall'] = taskdata[i]['stepcountall']
+            data['stepcountrate'] = int(data['stepcountnow']/data['stepcountall']*100)
+            data['create_time'] = taskdata[i]['create_time'].strftime('%Y-%m-%d %H:%M:%S')
+            tasklist['data'].append(data)
+    except:
+        tasklist={}
 
     return JsonResponse(tasklist)
 
@@ -2611,11 +2656,11 @@ def update_task_status(request):
 
 #得到定时任务数据
 def get_task_data(request):
-    task_name_list = Task.objects.filter(status=1).values("task_name","task_run_time_regular","env_desc","Nosqldb_desc","failcount","status",'email','subject').distinct().order_by('task_name')
+    task_name_list = Task.objects.filter(status=1).values("task_name","task_run_time_regular","env_desc","Nosqldb_desc","failcount","status",'email','subject','out_id','carryId').distinct().order_by('task_name')
     for i in range(len(task_name_list)):
         job = Job(task_name_list[i]['task_name'], task_name_list[i]['task_run_time_regular'])
         # 新建任务
-        job.create_job(request,task_name_list[i]['env_desc'],task_name_list[i]['Nosqldb_desc'], task_name_list[i]['failcount'],task_name_list[i]['subject'])
+        job.create_job(request,task_name_list[i]['env_desc'],task_name_list[i]['Nosqldb_desc'], task_name_list[i]['failcount'],task_name_list[i]['subject'], task_name_list[i]['out_id'],task_name_list[i]['carryId'])
 #启动定时任务
 @login_required
 def start_timing_task(request):

@@ -177,7 +177,7 @@
         }
         //执行任务列表
         function requestCarryingList(){
-            path="/task_list?task_name="+task_name
+            path="/task_list/?task_name="+task_name
             $.ajax({async:false,
                 url:path,
                  complete:function(msg) {

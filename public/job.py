@@ -20,19 +20,19 @@ class Job:
                 self.task_schedule[i]=None
 
     # 启动数据库和启动IP
-    def __get_ip_database(self,request, env_desc,nosqldb_desc, subject):
+    def __get_ip_database(self,request, env_desc,nosqldb_desc, subject,test_carryTaskid):
         # 环境
-        env_list = Environment.objects.filter(env_desc=env_desc).values("env_ip", "env_host", "env_port")
+        env_list = Environment.objects.filter(env_desc=env_desc).values("protocol","env_ip", "env_host", "env_port")
         if env_list[0]['env_ip'] != "":
             if env_list[0]['env_port']!="":
-                env_ip = "http://{host}:{port}".format(host=env_list[0]['env_ip'], port=env_list[0]['env_port'])
+                env_ip = "{protocol}://{host}:{port}".format(protocol=env_list[0]['protocol'],host=env_list[0]['env_ip'], port=env_list[0]['env_port'])
             else:
-                env_ip = "http://{host}".format(host=env_list[0]['env_ip'])
+                env_ip = "{protocol}://{host}".format(protocol=env_list[0]['protocol'],host=env_list[0]['env_ip'])
         else:
             if env_list[0]['env_port'] != "":
-                env_ip = "http://{host}:{port}".format(host=env_list[0]['env_host'], port=env_list[0]['env_port'])
+                env_ip = "{protocol}://{host}:{port}".format(protocol=env_list[0]['protocol'],host=env_list[0]['env_host'], port=env_list[0]['env_port'])
             else:
-                env_ip = "http://{host}".format(host=env_list[0]['env_host'])
+                env_ip = "{protocol}://{host}".format(protocol=env_list[0]['protocol'],host=env_list[0]['env_host'])
         # Nosql数据库
         if nosqldb_desc == "":
             redis = None
@@ -72,7 +72,7 @@ class Job:
         else:
             db=None
 
-        create_db(db, env_ip,redis)
+        create_db(db, env_ip,redis,test_carryTaskid)
 
         #邮件
         # 如果要发送邮件拿到邮件配置数据
@@ -86,14 +86,14 @@ class Job:
             email_data = None
         return email_data
     #添加定时任务
-    def create_job(self,request,env_desc,Nosqldb_desc,failcount,subject):
+    def create_job(self,request,env_desc,Nosqldb_desc,failcount,subject,out_id,test_carryTaskid):
         self.__get_date()
 
         @sched.scheduled_job('cron', minute = self.task_schedule[0],hour = self.task_schedule[1], day  = self.task_schedule[2],month  = self.task_schedule[3], week   = self.task_schedule[4],id=self.taskname)
         def task():
             #启动数据库和启动IP和获取邮件配置数据
-            email_data=self.__get_ip_database(request, env_desc,Nosqldb_desc,subject)
-            interface(self.taskname,failcount,email_data)
+            email_data=self.__get_ip_database(request, env_desc,Nosqldb_desc,subject,test_carryTaskid)
+            interface(self.taskname,failcount,email_data,env_desc,Nosqldb_desc,out_id,test_carryTaskid)
 
     #删除定时任务
     def delete_job(self):
@@ -104,14 +104,6 @@ class Job:
             #没有任务就跳过
             pass
 
-    #添加单次任务
-    def create_one_job(self,request,env_desc,Nosqldb_desc,failcount,subject):
-        nowtime=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
-        @sched.scheduled_job('date', run_date=nowtime,id="1")
-        def task():
-            #启动数据库和启动IP和获取邮件配置数据
-            email_data=self.__get_ip_database(request, env_desc,Nosqldb_desc,subject)
-            interface(self.taskname,failcount,email_data)
 
 
 

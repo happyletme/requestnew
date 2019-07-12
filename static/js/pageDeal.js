@@ -253,13 +253,29 @@ function choose_new_select(elements,selectstep){
     })
 }
 
-function openTab(url){
+function openTab(flagPosition,url){
     if (url){
-        //触发tab关闭
-        $('span:contains("用例")').trigger('dblclick');
+        if (flagPosition=="step"){
+            //触发tab关闭
+            $('span:contains("用例")').trigger('dblclick');
+        }
+        else if (flagPosition=="sql"){
+            //触发tab关闭
+            $('span:contains("sql管理")').trigger('dblclick');
+        }
+        else if (flagPosition=="Nosql"){
+            //触发tab关闭
+            $('span:contains("Nosql管理")').trigger('dblclick');
+        }
         //触发tab打开和跳转
-        $("#step").find("a").attr("href-url",url);
-        $("#step").trigger('click');
-        $("#step").find("a").attr("href-url","/step/");
+        $("#"+flagPosition).find("a").attr("href-url",url);
+        $("#"+flagPosition).trigger('click');
+        $("#"+flagPosition).find("a").attr("href-url","/"+flagPosition+"/");
     }
+}
+
+function jump(obj,flagPosition,url){
+    Name=$(obj).parent().parent().find("td").eq(2).text()
+    url += Name;
+    window.parent.openTab(flagPosition,url);
 }

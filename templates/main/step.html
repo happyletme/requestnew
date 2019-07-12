@@ -707,14 +707,13 @@
 
                 elementstep_name=$("#ipt2").val();
                 elementmethod=$("#selectmethod").val();
-                elementsteplevel=$("#ipt4").val();
                 elementselect=$("#select1").val();
                 elementcase_name=$("#selectcase_name").val();
                 oldHref=$(btn).attr("href");
-                href=oldHref+"&step_name="+elementstep_name+"&case_name="+elementcase_name+"&method="+elementmethod+"&steplevel="+elementsteplevel+"&select="+elementselect+"&checkedenv_ids="+checked_ids
+                href=oldHref+"&step_name="+elementstep_name+"&case_name="+elementcase_name+"&method="+elementmethod+"&select="+elementselect+"&checkedenv_ids="+checked_ids
                 $(btn).attr("href",href)
             }
-            var elementstep_name,elementcase_name,elementmethod,elementsteplevel,elementselect;
+            var elementstep_name,elementcase_name,elementmethod,elementselect;
             $("#first").click(function(){
                 merge(this);
             });
@@ -753,7 +752,6 @@
                     <option class="selectmethod">postfile</option>
                     <option class="selectmethod">put</option>
                 </select>
-                <input id="ipt4" name="steplevel" type="text" placeholder="优先级" class="form-control" value={{ steplevel }}>
                 <select id="select1" name='select' class="form-control" >
                     <option  value="2"  class="select">状态</option>
                     <option value="1" class="select">生效中</option>
@@ -793,7 +791,7 @@
         <div>
             <table id="table" class="table table-striped">
                 <tr>
-                    <th><input type="checkbox" id="allcheck"  onclick='checkAll("allcheck","choice")' /></th><th>id</th><th>用例名</th><th>接口名称</th><th>方式</th><th>信息头</th><th>请求参数</th><th>请求文件</th><th>断言</th><th style="display:None">接口依赖</th><th>优先级</th><th>用例描述</th><th>状态</th>
+                    <th><input type="checkbox" id="allcheck"  onclick='checkAll("allcheck","choice")' /></th><th>id</th><th>用例名</th><th>接口名称</th><th>方式</th><th>信息头</th><th>请求参数</th><th style="display:None">请求文件</th><th>断言</th><th style="display:None">接口依赖</th><th>生效sql数</th><th>生效nosql数</th><th>优先级</th><th>用例描述</th><th>状态</th>
                 </tr>
                 <tbody>
                 {% for step in steps %}
@@ -805,9 +803,11 @@
                         <td titlevalue="{{ step.method }}">{{ step.method }}</td>
                         <td titlevalue="{{ step.headers }}">{{ step.headers }}</td>
                         <td titlevalue="{{ step.params }}">{{ step.params }}</td>
-                        <td titlevalue="{{ step.files }}">{{ step.files }}</td>
+                        <td titlevalue="{{ step.files }}" style="display:None">{{ step.files }}</td>
                         <td titlevalue="{{ step.assert_response }}">{{ step.assert_response }}</td>
                         <td style="display:None" titlevalue="{{ step.api_dependency }}">{{ step.api_dependency }}</td>
+                        <td titlevalue={{ step.sqlCount }}><a onclick="jump(this,'sql','/sql/?page=1&selectdb_remark=0&selectisselect=2&select=1&step_name=')">{{ step.sqlCount }}</a></td>
+                        <td titlevalue={{ step.nosqlCount }}><a onclick="jump(this,'Nosql','/Nosql/?page=1&selectisselect=2&select=1&step_name=')">{{ step.nosqlCount }}</a></td>
                         <td titlevalue="{{ step.steplevel }}">{{ step.steplevel }}</td>
                         <td titlevalue="{{ step.step_desc }}">{{ step.step_desc }}</td>
                         {% if step.status %}
@@ -933,6 +933,7 @@
                             </li>
                        </ul>
                     </div>
+
                     <div class="form-group">
                         <label  for="steplevel">优先级</label>
                         <input  type="text" class="form-control" name="steplevel" placeholder="请输入优先级" >
@@ -1077,7 +1078,14 @@
                             </li>
                        </ul>
                     </div>
-
+                    <div class="form-group" style="display: none">
+                        <label  for="version" >生效sql数</label>
+                        <input  type="text" class="ipt form-control" name="sqlCount" placeholder="请输入生效sql数" >
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <label  for="version" >生效noSql数</label>
+                        <input  type="text" class="ipt form-control" name="nosqlCount" placeholder="请输入生效nosql数" >
+                    </div>
                     <div class="form-group">
                         <label  for="steplevel">优先级</label>
                         <input  type="text" class="ipt form-control" name="steplevel" placeholder="请输入优先级" >
