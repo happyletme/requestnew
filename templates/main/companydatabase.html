@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    <title>Env</title>
+    <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js">
+    </script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/frame/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/frame/static/css/style.css">
+    <script>
+        $(function(){
+            search();
+        });
+        function search(){
+            var elementsStatus="#select1 option";
+            var valueStatus="{{ envName }}";
+            get_option(elementsStatus,valueStatus);
+        }
+        //搜索或者搜索分页后去根据select返回的value去确定第几个option被选中
+        function get_option(elements,value){
+           $(elements).each(function(index,element){
+                if($(element).val()==value){
+                    $(element).attr("selected",true);
+                    //console.log($(element).val());
+                    return;
+                }
+            });
+        }
+    </script>
+</head>
+<body role="document">
+    <!--环境搜索栏-->
+    <div class="page-header" >
+        <form class="navbar-form" method="GET" action="/companydatabase/">
+            <div class="form-group">
+                <input  id="ipt3" name="dbName" type="text" placeholder="数据库名称" class="form-control" value={{ dbName }}>
+                <select id="select1" name='envName' class="form-control" >
+                    <option value="" class="select">环境</option>
+                    <option value="sit" class="select">sit</option>
+                    <option value="perf" class="select">perf</option>
+                    <option value="dev" class="select">dev</option>
+                    <option value="prod" class="select">prod</option>
+                </select>
+            </div>
+            <button id="btn4" type="submit" class="btn layui-btn" >搜索</button>
+            {% csrf_token %}
+        </form>
+    </div>
+    <!--数据库列表-->
+    <div>
+        <div>
+            <table id="table" class="table table-striped">
+                <tr>
+                    <th>appname</th><th>数据库名称</th><th>环境</th><th>权限</th>
+                </tr>
+                <tbody>
+                {% for companydatabase in companydatabases %}
+                    <tr>
+                        <td>{{ companydatabase.dbName }}-{{ companydatabase.envName }}</td>
+                        <td>{{ companydatabase.dbName }}</td>
+                        <td>{{ companydatabase.envName }}</td>
+                        <td>{{ companydatabase.permissions }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

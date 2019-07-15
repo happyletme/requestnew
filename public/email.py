@@ -54,7 +54,7 @@ class SendEmail:
             msg_text=fp.read()
             fp.close()
         '''
-        msg_text=""
+        msg_text=html
         msg = MIMEText(msg_text, 'html', 'utf-8')
         self.message = MIMEMultipart()
         self.message.attach(msg)

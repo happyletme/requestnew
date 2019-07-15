@@ -20,16 +20,12 @@
             del("btn3","ipt1","table","checkbox","checknum","myAlert1");
             paging();
             search();
+            display("table","td",25,25);//列表数据一旦超过多少个字符串就只显示，多少个字符串+..
             check("table","allcheck","checkbox","checknum"); // 根据返回值去勾选对应列
             makepy("btnmakepy","iptmakepy","table","checkbox","checknum","myAlert2");
             funisError("tipModalLabel","tipModal");//判断提交的表单是否错误
         });
 
-        function jump(obj){
-            case_name=$(obj).parent().parent().find("td").eq(2).text()
-            url = "/step/?page=1&step_name=&case_name="+case_name+"&method=0&steplevel=&select=1&checkedenv_ids=None"
-            window.parent.openTab(url);
-        }
         //搜索
         function search(){
             var elementsStatus="#select1 option";
@@ -250,7 +246,7 @@
                         <td titlevalue={{ project_listnames }}>{{ project_listnames }}</td>
                         <td titlevalue={{ case.Modules }}>{{ case.Modules }}</td>
                         <td titlevalue={{ case.api }}>{{ case.api }}</td>
-                        <td titlevalue={{ case.stepCount }}><a onclick="jump(this)">{{ case.stepCount }}</a></td>
+                        <td titlevalue={{ case.stepCount }}><a onclick="jump(this,'step','/step/?page=1&step_name=&method=0&select=1&checkedenv_ids=None&case_name=')">{{ case.stepCount }}</a></td>
                         <td titlevalue={{ case.version }}>{{ case.version }}</td>
                         <td titlevalue={{ case.case_desc }}>{{ case.case_desc }}</td>
                         {% if case.status %}

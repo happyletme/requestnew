@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 #测试环境表
 class Environment(models.Model):
-    env_ip=models.CharField(max_length=20)
+    protocol = models.CharField(max_length=20,default="http")
+    env_ip = models.CharField(max_length=20)
     env_host = models.CharField(max_length=40)
     env_port = models.CharField(max_length=10)
     env_desc = models.CharField(max_length=100)
@@ -44,7 +45,7 @@ class Email(models.Model):
     host_dir = models.CharField(max_length=100)
     email_port=models.CharField(max_length=20, default="")
     username = models.CharField(max_length=100)
-    passwd = models.CharField(max_length=20)
+    passwd = models.CharField(max_length=100)
     Headerfrom = models.CharField(max_length=100)
     Headerto = models.CharField(max_length=100)
     subject = models.CharField(max_length=100,default="")
@@ -111,6 +112,8 @@ class Step(models.Model):
     files = models.CharField(max_length=500)
     assert_response = models.CharField(max_length=4000)
     api_dependency = models.CharField(max_length=500,default="")
+    sqlCount = models.IntegerField(default=0)
+    nosqlCount = models.IntegerField(default=0)
     step_weights = models.IntegerField(default=0)
     status = models.BooleanField()
     update_time = models.DateTimeField(auto_now=True)
@@ -166,6 +169,9 @@ class NoSql(models.Model):
 class Task(models.Model):
     case=models.ForeignKey(Case,on_delete=models.CASCADE)
     task_name = models.CharField(max_length=200)
+    uuid = models.CharField(max_length=200, default="")
+    out_id = models.CharField(max_length=200, default="")
+    carryId = models.IntegerField(default=0)
     task_run_time_regular = models.CharField(max_length=100)
     ip=models.CharField(max_length=40,default="")
     Nosqldb = models.CharField(max_length=40,default="")

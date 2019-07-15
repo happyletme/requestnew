@@ -66,7 +66,7 @@ ROOT_URLCONF = 'requestnew.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'task')]
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'task'),os.path.join(BASE_DIR, 'debug')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
