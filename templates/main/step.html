@@ -120,6 +120,8 @@
             display("table","td",25,25);//列表数据一旦超过多少个字符串就只显示，多少个字符串+...
             check("table","allcheck","checkbox","checknum"); // 根据返回值去勾选对应列
             funisError("tipModalLabel","tipModal");//判断提交的表单是否错误
+            controleDebugModal();//单用例调试
+            findReport();//找到报告
         });
         function search(){
             var elementsStatus="#select1 option";
@@ -791,7 +793,7 @@
         <div>
             <table id="table" class="table table-striped">
                 <tr>
-                    <th><input type="checkbox" id="allcheck"  onclick='checkAll("allcheck","choice")' /></th><th>id</th><th>用例名</th><th>接口名称</th><th>方式</th><th>信息头</th><th>请求参数</th><th style="display:None">请求文件</th><th>断言</th><th style="display:None">接口依赖</th><th>生效sql数</th><th>生效nosql数</th><th>优先级</th><th>用例描述</th><th>状态</th>
+                    <th><input type="checkbox" id="allcheck"  onclick='checkAll("allcheck","choice")' /></th><th>id</th><th>用例名</th><th>接口名称</th><th>方式</th><th>信息头</th><th>请求参数</th><th style="display:None">请求文件</th><th>断言</th><th style="display:None">接口依赖</th><th>生效sql数</th><th>生效nosql数</th><th>优先级</th><th>用例描述</th><th>状态</th><th>操作</th>
                 </tr>
                 <tbody>
                 {% for step in steps %}
@@ -815,6 +817,12 @@
                         {% else %}
                             <td titlevalue="{{ step.status }}"><span class="choosespan label label-danger">已禁用</span></td>
                         {% endif %}
+                        <td fontDisplay="false"  class="btn-group btn-group-xs">
+                            <button  class="btn btn-default findDetails debug" style="background: #1AA194;color: whitesmoke;" >执行</button>
+                            <a class="btn-group btn-group-xs aReport" href="/debugReport/" target="_blank">
+                                <button  class="btn btn-default findDetails report" style="background: #1AA194;color: whitesmoke;" >查看报告</button>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -1194,6 +1202,59 @@
                         确认
                     </button>
                 </div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!-- 执行 -->
+    <div class="modal fade" id="debugMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button  type="button" class="close carryclose" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					控制面板
+				</h4>
+			</div>
+			<div class="modal-body">
+                <!--提示框-->
+                <div id="debugMyAlert" class="alert alert-success" style="display: none">
+                    <strong>Tip：</strong>执行中，请等待。。。
+                </div>
+                <form id="debugform" role="form" method='POST' action="/debug/" >
+                    <div class="form-group" style="display: none">
+                        <label  for="id">id</label>
+                        <input  id="stepId" type="text" class="form-control" name="id" placeholder="请输入id" >
+                    </div>
+                    <div class="form-group ipt" id="editenv">
+                        <label  for="env_desc" >环境</label>
+                        <select id="editselectenv" name="env_desc" class="form-control selectpicker" data-live-search="true" required>
+                            {% for env_desc in env_descs %}
+                            <option>{{ env_desc }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group ipt" id="editnosql">
+                        <label  for="Nosqldb_desc" >NosqlDb名称</label>
+                        <select id="editselectnosql" name="Nosqldb_desc" class="form-control selectpicker" data-live-search="true" >
+                            <option value="">请选择</option>
+                            {% for Nosqldb_desc in Nosqldb_descs %}
+                            <option>{{ Nosqldb_desc }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn carryclose" data-dismiss="modal">关闭
+				        </button>
+				        <button id="debugsubmit"  type="button" class="btn layui-btn">
+					    执行
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+                <iframe id="rfFrame" name="rfFrame" src="about:blank" style="display:none;"></iframe>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->

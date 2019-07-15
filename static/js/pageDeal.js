@@ -184,15 +184,17 @@ showCount ---展示多少个字数
 function display(tableId,tag,maxJudgeCount,showCount){
     var elements=$("#"+tableId).find(tag);
     for (var i=0;i<elements.length;i++){
-        $(elements[i]).attr("title",$(elements[i]).text());
-        if ($(elements[i]).text().length>=maxJudgeCount){
-            var str=$(elements[i]).text().substring(0,showCount)+"...";
-            $(elements[i]).html(str);
+        if ($(elements[i]).attr("fontDisplay")!="false"){
+            $(elements[i]).attr("title",$(elements[i]).text());
+            if ($(elements[i]).text().length>=maxJudgeCount){
+                var str=$(elements[i]).text().substring(0,showCount)+"...";
+                $(elements[i]).html(str);
+            }
+            //当鼠标在列表上悬停时，出现内容
+            $(elements[i]).mouseover(function(){
+                $(this).tooltip;
+             });
         }
-        //当鼠标在列表上悬停时，出现内容
-        $(elements[i]).mouseover(function(){
-            $(this).tooltip;
-         });
     }
 }
 
@@ -252,7 +254,7 @@ function choose_new_select(elements,selectstep){
         }
     })
 }
-
+//首页控制tab
 function openTab(flagPosition,url){
     if (url){
         if (flagPosition=="step"){
@@ -273,9 +275,35 @@ function openTab(flagPosition,url){
         $("#"+flagPosition).find("a").attr("href-url","/"+flagPosition+"/");
     }
 }
-
+//跳转url
 function jump(obj,flagPosition,url){
     Name=$(obj).parent().parent().find("td").eq(2).text()
     url += Name;
     window.parent.openTab(flagPosition,url);
+}
+
+//单步调试
+function controleDebugModal(){
+    $(".debug").click(function(){
+        $("#debugMyAlert").css("display","none");
+        stepId=$(this).parent().parent().children('td').eq(1).text()
+        $("#stepId").attr("value",stepId);
+        $("#debugMyModal").modal("show");
+        debug();
+    });
+}
+function debug(){
+    $("#debugsubmit").click(function(){
+        $("#debugform").submit()
+        $("#debugMyAlert").css("display","inherit");
+    });
+}
+
+//找到报告
+function findReport(){
+    $(".report").click(function(){
+        stepName=$(this).parent().parent().parent().children('td').eq(2).text()
+        newhref="/debugReport/?stepName="+stepName
+        $(".aReport").attr("href",newhref)
+    });
 }

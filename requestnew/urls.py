@@ -95,6 +95,10 @@ urlpatterns = [
     #生成脚本
     url('^make_case_data/$', views.make_case_data),
 
+    #debug
+    url('^debug/$', views.debug),
+    url('^debugReport/$', views.debugReport),
+
     #定时任务
     url('^task/$', views.task),
     url('^tasks_delete_data/$', views.tasks_delete_data),
