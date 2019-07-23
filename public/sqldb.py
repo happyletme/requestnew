@@ -1,4 +1,4 @@
-#-*-coding:utf-8-*-s
+#-*-coding:utf-8-*-
 #mysql和sqlserver的库
 import pymysql,pymssql,json,requests
 from DBUtils.PooledDB import PooledDB

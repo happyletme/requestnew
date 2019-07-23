@@ -850,7 +850,6 @@
                 <form id="add"  role="form" method='POST' action="/step_add_data/">
                     <div class="form-group">
                         <label  for="step_name">用例名</label>
-                        <!--<input  id="step_name" type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">-->
                         <input  id="step_name" type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
@@ -993,7 +992,7 @@
                     </div>
                     <div class="form-group">
                         <label  for="step_name">用例名</label>
-                        <input  id="editstep_name" type="text" class="ipt form-control" name="step_name" placeholder="请输入用例名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  id="editstep_name" type="text" class="ipt form-control" name="step_name" placeholder="请输入用例名" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <!--给label的class加个ipt的属性，保证新的select成功-->
                     <div class="form-group ipt" id="editdiv">
@@ -1136,7 +1135,7 @@
                 <form id="copy"  role="form" method='POST' action="/step_copy_data/">
                     <div class="form-group">
                         <label  for="step_name">用例名</label>
-                        <input  type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
                         <label  for="step_name" >用例来源</label>
