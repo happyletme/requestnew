@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f198f29-acf0-4c80-ba33-87463998389b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/requestnew.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sqldb.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/sqldb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/case.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/case.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/modules.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/modules.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/step.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/step.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -108,32 +110,33 @@
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.open.time.7" value="4" />
+          <entry key="project.open.time.7" value="5" />
           <entry key="project.open.time.8" value="3" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="159" />
+          <entry key="html" value="164" />
           <entry key="js" value="21" />
           <entry key="log" value="1" />
-          <entry key="md" value="4" />
-          <entry key="py" value="184" />
+          <entry key="md" value="6" />
+          <entry key="py" value="197" />
+          <entry key="sh" value="3" />
           <entry key="template" value="5" />
           <entry key="text" value="5" />
           <entry key="ts" value="4" />
           <entry key="txt" value="1" />
-          <entry key="version" value="6" />
+          <entry key="version" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="159" />
+          <entry key="HTML" value="164" />
           <entry key="JavaScript" value="21" />
-          <entry key="Markdown" value="4" />
-          <entry key="PLAIN_TEXT" value="13" />
-          <entry key="Python" value="189" />
+          <entry key="Markdown" value="6" />
+          <entry key="PLAIN_TEXT" value="17" />
+          <entry key="Python" value="202" />
           <entry key="TypeScript" value="4" />
         </counts>
       </usages-collector>
@@ -141,19 +144,19 @@
         <counts>
           <entry key="html" value="2685" />
           <entry key="js" value="1317" />
-          <entry key="md" value="96" />
-          <entry key="py" value="5779" />
+          <entry key="md" value="421" />
+          <entry key="py" value="5825" />
           <entry key="template" value="5" />
-          <entry key="version" value="235" />
+          <entry key="version" value="259" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="2685" />
           <entry key="JavaScript" value="1317" />
-          <entry key="Markdown" value="96" />
-          <entry key="PLAIN_TEXT" value="235" />
-          <entry key="Python" value="5784" />
+          <entry key="Markdown" value="421" />
+          <entry key="PLAIN_TEXT" value="259" />
+          <entry key="Python" value="5830" />
         </counts>
       </usages-collector>
     </session>
@@ -163,7 +166,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/requestnew/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
+            <state relative-caret-position="475">
               <caret line="103" column="27" selection-start-line="103" selection-start-column="27" selection-end-line="103" selection-end-column="27" />
             </state>
           </provider>
@@ -172,8 +175,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/main/case.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="716">
-              <caret line="419" column="112" selection-start-line="419" selection-start-column="112" selection-end-line="419" selection-end-column="112" />
+            <state relative-caret-position="507">
+              <caret line="354" column="40" selection-start-line="354" selection-start-column="40" selection-end-line="354" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -182,65 +185,69 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor />
+              <first_editor relative-caret-position="152">
+                <caret line="8" selection-start-line="8" selection-end-line="8" />
+              </first_editor>
               <second_editor />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/version">
+        <entry file="file://$PROJECT_DIR$/templates/main/modules.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+            <state relative-caret-position="718">
+              <caret line="365" column="27" selection-start-line="365" selection-start-column="27" selection-end-line="365" selection-end-column="27" />
+              <folding>
+                <element signature="n#style#0;n#div#9;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/main/sql.html">
+        <entry file="file://$PROJECT_DIR$/shutdown.sh">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/start.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="253" column="21" selection-start-line="253" selection-start-column="21" selection-end-line="253" selection-end-column="21" />
+            <state relative-caret-position="19">
+              <caret line="1" column="34" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/main/step.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="1137" column="264" selection-start-line="1137" selection-start-column="264" selection-end-line="1137" selection-end-column="264" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/request/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/ExtentHTMLTestRunner.py">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/main/Nosql.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="290" column="21" selection-start-line="290" selection-start-column="21" selection-end-line="290" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/main/database.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="155" column="83" selection-start-line="155" selection-start-column="83" selection-end-line="155" selection-end-column="83" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/main/NosqlDb.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="117" column="21" selection-start-line="117" selection-start-column="21" selection-end-line="117" selection-end-column="21" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/public/expandfunction.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -249,15 +256,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>stepCount</find>
-      <find>optionsRadios3</find>
       <find>html</find>
       <find>steplevel</find>
       <find>case</find>
@@ -286,6 +291,8 @@
       <find>/task_list</find>
       <find>CarryTask.objects.create</find>
       <find>新增</find>
+      <find>if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}</find>
+      <find>modules</find>
     </findStrings>
     <replaceStrings>
       <replace>email</replace>
@@ -297,8 +304,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/ExtentHTMLTestRunner.py" />
-        <option value="$PROJECT_DIR$/task/first_task---48ea0682-2058-11e9-956c-4cedfb3d07c3/testcase/PostStoreTemplateItemSync.py" />
         <option value="$PROJECT_DIR$/templates/main/test.html" />
         <option value="$PROJECT_DIR$/templates/first_page1.html" />
         <option value="$PROJECT_DIR$/templates/main/formatJson.html" />
@@ -311,7 +316,6 @@
         <option value="$PROJECT_DIR$/task/third_task---fb9dc548-626b-11e9-b82f-4cedfb3d07c3/testcase/SelectPersonNameIdCode.py" />
         <option value="$PROJECT_DIR$/templates/main/functionhelp.html" />
         <option value="$PROJECT_DIR$/static/frame/layui/layui.js" />
-        <option value="$PROJECT_DIR$/templates/main/modules.html" />
         <option value="$PROJECT_DIR$/templates/main/project.html" />
         <option value="$PROJECT_DIR$/request/admin.py" />
         <option value="$PROJECT_DIR$/requestnew/db.py" />
@@ -321,7 +325,6 @@
         <option value="$PROJECT_DIR$/requestnew/urls.py" />
         <option value="$PROJECT_DIR$/request/db.py" />
         <option value="$PROJECT_DIR$/templates/first_page.html" />
-        <option value="$PROJECT_DIR$/templates/main/step.html" />
         <option value="$PROJECT_DIR$/static/js/pageDeal.js" />
         <option value="$PROJECT_DIR$/templates/main/env.html" />
         <option value="$PROJECT_DIR$/public/emailBody.py" />
@@ -330,23 +333,27 @@
         <option value="$PROJECT_DIR$/task/first_task---f378e268-a32d-11e9-9c26-4cedfb3d07c3/testcase/guoguo.py" />
         <option value="$PROJECT_DIR$/task/template" />
         <option value="$PROJECT_DIR$/task/first_task---b894eb70-a3a9-11e9-81f7-4cedfb3d07c3/testcase/redirect.py" />
-        <option value="$PROJECT_DIR$/public/sqldb.py" />
         <option value="$PROJECT_DIR$/public/make_testcase.py" />
         <option value="$PROJECT_DIR$/public/run.py" />
         <option value="$PROJECT_DIR$/public/script_function.py" />
         <option value="$PROJECT_DIR$/request/models.py" />
         <option value="$PROJECT_DIR$/public/job.py" />
         <option value="$PROJECT_DIR$/templates/main/task.html" />
-        <option value="$PROJECT_DIR$/request/views.py" />
         <option value="$PROJECT_DIR$/test.html" />
-        <option value="$PROJECT_DIR$/templates/main/case.html" />
-        <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/version" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/templates/main/database.html" />
         <option value="$PROJECT_DIR$/templates/main/Nosql.html" />
         <option value="$PROJECT_DIR$/templates/main/NosqlDb.html" />
         <option value="$PROJECT_DIR$/templates/main/sql.html" />
+        <option value="$PROJECT_DIR$/public/sqldb.py" />
+        <option value="$PROJECT_DIR$/templates/main/modules.html" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/templates/main/step.html" />
+        <option value="$PROJECT_DIR$/templates/main/case.html" />
+        <option value="$PROJECT_DIR$/version" />
+        <option value="$PROJECT_DIR$/version.md" />
+        <option value="$PROJECT_DIR$/start.sh" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/request/views.py" />
         <option value="$PROJECT_DIR$/requestnew/settings.py" />
       </list>
     </option>
@@ -363,8 +370,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-12" />
-    <option name="y" value="-12" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1299" />
     <option name="height" value="1042" />
   </component>
@@ -384,7 +391,28 @@
             <path>
               <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
               <item name="requestnew" type="462c0819:PsiDirectoryNode" />
-              <item name="debug" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="request" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
+              <item name="requestnew" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="requestnew" type="b2602c69:ProjectViewProjectNode" />
@@ -629,8 +657,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26918977" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18070363" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -698,37 +727,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/python/Lib/site-packages/pandas/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/publicExpansion/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/email.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/carryfunction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/mongodb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="44" column="29" lean-forward="true" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task/third_task---592ae15a-a38c-11e9-9ca8-4cedfb3d07c3/testcase/guoguo.py" />
-    <entry file="file://$PROJECT_DIR$/task/first_task---f378e268-a32d-11e9-9c26-4cedfb3d07c3/testcase/redirect.py" />
-    <entry file="file://$PROJECT_DIR$/task/first_task---f378e268-a32d-11e9-9c26-4cedfb3d07c3/testcase/guoguo.py" />
-    <entry file="file://$PROJECT_DIR$/task/first_task---0a02ba8a-a3a9-11e9-b3cd-4cedfb3d07c3/testcase/redirect.py" />
     <entry file="file://$PROJECT_DIR$/task/first_task---b894eb70-a3a9-11e9-81f7-4cedfb3d07c3/testcase/redirect.py" />
     <entry file="file://$PROJECT_DIR$/task/template">
       <provider selected="true" editor-type-id="text-editor">
@@ -774,13 +772,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/task/first_task---50d862b8-a3c1-11e9-8db3-4cedfb3d07c3/testcase/redirect.py" />
-    <entry file="file://$PROJECT_DIR$/public/script_function.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="165" column="47" selection-start-line="165" selection-start-column="47" selection-end-line="165" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/task/first_task---882b5ee8-a3c4-11e9-9c27-4cedfb3d07c3/report/Successlog19-07-1118-14-12.text" />
     <entry file="file://$PROJECT_DIR$/task/first_task---882b5ee8-a3c4-11e9-9c27-4cedfb3d07c3/report/Errorlog19-07-1118-14-12.text" />
     <entry file="file://D:/python/Lib/threading.py">
@@ -800,20 +791,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/request/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="173" column="11" selection-start-line="173" selection-start-column="4" selection-end-line="173" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/sqldb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="79" column="11" selection-start-line="79" selection-start-column="11" selection-end-line="79" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/job.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -822,35 +799,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/task/first_task---882b5ee8-a3c4-11e9-9c27-4cedfb3d07c3/report/report19-07-1119-47-00.html" />
-    <entry file="file://$PROJECT_DIR$/requestnew/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="102" column="35" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/request/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="2625" column="172" selection-start-line="2625" selection-start-column="172" selection-end-line="2625" selection-end-column="172" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.html" />
     <entry file="file://$PROJECT_DIR$/geckodriver.log" />
-    <entry file="file://$PROJECT_DIR$/templates/main/task.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3496">
-          <caret line="184" column="55" selection-start-line="184" selection-start-column="55" selection-end-line="184" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/ExtentHTMLTestRunner.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/publicExpansion/emailBody.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -858,66 +808,199 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py" />
-    <entry file="file://$PROJECT_DIR$/templates/main/case.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="419" column="112" selection-start-line="419" selection-start-column="112" selection-end-line="419" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/version">
+    <entry file="file://$PROJECT_DIR$/templates/main/sql.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+        <state relative-caret-position="4807">
+          <caret line="253" column="21" selection-start-line="253" selection-start-column="21" selection-end-line="253" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/main/Nosql.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="5510">
           <caret line="290" column="21" selection-start-line="290" selection-start-column="21" selection-end-line="290" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/database.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2945">
+          <caret line="155" column="83" selection-start-line="155" selection-start-column="83" selection-end-line="155" selection-end-column="83" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/main/NosqlDb.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="2223">
           <caret line="117" column="21" selection-start-line="117" selection-start-column="21" selection-end-line="117" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/main/sql.html">
+    <entry file="file://$PROJECT_DIR$/public/request.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="253" column="21" selection-start-line="253" selection-start-column="21" selection-end-line="253" selection-end-column="21" />
+        <state relative-caret-position="19">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="e#20#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/script_function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/log.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/sqldb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="19" />
+          <folding>
+            <element signature="e#40#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/request/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/request/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-878">
+          <caret line="173" column="11" selection-start-line="173" selection-start-column="4" selection-end-line="173" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/project.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="333" column="16" selection-start-line="333" selection-start-column="16" selection-end-line="333" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requestnew/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/task.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="184" column="55" selection-start-line="184" selection-start-column="55" selection-end-line="184" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/main/step.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="1137" column="264" selection-start-line="1137" selection-start-column="264" selection-end-line="1137" selection-end-column="264" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/case.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="354" column="40" selection-start-line="354" selection-start-column="40" selection-end-line="354" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/ExtentHTMLTestRunner.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/main/database.html">
+    <entry file="file://$PROJECT_DIR$/public/expandfunction.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/version">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="155" column="83" selection-start-line="155" selection-start-column="83" selection-end-line="155" selection-end-column="83" />
+        <state relative-caret-position="456">
+          <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shutdown.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="34" lean-forward="true" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main/modules.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="718">
+          <caret line="365" column="27" selection-start-line="365" selection-start-column="27" selection-end-line="365" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#div#9;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/version.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="399">
+            <caret line="21" column="37" selection-end-line="78" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="152">
+            <caret line="8" selection-start-line="8" selection-end-line="8" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/request/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/requestnew/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
+        <state relative-caret-position="475">
           <caret line="103" column="27" selection-start-line="103" selection-start-column="27" selection-end-line="103" selection-end-column="27" />
         </state>
       </provider>

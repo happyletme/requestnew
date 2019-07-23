@@ -277,7 +277,7 @@
                 <form role="form" method='POST' action="/case_add_data/">
                     <div class="form-group">
                         <label  for="case_name">接口名称</label>
-                        <input  type="text" class="form-control" name="case_name" placeholder="请输入接口名称" required  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  type="text" class="form-control" name="case_name" placeholder="请输入接口名称" required  onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
                         <label  for="project_name" >项目名</label>
@@ -345,7 +345,7 @@
                     </div>
                     <div class="form-group">
                         <label  for="case_name">接口名称</label>
-                        <input  type="text" class="ipt form-control" name="case_name" placeholder="请输入接口名称" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  type="text" class="ipt form-control" name="case_name" placeholder="请输入接口名称" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
                         <label  for="project_name" >项目名</label>
@@ -417,7 +417,7 @@
                     </div>
                     <div class="form-group">
                         <label  for="case_name" >任务名</label>
-                        <input  type="text" class="form-control" name="task_name" placeholder="请输入任务名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  type="text" class="form-control" name="task_name" placeholder="请输入任务名" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
                         <label  for="remark">备注</label>
