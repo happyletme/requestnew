@@ -1,5 +1,5 @@
 #-*-utf-8-*-
-import os,shutil
+import os,shutil,socket
 #判断一个夹是否存在，不存在创建
 def create_dir(dir):
     isexist = os.path.isdir(dir)
@@ -17,3 +17,11 @@ def rm_file(name):
 def create_file(filename):
     with open(filename,"w") as fp:
         fp.close()
+
+#获取本机ip
+def getLocalIp():
+    # 获取本机电脑名
+    myname = socket.getfqdn(socket.gethostname())
+    # 获取本机ip
+    myaddr = socket.gethostbyname(myname)
+    return myaddr

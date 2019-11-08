@@ -1,0 +1,2 @@
+
+        java -jar ./diffy/diffy-server.jar         -candidate='adhoc-query.k8s-new.qunhequnhe.com:80'         -master.primary='adhoc-query.kube-aliyun.qunhequnhe.com:80'         -master.secondary='adhoc-query.kube-aliyun.qunhequnhe.com:80'         -service.protocol='http'         -serviceName='My Service'         -proxy.port=:8880         -admin.port=:8881         -http.port=:8888         -rootUrl='localhost:8888'         -excludeHttpHeadersComparison=true         -allowHttpSideEffects=true           

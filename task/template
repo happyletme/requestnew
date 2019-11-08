@@ -20,7 +20,7 @@ class ${case_name}(unittest.TestCase):
         cls.transfermongodb = Transferip_mongodb()
         cls.transferfunction = Transferfunction()
         api="${api}"
-        cls.url=cls.transferip_db.ip+api
+        cls.url=cls.transferip_db.ip[str(cls.transferlogname.test_carryid)+"ip"]+api
         pass
 
     @classmethod

@@ -19,6 +19,12 @@ class Expandfunction:
         thatday_start_time = str(int(time.mktime(time.strptime(str(thatday), '%Y-%m-%d')))) + "000"
         return thatday_start_time
 
+    # 获取几分钟后的那天开始的时间戳
+    def get_later_minutes_Timestamp(self,minute):
+        ago = datetime.datetime.now() - datetime.timedelta(minutes=minute)
+        timeStamp = str(int(time.mktime(ago.timetuple()))) + "000"
+        return timeStamp
+
 
 
 

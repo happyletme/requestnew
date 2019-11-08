@@ -18,7 +18,7 @@ class ProjectPostAdmin(admin.ModelAdmin):
         else:
             msg = u'项目名重复，操作失败了呦'
         self.message_user(request, msg)
-    list_display = ('project_name', 'Testers', 'Developer','status','project_desc')
+    list_display = ('project_name','project_desc','status')
     list_per_page = 50
 
 

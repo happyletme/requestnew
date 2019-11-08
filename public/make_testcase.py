@@ -74,9 +74,9 @@ class Make_testcase:
         sqlDatalist=replace_function(self.transferfunction,sqlDatalist)
         
         #前置nosql的执行
-        newVariableObj,nosqlDatalist=carry_nosql(self.transferip_db,self.transferfunction,nosqlDatalist,0,newVariableObj)
+        newVariableObj,nosqlDatalist=carry_nosql(self.transferip_db,self.transferlogname.test_carryid,self.transferfunction,nosqlDatalist,0,newVariableObj)
         #前置sql的执行
-        makesqldata, newVariableObj, sqlDatalist=carry_sql(self.transferip_db,self.transferfunction,sqlDatalist,0,newVariableObj)
+        makesqldata, newVariableObj, sqlDatalist=carry_sql(self.transferip_db,self.transferlogname.test_carryid,self.transferfunction,sqlDatalist,0,newVariableObj)
         
         params=\'\'\'${params}\'\'\'
         params=json.loads(params)
@@ -103,9 +103,9 @@ class Make_testcase:
         assert_response=replace_function(self.transferfunction,assert_response)
         
         #断言nosql的执行
-        newVariableObj,nosqlDatalist=carry_nosql(self.transferip_db,self.transferfunction,nosqlDatalist,1,newVariableObj)
+        newVariableObj,nosqlDatalist=carry_nosql(self.transferip_db,self.transferlogname.test_carryid,self.transferfunction,nosqlDatalist,1,newVariableObj)
         # 断言sql的执行
-        makesqldata, newVariableObj, sqlDatalist = carry_sql(self.transferip_db,self.transferfunction,sqlDatalist, 1,newVariableObj)
+        makesqldata, newVariableObj, sqlDatalist = carry_sql(self.transferip_db,self.transferlogname.test_carryid,self.transferfunction,sqlDatalist, 1,newVariableObj)
         
         #replace assert_response
         assert_response = replace_newVariableObj(self.transferfunction,newVariableObj, assert_response)
@@ -114,12 +114,12 @@ class Make_testcase:
         
         #断言
         carry_assert(assert_response, responseJson, status_code, step_name, self.url, way, headers, params, self.chooseAssertWay,
-                     self.transferlogname)
+                     self.transferlogname,self.transferlogname.test_carryid)
                      
         #后置nosql的执行
-        carry_nosql(self.transferip_db,self.transferfunction,nosqlDatalist,2,newVariableObj)
+        carry_nosql(self.transferip_db,self.transferlogname.test_carryid,self.transferfunction,nosqlDatalist,2,newVariableObj)
         # 后置sql的执行
-        carry_sql(self.transferip_db,self.transferfunction,sqlDatalist, 2,newVariableObj)
+        carry_sql(self.transferip_db,self.transferlogname.test_carryid,self.transferfunction,sqlDatalist, 2,newVariableObj)
 '''
             message += stepmessage
         #替换变量

@@ -49,6 +49,7 @@ urlpatterns = [
     #测试步骤
     url('step/$',views.step),
     url('^step_add_data/$', views.step_add_data),
+    url('^uploadFile/$', views.uploadFile),
     url('^step_edit_data/$', views.step_edit_data),
     url('^step_copy_data/$', views.step_copy_data),
     url('^step_delete_data/$', views.step_delete_data),
@@ -85,7 +86,7 @@ urlpatterns = [
     url('^database_delete_data/$', views.database_delete_data),
     url('^database_search_name/$', views.database_search_name),
 
-    #环境配置
+    #非关系数据库配置
     url('^NosqlDatabase/$',views.NosqlDatabase),
     url('^NosqlDatabase_add_data/$', views.NosqlDatabase_add_data),
     url('^NosqlDatabase_edit_data/$', views.NosqlDatabase_edit_data),
@@ -95,7 +96,11 @@ urlpatterns = [
     #生成脚本
     url('^make_case_data/$', views.make_case_data),
 
-    #定时任务
+    #debug
+    url('^debug/$', views.debug),
+    url('^debugReport/$', views.debugReport),
+
+    #常规任务
     url('^task/$', views.task),
     url('^tasks_delete_data/$', views.tasks_delete_data),
     url('^task_search_name/$', views.task_search_name),
@@ -105,6 +110,11 @@ urlpatterns = [
     url('^task_status/$', views.task_status),
     url('^start_timing_task/$', views.start_timing_task),
 
+    #diffy任务
+    url('^diffytask/$', views.diffytask),
+    url('^diffytask_search_name/$', views.diffytask_search_name),
+    url('^diffytasks_delete_data/$', views.diffytasks_delete_data),
+    url('^diffytask_run/$', views.diffytask_run),
     #执行结果
     url('^htmlreport/$', views.htmlreport),
 
@@ -114,4 +124,10 @@ urlpatterns = [
     #测试工具
     url('^formatJson/$', views.formatJson),
     url('^functionhelp/$', views.functionhelp),
+
+    #外部接口调用
+    url('^openTaskRun$', views.openTaskRun),
+    url('^openDiffytaskRun$', views.openDiffytaskRun),
+
+    url('^test$', views.test),
 ]

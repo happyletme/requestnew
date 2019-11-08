@@ -77,11 +77,21 @@ class MakeSqlData:
             raise RuntimeError(errormessage)
 
 #启动数据库对象和ip属性
-def create_db(db_dict,env_ip,redis):
+def create_db(db_dict,env_ip,redis,test_carryTaskid):
     global db,ip,NoSqlredis
-    ip=env_ip
-    db=db_dict
-    NoSqlredis=redis
+    try:
+        ip.update({str(test_carryTaskid) + "ip": env_ip})
+    except:
+        ip = {str(test_carryTaskid) + "ip": env_ip}
+    try:
+        db.update({str(test_carryTaskid) + "db": db_dict})
+    except:
+        db = {str(test_carryTaskid) + "db": db_dict}
+    try:
+        NoSqlredis.update({str(test_carryTaskid) + "NoSqlredis": redis})
+    except:
+        NoSqlredis={str(test_carryTaskid) + "NoSqlredis": redis}
+
 #create_db(0,"192.168.100.211",3307,"akmysql", "mysql123", "bt_hyaline")
 #allocation=configuration()
 #db=Database(allocation.Mysqlhost,allocation.Mysqlport,allocation.Mysqluser,allocation.Mysqlpwd,allocation.Mysqldb)
@@ -97,7 +107,7 @@ print (makesqldata.variableObj)
 #传递全局变量IP和数据库对象
 class Transferip_db:
     def __init__(self):
-        self.ip=ip
-        self.db=db
-        self.NoSqlredis=NoSqlredis
+        self.ip = ip
+        self.db = db
+        self.NoSqlredis = NoSqlredis
 

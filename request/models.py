@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 #测试环境表
 class Environment(models.Model):
-    env_ip=models.CharField(max_length=20)
+    protocol = models.CharField(max_length=20,default="http")
+    env_ip = models.CharField(max_length=20)
     env_host = models.CharField(max_length=40)
     env_port = models.CharField(max_length=10)
     env_desc = models.CharField(max_length=100)
@@ -44,7 +45,7 @@ class Email(models.Model):
     host_dir = models.CharField(max_length=100)
     email_port=models.CharField(max_length=20, default="")
     username = models.CharField(max_length=100)
-    passwd = models.CharField(max_length=20)
+    passwd = models.CharField(max_length=100)
     Headerfrom = models.CharField(max_length=100)
     Headerto = models.CharField(max_length=100)
     subject = models.CharField(max_length=100,default="")
@@ -55,8 +56,6 @@ class Email(models.Model):
 #项目表
 class Project(models.Model):
     project_name=models.CharField(max_length=20,verbose_name="项目名")
-    Testers=models.CharField(max_length=100,default="",blank=True,verbose_name="测试人员")
-    Developer = models.CharField(max_length=100,default="",blank=True,verbose_name="开发人员")
     project_desc = models.CharField(max_length=200, blank=True, verbose_name="项目描述")
     status= models.BooleanField( verbose_name="状态")
 
@@ -76,7 +75,7 @@ class Modules(models.Model):
     Modules_name=models.CharField(max_length=20,verbose_name="模块名")
     Testers=models.ManyToManyField('auth.User',blank=True,verbose_name="测试人员")
     Developer = models.CharField(max_length=100,blank=True,verbose_name="开发人员")
-    Modules_desc = models.CharField(max_length=200, blank=True, verbose_name="项目描述")
+    Modules_desc = models.CharField(max_length=200, blank=True, verbose_name="模块描述")
     status = models.BooleanField(verbose_name="状态")
 
     class Meta:
@@ -91,6 +90,7 @@ class Case(models.Model):
     Modules=models.ForeignKey(Modules,on_delete=models.CASCADE)
     case_name = models.CharField(max_length=100)
     api = models.CharField(max_length=100)
+    stepCount = models.IntegerField(default=0)
     status = models.BooleanField()
     version = models.CharField(max_length=20)
     case_weights = models.IntegerField(default=0)
@@ -107,11 +107,13 @@ class Step(models.Model):
     step_desc = models.CharField(max_length=100)
     steplevel = models.CharField(max_length=10)
     method = models.CharField(max_length=10)
-    params = models.CharField(max_length=500)
+    params = models.CharField(max_length=1000)
     headers = models.CharField(max_length=500)
     files = models.CharField(max_length=500)
     assert_response = models.CharField(max_length=4000)
     api_dependency = models.CharField(max_length=500,default="")
+    sqlCount = models.IntegerField(default=0)
+    nosqlCount = models.IntegerField(default=0)
     step_weights = models.IntegerField(default=0)
     status = models.BooleanField()
     update_time = models.DateTimeField(auto_now=True)
@@ -167,6 +169,9 @@ class NoSql(models.Model):
 class Task(models.Model):
     case=models.ForeignKey(Case,on_delete=models.CASCADE)
     task_name = models.CharField(max_length=200)
+    uuid = models.CharField(max_length=200, default="")
+    out_id = models.CharField(max_length=200, default="")
+    carryId = models.IntegerField(default=0)
     task_run_time_regular = models.CharField(max_length=100)
     ip=models.CharField(max_length=40,default="")
     Nosqldb = models.CharField(max_length=40,default="")
@@ -185,6 +190,19 @@ class Task(models.Model):
 
     def __str__(self):
         return self.task_name
+
+
+#任务表
+class DiffyTask(models.Model):
+    case=models.ForeignKey(Case,on_delete=models.CASCADE)
+    task_name = models.CharField(max_length=200)
+    remark = models.CharField(max_length=100, default="")
+    status = models.BooleanField()
+    update_time = models.DateTimeField(auto_now=True)
+    create_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.diff_task_name
 
 #测试结果表
 class api_test_result(models.Model):
@@ -236,6 +254,16 @@ class CarryTask(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.task_name
+
+#第几次执行diff任务
+class CarryDiffyTask(models.Model):
+    task_name = models.CharField(max_length=200)
+    candidate =  models.CharField(max_length=200)
+    master = models.CharField(max_length=200)
+    update_time = models.DateTimeField(auto_now=True)
+    create_time = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.diff_task_name
 
 #添加用户表的另一个密码字段
 pwd_field = models.CharField(max_length=30, default="")
