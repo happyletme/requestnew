@@ -69,3 +69,19 @@ def postbody(url,params,headers):
 def postfile(url,params,headers,files):
     pass
 
+
+def http(method,url,params,headers):
+    if method=="postbody":
+        postbody(url=url, params=params, headers=headers)
+    elif method=="get":
+        get(url=url, params=params, headers=headers)
+    elif method=="put":
+        put(url=url, params=params, headers=headers)
+    elif method=="delete":
+        delete(url=url, params=params, headers=headers)
+    elif method=="postform":
+        postform(url=url, params=params, headers=headers)
+
+
+
+

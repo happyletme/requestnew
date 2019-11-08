@@ -149,7 +149,7 @@ class Template_mixin(object):
     <meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href='http://extentreports.com/resx/dist/css/extent.css' type='text/css' rel='stylesheet'/>
+    <link href='../static/css/extent.css' type='text/css' rel='stylesheet'/>
     <title>%(title)s - TestReport</title>
     %(stylesheet)s
 
@@ -633,7 +633,7 @@ class Template_mixin(object):
 
     </script>
 
-    <script src='http://extentreports.com/resx/dist/js/extent.js' type='text/javascript'></script>
+    <script src='../static/js/extent.js' type='text/javascript'></script>
 
 
     <script type='text/javascript'>

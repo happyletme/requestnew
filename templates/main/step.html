@@ -117,9 +117,11 @@
             del("btn3","ipt1","table","checkbox","checknum","myAlert1");
             paging();
             search();
-            display("table","td",25,25);//列表数据一旦超过多少个字符串就只显示，多少个字符串+...
+            display("table","td");//鼠标hover内容展示
             check("table","allcheck","checkbox","checknum"); // 根据返回值去勾选对应列
             funisError("tipModalLabel","tipModal");//判断提交的表单是否错误
+            controleDebugModal();//单用例调试
+            findReport();//找到报告
         });
         function search(){
             var elementsStatus="#select1 option";
@@ -707,14 +709,13 @@
 
                 elementstep_name=$("#ipt2").val();
                 elementmethod=$("#selectmethod").val();
-                elementsteplevel=$("#ipt4").val();
                 elementselect=$("#select1").val();
                 elementcase_name=$("#selectcase_name").val();
                 oldHref=$(btn).attr("href");
-                href=oldHref+"&step_name="+elementstep_name+"&case_name="+elementcase_name+"&method="+elementmethod+"&steplevel="+elementsteplevel+"&select="+elementselect+"&checkedenv_ids="+checked_ids
+                href=oldHref+"&step_name="+elementstep_name+"&case_name="+elementcase_name+"&method="+elementmethod+"&select="+elementselect+"&checkedenv_ids="+checked_ids
                 $(btn).attr("href",href)
             }
-            var elementstep_name,elementcase_name,elementmethod,elementsteplevel,elementselect;
+            var elementstep_name,elementcase_name,elementmethod,elementselect;
             $("#first").click(function(){
                 merge(this);
             });
@@ -753,7 +754,6 @@
                     <option class="selectmethod">postfile</option>
                     <option class="selectmethod">put</option>
                 </select>
-                <input id="ipt4" name="steplevel" type="text" placeholder="优先级" class="form-control" value={{ steplevel }}>
                 <select id="select1" name='select' class="form-control" >
                     <option  value="2"  class="select">状态</option>
                     <option value="1" class="select">生效中</option>
@@ -780,6 +780,9 @@
             <button id="btn2" class="btn layui-btn"  data-toggle="modal" data-target="#">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
             </button>
+            <button id="btn6" class="btn layui-btn"  data-toggle="modal" data-target="#upLoadMyModal" >
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>上传
+            </button>
             <button id="btn5" class="btn layui-btn" data-toggle="modal" data-target="#copyModal">
 	            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>复制
             </button>
@@ -793,28 +796,36 @@
         <div>
             <table id="table" class="table table-striped">
                 <tr>
-                    <th><input type="checkbox" id="allcheck"  onclick='checkAll("allcheck","choice")' /></th><th>id</th><th>用例名</th><th>接口名称</th><th>方式</th><th>信息头</th><th>请求参数</th><th>请求文件</th><th>断言</th><th style="display:None">接口依赖</th><th>优先级</th><th>用例描述</th><th>状态</th>
+                    <th><input type="checkbox" id="allcheck"  onclick='checkAll("allcheck","choice")' /></th><th>id</th><th>用例名</th><th>接口名称</th><th>方式</th><th>信息头</th><th>请求参数</th><th style="display:None">请求文件</th><th>断言</th><th style="display:None">接口依赖</th><th>生效sql数</th><th>生效nosql数</th><th style="display: none">优先级</th><th>用例描述</th><th>状态</th><th>操作</th>
                 </tr>
                 <tbody>
                 {% for step in steps %}
                     <tr>
                         <td id="che1"><input type="checkbox" name="choice" class="checknum"  onclick='setAll("allcheck","checkbox","checknum")'/></td>
                         <td titlevalue="{{ step.id }}">{{ step.id }}</td>
-                        <td titlevalue="{{ step.step_name }}">{{ step.step_name }}</td>
+                        <td titlevalue="{{ step.step_name }}" title="{{ step.step_name }}">{{ step.step_name|truncatechars:28 }}</td>
                         <td titlevalue="{{ step.case }}">{{ step.case }}</td>
                         <td titlevalue="{{ step.method }}">{{ step.method }}</td>
-                        <td titlevalue="{{ step.headers }}">{{ step.headers }}</td>
-                        <td titlevalue="{{ step.params }}">{{ step.params }}</td>
-                        <td titlevalue="{{ step.files }}">{{ step.files }}</td>
-                        <td titlevalue="{{ step.assert_response }}">{{ step.assert_response }}</td>
+                        <td titlevalue="{{ step.headers }}" title="{{ step.headers }}">{{ step.headers |truncatechars:28}}</td>
+                        <td titlevalue="{{ step.params }}" title="{{ step.params }}">{{ step.params |truncatechars:28 }}</td>
+                        <td titlevalue="{{ step.files }}" style="display:None">{{ step.files}}</td>
+                        <td titlevalue="{{ step.assert_response }}" title="{{ step.assert_response }}">{{ step.assert_response|truncatechars:28 }}</td>
                         <td style="display:None" titlevalue="{{ step.api_dependency }}">{{ step.api_dependency }}</td>
-                        <td titlevalue="{{ step.steplevel }}">{{ step.steplevel }}</td>
+                        <td titlevalue={{ step.sqlCount }}><a onclick="jump(this,'sql','/sql/?page=1&selectdb_remark=0&selectisselect=2&select=1&step_name=')">{{ step.sqlCount }}</a></td>
+                        <td titlevalue={{ step.nosqlCount }}><a onclick="jump(this,'Nosql','/Nosql/?page=1&selectisselect=2&select=1&step_name=')">{{ step.nosqlCount }}</a></td>
+                        <td titlevalue="{{ step.steplevel }}" style="display: none" >{{ step.steplevel }}</td>
                         <td titlevalue="{{ step.step_desc }}">{{ step.step_desc }}</td>
                         {% if step.status %}
                             <td titlevalue="{{ step.status }}"><span class="choosespan label label-success" >生效中</span></td>
                         {% else %}
                             <td titlevalue="{{ step.status }}"><span class="choosespan label label-danger">已禁用</span></td>
                         {% endif %}
+                        <td fontDisplay="false"  class="btn-group btn-group-xs">
+                            <button  class="btn btn-default findDetails debug" style="background: #1AA194;color: whitesmoke;" >执行</button>
+                            <a class="btn-group btn-group-xs aReport" href="/debugReport/" target="_blank">
+                                <button  class="btn btn-default findDetails report" style="background: #1AA194;color: whitesmoke;" >查看报告</button>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -842,7 +853,6 @@
                 <form id="add"  role="form" method='POST' action="/step_add_data/">
                     <div class="form-group">
                         <label  for="step_name">用例名</label>
-                        <!--<input  id="step_name" type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">-->
                         <input  id="step_name" type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
@@ -933,6 +943,7 @@
                             </li>
                        </ul>
                     </div>
+
                     <div class="form-group">
                         <label  for="steplevel">优先级</label>
                         <input  type="text" class="form-control" name="steplevel" placeholder="请输入优先级" >
@@ -984,7 +995,7 @@
                     </div>
                     <div class="form-group">
                         <label  for="step_name">用例名</label>
-                        <input  id="editstep_name" type="text" class="ipt form-control" name="step_name" placeholder="请输入用例名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  id="editstep_name" type="text" class="ipt form-control" name="step_name" placeholder="请输入用例名" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <!--给label的class加个ipt的属性，保证新的select成功-->
                     <div class="form-group ipt" id="editdiv">
@@ -1077,7 +1088,14 @@
                             </li>
                        </ul>
                     </div>
-
+                    <div class="form-group" style="display: none">
+                        <label  for="version" >生效sql数</label>
+                        <input  type="text" class="ipt form-control" name="sqlCount" placeholder="请输入生效sql数" >
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <label  for="version" >生效noSql数</label>
+                        <input  type="text" class="ipt form-control" name="nosqlCount" placeholder="请输入生效nosql数" >
+                    </div>
                     <div class="form-group">
                         <label  for="steplevel">优先级</label>
                         <input  type="text" class="ipt form-control" name="steplevel" placeholder="请输入优先级" >
@@ -1104,6 +1122,38 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
     </div>
+    <!--上传-->
+    <div class="modal fade" id="upLoadMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="max-width:560px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" >
+					上传har文件
+				</h4>
+			</div>
+			<div class="modal-body">
+                <form id="upload" enctype="multipart/form-data" role="form" method='POST' action="/uploadFile/">
+                    <div class="form-group">
+                        <label  for="step_name" >上传文件</label>
+                        <input type='file' name="file_name">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn" data-dismiss="modal">关闭
+				        </button>
+				        <button type="submit" class="btn layui-btn">
+					    提交
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
     <!--复制-->
     <div class="modal fade" id="copyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="max-width:560px">
@@ -1120,7 +1170,7 @@
                 <form id="copy"  role="form" method='POST' action="/step_copy_data/">
                     <div class="form-group">
                         <label  for="step_name">用例名</label>
-                        <input  type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  type="text" class="form-control" name="step_name" placeholder="请输入用例名" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
                         <label  for="step_name" >用例来源</label>
@@ -1186,6 +1236,59 @@
                         确认
                     </button>
                 </div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+    </div>
+    <!-- 执行 -->
+    <div class="modal fade" id="debugMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog" style="max-width:400px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button  type="button" class="close carryclose" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					控制面板
+				</h4>
+			</div>
+			<div class="modal-body">
+                <!--提示框-->
+                <div id="debugMyAlert" class="alert alert-success" style="display: none">
+                    <strong>Tip：</strong>执行中，请等待。。。
+                </div>
+                <form id="debugform" role="form" method='POST' action="/debug/" >
+                    <div class="form-group" style="display: none">
+                        <label  for="id">id</label>
+                        <input  id="stepId" type="text" class="form-control" name="id" placeholder="请输入id" >
+                    </div>
+                    <div class="form-group ipt" id="editenv">
+                        <label  for="env_desc" >环境</label>
+                        <select id="editselectenv" name="env_desc" class="form-control selectpicker" data-live-search="true" required>
+                            {% for env_desc in env_descs %}
+                            <option>{{ env_desc }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group ipt" id="editnosql">
+                        <label  for="Nosqldb_desc" >NosqlDb名称</label>
+                        <select id="editselectnosql" name="Nosqldb_desc" class="form-control selectpicker" data-live-search="true" >
+                            <option value="">请选择</option>
+                            {% for Nosqldb_desc in Nosqldb_descs %}
+                            <option>{{ Nosqldb_desc }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn layui-btn carryclose" data-dismiss="modal">关闭
+				        </button>
+				        <button id="debugsubmit"  type="button" class="btn layui-btn">
+					    执行
+				        </button>
+			        </div>
+                    {% csrf_token %}
+                </form>
+                <iframe id="rfFrame" name="rfFrame" src="about:blank" style="display:none;"></iframe>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->

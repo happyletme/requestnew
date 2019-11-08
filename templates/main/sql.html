@@ -27,7 +27,7 @@
         $(function(){
             tip("table","icon");//ICON提示
             changeSelect("selectpicker");//修改select框
-            display("table","td",80,60);//列表数据一旦超过多少个字符串就只显示，多少个字符串+...
+            display("table","td");//鼠标hover内容展示
             edit();
             add();
             del("btn3","ipt1","table","checkbox","checknum","myAlert1");
@@ -249,9 +249,9 @@
     <!--按钮-->
     <div class="btn-toolbar" role="toolbar">
         <div class="btn-group">
-            <button id="btn1" class="btn layui-btn"  data-toggle="modal" data-target="#addMyModal" >
+            <!--<button id="btn1" class="btn layui-btn"  data-toggle="modal" data-target="#addMyModal" >
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
-            </button>
+            </button>-->
             <button id="btn2" class="btn layui-btn"  data-toggle="modal" data-target="#">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
             </button>
@@ -282,8 +282,8 @@
                         {% else %}
                             <td titlevalue={{ sql.is_select }}>非查询</td>
                         {% endif %}
-                        <td titlevalue={{ sql.variable }}>{{ sql.variable }}</td>
-                        <td titlevalue="{{ sql.sql }}">{{ sql.sql }}</td>
+                        <td titlevalue={{ sql.variable }} title={{ sql.variable }}>{{ sql.variable|truncatechars:60 }}</td>
+                        <td titlevalue="{{ sql.sql }}" title="{{ sql.sql }}">{{ sql.sql|truncatechars:60 }}</td>
                         {% if sql.sql_condition is 0 %}
                             <td titlevalue={{ sql.sql_condition }}>前置</td>
                         {% elif sql.sql_condition is 1 %}

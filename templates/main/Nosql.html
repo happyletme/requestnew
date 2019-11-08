@@ -25,7 +25,7 @@
 
         $(function(){
             changeSelect("selectpicker");//修改select框
-            display("table","td",80,60);//列表数据一旦超过多少个字符串就只显示，多少个字符串+...
+            display("table","td");//鼠标hover内容展示
             edit();
             add();
             del("btn3","ipt1","table","checkbox","checknum","myAlert1");
@@ -286,9 +286,9 @@
     <!--按钮-->
     <div class="btn-toolbar" role="toolbar">
         <div class="btn-group">
-            <button id="btn1" class="btn layui-btn"  data-toggle="modal" data-target="#addMyModal" >
+            <!--<button id="btn1" class="btn layui-btn"  data-toggle="modal" data-target="#addMyModal" >
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
-            </button>
+            </button>-->
             <button id="btn2" class="btn layui-btn"  data-toggle="modal" data-target="#">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
             </button>
@@ -320,8 +320,8 @@
                         {% else %}
                             <td titlevalue={{ Nosql.is_select }}>非查询</td>
                         {% endif %}
-                        <td titlevalue="{{ Nosql.variable }}">{{ Nosql.variable }}</td>
-                        <td titlevalue="{{ Nosql.Nosql }}">{{ Nosql.Nosql }}</td>
+                        <td titlevalue="{{ Nosql.variable }}" title="{{ Nosql.variable }}">{{ Nosql.variable|truncatechars:60 }}</td>
+                        <td titlevalue="{{ Nosql.Nosql }}" title="{{ Nosql.Nosql }}">{{ Nosql.Nosql|truncatechars:60 }}</td>
                         {% if Nosql.Nosql_condition is 0 %}
                             <td titlevalue={{ Nosql.Nosql_condition }}>前置</td>
                         {% elif Nosql.Nosql_condition is 1 %}

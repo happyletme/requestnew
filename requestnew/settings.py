@@ -25,8 +25,8 @@ SECRET_KEY = '2l24cj%pl_8iku9x+vo)1h+!s+e+ga-i86zmx&y$s9k07w!19x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.10.31.243']
-#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['10.10.12.102']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -66,7 +66,7 @@ ROOT_URLCONF = 'requestnew.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'task')]
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR, 'task'),os.path.join(BASE_DIR, 'debug')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -101,7 +101,7 @@ DATABASES = {
         'PORT' : '3306',
         'NAME':'request',
         'USER':'admin',
-        'PASSWORD': 'XXXXXX',
+        'PASSWORD': 'Rl123456',
         'OPTIONS': {
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
         }
@@ -110,7 +110,7 @@ DATABASES = {
 }
 
 #测试开发mongodb
-MONGODB={'ip':'127.0.0.1','port':27017,'NAME':'test','collections':'test_response'}
+MONGODB={'ip':'47.102.110.163','port':27017,'NAME':'test','collections':'test_response'}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

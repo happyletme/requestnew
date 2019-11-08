@@ -43,7 +43,7 @@ class Carryfunction(Expandfunction):
                 functionname = Separationfunctionstrlist[0][0]
 
                 # 生成函数
-                print (functionname)
+                #print (functionname)
                 func = getattr(self, functionname)
                 functionparamslist = Separationfunctionstrlist[0][1].split(',')
 

@@ -20,16 +20,12 @@
             del("btn3","ipt1","table","checkbox","checknum","myAlert1");
             paging();
             search();
+            display("table","td");//鼠标hover内容展示
             check("table","allcheck","checkbox","checknum"); // 根据返回值去勾选对应列
             makepy("btnmakepy","iptmakepy","table","checkbox","checknum","myAlert2");
             funisError("tipModalLabel","tipModal");//判断提交的表单是否错误
         });
 
-        function jump(obj){
-            case_name=$(obj).parent().parent().find("td").eq(2).text()
-            url = "/step/?page=1&step_name=&case_name="+case_name+"&method=0&steplevel=&select=1&checkedenv_ids=None"
-            window.parent.openTab(url);
-        }
         //搜索
         function search(){
             var elementsStatus="#select1 option";
@@ -215,7 +211,7 @@
 	    <strong>警告！</strong>删除时一定要勾选一条。
     </div>
     <div id="myAlert2" class="alert alert-warning" style="display: none">
-	    <strong>警告！</strong>生成脚本时一定要勾选一条。
+	    <strong>警告！</strong>生成任务时一定要勾选一条。
     </div>
     <!--按钮-->
     <div class="btn-toolbar" role="toolbar">
@@ -230,7 +226,7 @@
                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>删除
             </button>
             <button id="btnmakepy" class="btn layui-btn"  data-toggle="modal" data-target="#maketaskMyModal" >
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>生成脚本
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>生成任务
             </button>
         </div>
     </div>
@@ -246,11 +242,11 @@
                     <tr>
                         <td class="che1"><input type="checkbox" name="choice" class="checknum"  onclick='setAll("allcheck","checkbox","checknum")'/></td>
                         <td titlevalue={{ case.id }}>{{ case.id }}</td>
-                        <td titlevalue={{ case.case_name }}>{{ case.case_name }}</td>
+                        <td titlevalue={{ case.case_name }} title={{ case.case_name }}>{{ case.case_name|truncatechars:28 }}</td>
                         <td titlevalue={{ project_listnames }}>{{ project_listnames }}</td>
                         <td titlevalue={{ case.Modules }}>{{ case.Modules }}</td>
-                        <td titlevalue={{ case.api }}>{{ case.api }}</td>
-                        <td titlevalue={{ case.stepCount }}><a onclick="jump(this)">{{ case.stepCount }}</a></td>
+                        <td titlevalue={{ case.api }} title={{ case.api }}>{{ case.api|truncatechars:28 }}</td>
+                        <td titlevalue={{ case.stepCount }}><a onclick="jump(this,'step','/step/?page=1&step_name=&method=0&select=1&checkedenv_ids=None&case_name=')">{{ case.stepCount }}</a></td>
                         <td titlevalue={{ case.version }}>{{ case.version }}</td>
                         <td titlevalue={{ case.case_desc }}>{{ case.case_desc }}</td>
                         {% if case.status %}
@@ -281,7 +277,7 @@
                 <form role="form" method='POST' action="/case_add_data/">
                     <div class="form-group">
                         <label  for="case_name">接口名称</label>
-                        <input  type="text" class="form-control" name="case_name" placeholder="请输入接口名称" required  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  type="text" class="form-control" name="case_name" placeholder="请输入接口名称" required  onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
                         <label  for="project_name" >项目名</label>
@@ -349,7 +345,7 @@
                     </div>
                     <div class="form-group">
                         <label  for="case_name">接口名称</label>
-                        <input  type="text" class="ipt form-control" name="case_name" placeholder="请输入接口名称" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  type="text" class="ipt form-control" name="case_name" placeholder="请输入接口名称" required onkeyup="this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
                         <label  for="project_name" >项目名</label>
@@ -401,7 +397,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
     </div>
-    <!-- 生成脚本 -->
+    <!-- 生成任务 -->
     <div class="modal fade" id="maketaskMyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="max-width:400px">
 		<div class="modal-content">
@@ -410,7 +406,7 @@
 					&times;
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					生成脚本
+					生成任务
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -419,9 +415,17 @@
                         <label  for="id">id</label>
                         <input id="iptmakepy" type="text" class="form-control" name="id" style="display:none"/>
                     </div>
+                    <div class="form-group" >
+                        <label class="radio-inline">
+                            <input type="radio" name="taskType" id="optionsRadios1" value="commonTask" checked> 常规任务
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="taskType" id="optionsRadios2" value="diffyTask"> diffy任务
+                        </label>
+                    </div>
                     <div class="form-group">
                         <label  for="case_name" >任务名</label>
-                        <input  type="text" class="form-control" name="task_name" placeholder="请输入任务名" required onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^0-9a-zA-Z_]/g,'')}else{this.value=this.value.replace(/\W/g,'')}">
+                        <input  type="text" class="form-control" name="task_name" placeholder="请输入任务名" required onkeyup="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')" onafterpaste="this.value=this.value.replace(/[^\u4E00-\u9FA50-9a-zA-Z_]/g,'')">
                     </div>
                     <div class="form-group">
                         <label  for="remark">备注</label>
