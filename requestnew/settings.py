@@ -101,7 +101,7 @@ DATABASES = {
         'PORT' : '3306',
         'NAME':'request',
         'USER':'admin',
-        'PASSWORD': 'Rl123456',
+        'PASSWORD': 'xxxxxx',
         'OPTIONS': {
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
         }
@@ -149,3 +149,4 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATIC_ROOT='/home/yiqian/pj/requestnew/tmp/'
