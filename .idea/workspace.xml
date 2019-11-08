@@ -2,52 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f198f29-acf0-4c80-ba33-87463998389b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/debug/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/wechat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publicExpansion/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publicExpansion/emailBody.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/record/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/record/compat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/record/core.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/record/filter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/record/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/main/diffytask.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uwsgi.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/requestnew.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/requestnew.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/ExtentHTMLTestRunner.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/ExtentHTMLTestRunner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/carryfunction.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/carryfunction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/email.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/expandfunction.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/expandfunction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/job.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/job.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/make_testcase.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/make_testcase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/request.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/request.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/script_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/script_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sqldb.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/sqldb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/system.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/system.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/request/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requestnew/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/requestnew/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/pageDeal.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/pageDeal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task/template" beforeDir="false" afterPath="$PROJECT_DIR$/task/template" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/first_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/first_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/Nosql.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/Nosql.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/NosqlDb.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/NosqlDb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/case.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/case.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/database.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/database.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/env.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/env.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/modules.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/modules.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/sql.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/sql.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/step.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/step.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/task.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/task.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/differences.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid3648.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jmeter.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uwsgi.ini" beforeDir="false" afterPath="$PROJECT_DIR$/uwsgi.ini" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +68,7 @@
           <entry key="css" value="2" />
           <entry key="har" value="3" />
           <entry key="html" value="41" />
-          <entry key="ini" value="1" />
+          <entry key="ini" value="2" />
           <entry key="js" value="5" />
           <entry key="log" value="2" />
           <entry key="md" value="2" />
@@ -124,7 +82,7 @@
         <counts>
           <entry key="CSS" value="2" />
           <entry key="HTML" value="41" />
-          <entry key="Ini" value="1" />
+          <entry key="Ini" value="2" />
           <entry key="JavaScript" value="5" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="11" />
@@ -220,7 +178,7 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/record/core.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="128">
@@ -228,6 +186,15 @@
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/uwsgi.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -322,7 +289,6 @@
         <option value="$PROJECT_DIR$/templates/main/step.html" />
         <option value="$PROJECT_DIR$/static/js/pageDeal.js" />
         <option value="$PROJECT_DIR$/task/first_task---5d7c74d2-fa12-11e9-a5ce-28c63fc5c866/testcase/query_1.py" />
-        <option value="$PROJECT_DIR$/uwsgi.ini" />
         <option value="$PROJECT_DIR$/templates/main/case.html" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/requestnew/settings.py" />
@@ -337,6 +303,7 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/request/db.py" />
         <option value="$PROJECT_DIR$/record/core.py" />
+        <option value="$PROJECT_DIR$/uwsgi.ini" />
       </list>
     </option>
   </component>
@@ -650,12 +617,12 @@
     <frame x="-7" y="-7" width="1455" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22333571" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22333571" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32795697" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9051173" visible="true" weight="0.31048387" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.9051173" visible="true" weight="0.31048387" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.3965054" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -787,13 +754,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/requestnew/11">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uwsgi.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="38" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/task/first_task---9124d8a4-facc-11e9-9d77-28c63fc5c866/testcase/query_1.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1045,6 +1005,13 @@
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uwsgi.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
